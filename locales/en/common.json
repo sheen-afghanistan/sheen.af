@@ -1,0 +1,55 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "packages": "Packages",
+    "portfolio": "Portfolio",
+    "blog": "Blog",
+    "contact": "Contact",
+    "book": "Book Online",
+    "shop": "Shop"
+  },
+  "hero": {
+    "title": "Digital Excellence for the Modern Era",
+    "subtitle": "We build premium digital experiences that elevate your brand and drive results.",
+    "cta": "Get Started",
+    "viewWork": "View Our Work"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Comprehensive digital solutions tailored to your needs",
+    "webDesign": "Website Design & Development",
+    "webDesignDesc": "Custom, responsive websites built with modern technologies",
+    "seo": "SEO Optimization & Technical SEO",
+    "seoDesc": "Boost your visibility with expert search engine optimization",
+    "googleAds": "Google Ads Management",
+    "googleAdsDesc": "Strategic ad campaigns that maximize ROI",
+    "socialAds": "Social Media Advertising",
+    "socialAdsDesc": "Targeted campaigns across all major platforms",
+    "apiIntegration": "API Integrations",
+    "apiIntegrationDesc": "Seamless third-party service integration",
+    "ecommerce": "E-Commerce Development",
+    "ecommerceDesc": "Full-featured online stores that convert",
+    "3dWeb": "3D & Modern Web Solutions",
+    "3dWebDesc": "Cutting-edge interactive experiences",
+    "automation": "Business Automation",
+    "automationDesc": "Streamline operations with custom tools"
+  },
+  "footer": {
+    "about": "About Sheen",
+    "aboutText": "We are a premium digital agency specializing in modern web solutions, SEO, advertising, and automation.",
+    "quickLinks": "Quick Links",
+    "contact": "Contact Us",
+    "followUs": "Follow Us",
+    "rights": "All rights reserved."
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "bookNow": "Book Now",
+    "buyNow": "Buy Now",
+    "viewAll": "View All",
+    "readMore": "Read More",
+    "contactUs": "Contact Us"
+  }
+}
