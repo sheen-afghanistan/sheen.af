@@ -98,7 +98,7 @@ export default function Header() {
                     {["en", "da", "pa"].map((lng) => (
                       <button
                         key={lng}
-                        onClick={() => changeLanguage(lng)}
+                        // onClick={() => changeLanguage(lng)}
                         className={`block w-full text-left px-4 py-2 text-white hover:bg-white/10 transition-colors ${
                           i18n.language === lng ? "bg-white/5" : ""
                         }`}

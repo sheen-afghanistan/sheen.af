@@ -78,8 +78,8 @@ export default function HomePage() {
       avatar: "/client-sara.png",
     },
     {
-      name: "Hamid Karimi",
-      position: "Founder, E-Shop",
+      name: "Rohullah Karimi",
+      position: "Founder, Laatulakki Oy",
       text: "Our e-commerce platform built by Sheen is fast, beautiful, and converts like crazy.",
       avatar: "/client-hamid.png",
     },
@@ -225,7 +225,6 @@ export default function HomePage() {
                 whileHover={{ y: -10 }}
                 className="glass p-6 rounded-2xl hover:bg-white/10 transition-all cursor-pointer group"
               >
-                <div className="text-5xl mb-4">{service.icon}</div>
                 <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-[var(--brand-gold)] transition-colors">
                   {service.title}
                 </h3>

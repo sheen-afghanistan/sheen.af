@@ -36,20 +36,20 @@ export default function ContactPage() {
     {
       icon: FiMail,
       title: "Email",
-      value: "info@sheen.af",
-      link: "mailto:info@sheen.af",
+      value: "sheen.af.co@gmail.com",
+      link: "mailto:sheen.af.co@gmail.com",
     },
     {
       icon: FiPhone,
       title: "Phone",
-      value: "+93 XXX XXX XXX",
-      link: "tel:+93XXXXXXXXX",
+      value: "+93 784 966 018",
+      link: "tel:+93784966018",
     },
     {
       icon: FaWhatsapp,
       title: "WhatsApp",
-      value: "+93 XXX XXX XXX",
-      link: "https://wa.me/93XXXXXXXXX",
+      value: "+93 784 966 018",
+      link: "https://wa.me/93784966018",
     },
     {
       icon: FiMapPin,

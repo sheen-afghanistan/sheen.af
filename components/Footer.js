@@ -19,10 +19,10 @@ export default function Footer() {
   ];
 
   const socialLinks = [
-    { icon: FaFacebookF, href: "#", label: "Facebook" },
+    { icon: FaFacebookF, href: "https://www.facebook.com/profile.php?id=100066759369557", label: "Facebook" },
     { icon: FaTwitter, href: "#", label: "Twitter" },
     { icon: FaInstagram, href: "#", label: "Instagram" },
-    { icon: FaLinkedinIn, href: "#", label: "LinkedIn" },
+    { icon: FaLinkedinIn, href: "https://www.linkedin.com/company/sheen-af", label: "LinkedIn" },
   ];
 
   return (
@@ -79,8 +79,8 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">{t("footer.contact")}</h4>
             <ul className="space-y-3 text-white/70">
-              <li>Email: info@sheen.af</li>
-              <li>Phone: +93 XXX XXX XXX</li>
+              <li>Email: sheen.af.co@gmail.com</li>
+              <li>Phone: +93 784 966 018</li>
               <li>Address: Kabul, Afghanistan</li>
             </ul>
           </div>
@@ -94,7 +94,7 @@ export default function Footer() {
 
       {/* Floating Buttons */}
       <motion.a
-        href="https://wa.me/93XXXXXXXXX"
+        href="https://wa.me/93784966018"
         target="_blank"
         rel="noopener noreferrer"
         whileHover={{ scale: 1.1 }}
@@ -104,7 +104,7 @@ export default function Footer() {
       </motion.a>
 
       <motion.a
-        href="https://m.me/sheen"
+        href="https://m.me/100066759369557"
         target="_blank"
         rel="noopener noreferrer"
         whileHover={{ scale: 1.1 }}

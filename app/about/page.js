@@ -3,35 +3,18 @@
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { FaLinkedinIn, FaTwitter, FaGithub } from "react-icons/fa";
+import { merge } from "@/server";
 
 export default function AboutPage() {
   const { t } = useTranslation();
 
   const team = [
     {
-      name: "Ahmad Rezai",
+      name: "Suliman Hakimi",
       position: "CEO & Founder",
-      image: "👨‍💼",
-      social: { linkedin: "#", twitter: "#" },
-    },
-    {
-      name: "Sara Ahmadi",
-      position: "Lead Designer",
-      image: "👩‍💼",
-      social: { linkedin: "#", twitter: "#" },
-    },
-    {
-      name: "Hamid Karimi",
-      position: "Tech Lead",
-      image: "👨‍💻",
-      social: { linkedin: "#", github: "#" },
-    },
-    {
-      name: "Fatima Nazari",
-      position: "Marketing Director",
-      image: "👩‍💻",
-      social: { linkedin: "#", twitter: "#" },
-    },
+      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUbJD2QbgkvF7V-CkPeqqyjps2W0pND9tSnA&s",
+      social: { linkedin: "https://www.linkedin.com/in/suliman-hakimi/", twitter: "#" },
+    }
   ];
 
   const values = [
@@ -198,7 +181,7 @@ export default function AboutPage() {
                 whileHover={{ y: -10 }}
                 className="glass p-6 rounded-2xl text-center group hover:bg-white/10 transition-all"
               >
-                <div className="text-7xl mb-4">{member.image}</div>
+                <img src={member.image} className="text-7xl mb-4"/>
                 <h3 className="text-xl font-semibold text-white mb-2">
                   {member.name}
                 </h3>
