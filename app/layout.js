@@ -40,13 +40,29 @@ export const metadata = {
     "Sheen",
     "شین",
     "Sheen Digital Agency",
+    "Next.js development Afghanistan",
+    "React development Kabul",
+    "e-commerce Afghanistan",
+    "API integration",
+    "3D web experiences",
   ],
-  authors: [{ name: "Sheen Digital Agency" }],
+  authors: [{ name: "Sheen Digital Agency", url: "https://agency.sheen.af" }],
   creator: "Sheen Digital Agency",
   publisher: "Sheen Digital Agency",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  verification: {
+    google: "CpREQ-7SAyuXuLNBBfGuS98cdDg3pywRTLPpGZ9Rsqw", // Add your actual verification code
+    yandex: "bbabd6975c43efe7",
+    bing: "42CD6515D45991F50EF8A5B9905C25C6",
+  },
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
@@ -58,6 +74,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
+    alternateLocale: ["fa_AF", "ps_AF"],
     url: "https://agency.sheen.af",
     title: "Sheen - Premium Digital Agency in Afghanistan",
     description:
@@ -65,59 +82,189 @@ export const metadata = {
     siteName: "Sheen Digital Agency",
     images: [
       {
-        url: "/logo.png", // Make sure this image exists or use a placeholder
+        url: "/logo.png",
         width: 1200,
         height: 630,
-        alt: "Sheen Digital Agency",
+        alt: "Sheen Digital Agency - Premium Web Design & Digital Marketing",
+        type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
+    site: "@sheen_af",
+    creator: "@sheen_af",
     title: "Sheen - Premium Digital Agency in Afghanistan",
     description:
       "Premium web design, SEO, and digital marketing services in Afghanistan. ساخت ویبسایت در افغانستان",
     images: ["/logo.png"],
-    creator: "@sheen_af", // Update with actual handle if available
   },
   alternates: {
     canonical: "https://agency.sheen.af",
     languages: {
-      "en-US": "https://agency.sheen.af"
+      "en-US": "https://agency.sheen.af",
+      "fa-AF": "https://agency.sheen.af",
+      "ps-AF": "https://agency.sheen.af",
     },
   },
+  category: "technology",
 };
 
 export default function RootLayout({ children }) {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Sheen Digital Agency",
-    url: "https://agency.sheen.af",
-    logo: "https://agency.sheen.af/logo.png",
-    sameAs: [
-      "https://www.facebook.com/profile.php?id=100066759369557",
-      "https://www.instagram.com/sheen.af",
-      "https://www.linkedin.com/company/sheen-af",
-      "https://twitter.com/sheen_af",
+    "@graph": [
+      {
+        "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
+        "@id": "https://agency.sheen.af/#organization",
+        name: "Sheen Digital Agency",
+        legalName: "Sheen Digital Agency",
+        url: "https://agency.sheen.af",
+        logo: {
+          "@type": "ImageObject",
+          url: "https://agency.sheen.af/logo.png",
+          width: 512,
+          height: 512,
+        },
+        image: "https://agency.sheen.af/logo.png",
+        description:
+          "Sheen is a premium digital agency in Afghanistan offering web design, SEO, digital marketing, and business automation services.",
+        slogan: "Transform Your Digital Presence",
+        foundingDate: "2020",
+        sameAs: [
+          "https://www.facebook.com/profile.php?id=100066759369557",
+          "https://www.instagram.com/sheen.af",
+          "https://www.linkedin.com/company/sheen-af",
+          "https://twitter.com/sheen_af",
+        ],
+        contactPoint: [
+          {
+            "@type": "ContactPoint",
+            telephone: "+93-784-966-018",
+            contactType: "customer service",
+            areaServed: "AF",
+            availableLanguage: ["English", "Dari", "Pashto"],
+            contactOption: "TollFree",
+          },
+          {
+            "@type": "ContactPoint",
+            contactType: "sales",
+            email: "info@sheen.af",
+            areaServed: "AF",
+            availableLanguage: ["English", "Dari", "Pashto"],
+          },
+        ],
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "Kabul",
+          addressLocality: "Kabul",
+          addressRegion: "Kabul",
+          postalCode: "1005",
+          addressCountry: "AF",
+        },
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: "34.5553",
+          longitude: "69.2075",
+        },
+        areaServed: {
+          "@type": "Country",
+          name: "Afghanistan",
+        },
+        priceRange: "$$",
+        openingHoursSpecification: [
+          {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Saturday",
+            ],
+            opens: "09:00",
+            closes: "18:00",
+          },
+        ],
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Digital Services",
+          itemListElement: [
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Web Design & Development",
+                description: "Modern, responsive websites that convert visitors into customers",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "SEO & Digital Marketing",
+                description: "Boost your visibility and rank higher on search engines",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Google Ads Management",
+                description: "Get instant visibility with targeted Google Ads campaigns",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Social Media Advertising",
+                description: "Reach your audience on Facebook, Instagram, and LinkedIn",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "E-commerce Solutions",
+                description: "Build a powerful online store that drives sales",
+              },
+            },
+          ],
+        },
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://agency.sheen.af/#website",
+        url: "https://agency.sheen.af",
+        name: "Sheen Digital Agency",
+        description: "Premium Digital Agency in Afghanistan",
+        publisher: {
+          "@id": "https://agency.sheen.af/#organization",
+        },
+        inLanguage: ["en", "fa", "ps"],
+        potentialAction: {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: "https://agency.sheen.af/search?q={search_term_string}",
+          },
+          "query-input": "required name=search_term_string",
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://agency.sheen.af/#breadcrumb",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: "https://agency.sheen.af",
+          },
+        ],
+      },
     ],
-    contactPoint: {
-      "@type": "ContactPoint",
-      telephone: "+93-784-966-018",
-      contactType: "customer service",
-      areaServed: "AF",
-      availableLanguage: ["en", "fa", "ps"],
-    },
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "Kabul",
-      addressLocality: "Kabul",
-      addressRegion: "Kabul",
-      postalCode: "1005",
-      addressCountry: "AF",
-    },
-    description:
-      "Sheen is a premium digital agency in Afghanistan offering web design, SEO, and digital marketing services.",
   };
 
   return (
