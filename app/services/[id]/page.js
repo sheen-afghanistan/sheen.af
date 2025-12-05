@@ -4,114 +4,16 @@ import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { FiArrowLeft, FiCheck } from "react-icons/fi";
-
+import servicesData from "../../../data/services";
+import { use } from "react";               // ← This is the key!
 export default function ServiceDetailPage({ params }) {
-  const { t } = useTranslation();
-  const serviceId = params?.id || "web-design";
+  const { t, i18n } = useTranslation();
+  const { id } = use(params);
+  const serviceId = id || "web-design";
+  // Find the service from data
+  const service = servicesData.find(s => s.slug === serviceId) || servicesData[0];
 
-  const serviceDetails = {
-    "web-design": {
-      title: "Website Design & Development",
-      icon: "🌐",
-      description: "Create stunning, responsive websites that captivate your audience and drive conversions.",
-      features: [
-        "Custom responsive design",
-        "Modern UI/UX principles",
-        "Fast loading speeds",
-        "SEO-optimized structure",
-        "Cross-browser compatibility",
-        "Mobile-first approach",
-        "Content Management System",
-        "Security best practices",
-      ],
-      pricing: [
-        {
-          name: "Basic",
-          price: "$499",
-          features: ["5 Pages", "Responsive Design", "Basic SEO", "1 Month Support"],
-        },
-        {
-          name: "Professional",
-          price: "$999",
-          features: ["10 Pages", "Advanced Design", "SEO Optimization", "3 Months Support", "Blog System"],
-          popular: true,
-        },
-        {
-          name: "Enterprise",
-          price: "$2,499",
-          features: ["Unlimited Pages", "Premium Design", "Advanced SEO", "6 Months Support", "Custom Features"],
-        },
-      ],
-    },
-    "seo": {
-      title: "SEO Optimization & Technical SEO",
-      icon: "🚀",
-      description: "Boost your search engine rankings and drive organic traffic to your website.",
-      features: [
-        "Comprehensive SEO audit",
-        "Keyword research & strategy",
-        "On-page optimization",
-        "Technical SEO fixes",
-        "Link building campaigns",
-        "Content optimization",
-        "Performance monitoring",
-        "Monthly reports",
-      ],
-      pricing: [
-        {
-          name: "Starter",
-          price: "$299/mo",
-          features: ["Basic SEO Audit", "Keyword Research", "On-Page SEO", "Monthly Report"],
-        },
-        {
-          name: "Growth",
-          price: "$599/mo",
-          features: ["Full SEO Audit", "Advanced Keywords", "Technical SEO", "Link Building", "Bi-weekly Reports"],
-          popular: true,
-        },
-        {
-          name: "Enterprise",
-          price: "$1,299/mo",
-          features: ["Complete SEO Suite", "Competitor Analysis", "Content Strategy", "Priority Support", "Weekly Reports"],
-        },
-      ],
-    },
-    "google-ads": {
-      title: "Google Ads Management",
-      icon: "📊",
-      description: "Maximize your ROI with expertly managed Google Ads campaigns.",
-      features: [
-        "Campaign strategy & setup",
-        "Keyword research & selection",
-        "Ad copy creation",
-        "Landing page optimization",
-        "A/B testing",
-        "Bid management",
-        "Conversion tracking",
-        "Performance reporting",
-      ],
-      pricing: [
-        {
-          name: "Starter",
-          price: "$399/mo",
-          features: ["1 Campaign", "Basic Setup", "Monthly Optimization", "Monthly Report"],
-        },
-        {
-          name: "Professional",
-          price: "$799/mo",
-          features: ["3 Campaigns", "Advanced Setup", "Weekly Optimization", "A/B Testing", "Bi-weekly Reports"],
-          popular: true,
-        },
-        {
-          name: "Enterprise",
-          price: "$1,599/mo",
-          features: ["Unlimited Campaigns", "Full Management", "Daily Optimization", "Advanced Analytics", "Weekly Reports"],
-        },
-      ],
-    },
-  };
-
-  const service = serviceDetails[serviceId] || serviceDetails["web-design"];
+  const currentLang = i18n.language || 'en';
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[var(--brand-dark)] to-black pt-20">
@@ -141,12 +43,11 @@ export default function ServiceDetailPage({ params }) {
             animate={{ opacity: 1, y: 0 }}
             className="text-center"
           >
-            <div className="text-8xl mb-6">{service.icon}</div>
             <h1 className="text-5xl md:text-7xl font-bold text-gradient mb-6">
-              {service.title}
+              {service.title[currentLang] || service.title.en}
             </h1>
             <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto">
-              {service.description}
+              {service.description[currentLang] || service.description.en}
             </p>
           </motion.div>
         </div>
@@ -161,7 +62,9 @@ export default function ServiceDetailPage({ params }) {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold text-white mb-4">What's Included</h2>
+            <h2 className="text-4xl font-bold text-white mb-4">
+              What's Included
+            </h2>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -193,24 +96,27 @@ export default function ServiceDetailPage({ params }) {
             viewport={{ once: true }}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold text-white mb-4">Pricing Plans</h2>
-            <p className="text-white/70">Choose the plan that fits your needs</p>
+            <h2 className="text-4xl font-bold text-white mb-4">
+              Pricing Plans
+            </h2>
+            <p className="text-white/70">
+              Choose the plan that fits your needs
+            </p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {service.pricing.map((plan, index) => (
+            {Object.entries(service.pricing).map(([key, plan], index) => (
               <motion.div
-                key={index}
+                key={key}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -10 }}
-                className={`glass rounded-2xl p-8 relative ${
-                  plan.popular ? "border-2 border-[var(--brand-gold)]" : ""
-                }`}
+                className={`glass rounded-2xl p-8 relative ${key === 'professional' ? "border-2 border-[var(--brand-gold)]" : ""
+                  }`}
               >
-                {plan.popular && (
+                {key === 'professional' && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] rounded-full text-white text-sm font-semibold">
                     Most Popular
                   </div>
@@ -236,11 +142,10 @@ export default function ServiceDetailPage({ params }) {
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className={`w-full px-6 py-4 rounded-full font-semibold transition-all ${
-                      plan.popular
-                        ? "bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] text-white"
-                        : "glass text-white hover:bg-white/10"
-                    }`}
+                    className={`w-full px-6 py-4 rounded-full font-semibold transition-all ${key === 'professional'
+                      ? "bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] text-white"
+                      : "glass text-white hover:bg-white/10"
+                      }`}
                   >
                     Get Started
                   </motion.button>
@@ -263,7 +168,7 @@ export default function ServiceDetailPage({ params }) {
               Ready to Get Started?
             </h2>
             <p className="text-xl text-white/80 mb-8">
-              Book a free consultation to discuss your project
+              Contact us for a free consultation
             </p>
             <Link href="/book">
               <motion.button
@@ -271,7 +176,7 @@ export default function ServiceDetailPage({ params }) {
                 whileTap={{ scale: 0.95 }}
                 className="px-10 py-5 rounded-full bg-white text-[var(--brand-dark)] font-bold text-lg shadow-2xl"
               >
-                {t("common.bookNow")}
+                Book Now
               </motion.button>
             </Link>
           </motion.div>

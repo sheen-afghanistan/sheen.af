@@ -7,15 +7,15 @@
   --foreground: #171717;
   
   /* Brand Colors */
-  --brand-dark: #003300;
-  --brand-primary: #004d00;
-  --brand-accent: #006600;
-  --brand-light: #e6f2e6;
+  --brand-dark: #1e6b54;
+  --brand-primary: #30ac8a;
+  --brand-accent: #4bc2a0;
+  --brand-light: #e6f7f2;
   --brand-gold: #D4AF37;
   
   /* Gradients */
   --gradient-main: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-primary) 100%);
-  --gradient-premium: linear-gradient(135deg, #003300 0%, #004d00 50%, #002200 100%);
+  --gradient-premium: linear-gradient(135deg, #1e6b54 0%, #30ac8a 50%, #165240 100%);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -68,7 +68,7 @@ body {
   }
 
   .glass-dark {
-    background: rgba(0, 51, 0, 0.7);
+    background: #1e6b54;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);

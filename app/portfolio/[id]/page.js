@@ -1,69 +1,26 @@
 "use client";
 
+import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
-import { FiArrowLeft, FiExternalLink, FiCalendar, FiUsers } from "react-icons/fi";
+import { FiArrowLeft, FiExternalLink, FiCalendar, FiUsers, FiArrowRight } from "react-icons/fi";
+import projects from "../../../data/portfolio";
+import { use } from "react";
 
 export default function PortfolioDetailPage({ params }) {
-  const projectId = params?.id || "1";
+  const { i18n } = useTranslation();
+  const { id } = use(params);
+  const projectSlug = id; // URL param
 
-  // Mock project data
-  const projects = {
-    "1": {
-      title: "E-Commerce Platform",
-      category: "E-Commerce",
-      client: "TechStore Afghanistan",
-      date: "November 2025",
-      image: "🛍️",
-      description: "A modern, full-featured e-commerce platform built for a leading tech retailer in Afghanistan. The platform includes advanced product filtering, secure payment integration, and a comprehensive admin dashboard.",
-      challenge: "The client needed a scalable e-commerce solution that could handle high traffic during sale events while providing a seamless shopping experience across all devices.",
-      solution: "We built a custom Next.js application with MongoDB for data management, integrated Stripe for payments, and implemented advanced caching strategies for optimal performance.",
-      results: [
-        "300% increase in online sales",
-        "50% reduction in cart abandonment",
-        "99.9% uptime during peak traffic",
-        "4.8/5 customer satisfaction rating",
-      ],
-      technologies: ["Next.js", "MongoDB", "Stripe", "Tailwind CSS", "Vercel"],
-      features: [
-        "Advanced product search and filtering",
-        "Secure payment processing",
-        "Real-time inventory management",
-        "Customer reviews and ratings",
-        "Order tracking system",
-        "Admin dashboard with analytics",
-      ],
-      screenshots: ["📱", "💻", "🖥️", "⌨️"],
-    },
-    "2": {
-      title: "Corporate Website",
-      category: "Web Development",
-      client: "Afghan Business Group",
-      date: "October 2025",
-      image: "🏢",
-      description: "A professional corporate website showcasing services, team, and achievements with a modern, clean design.",
-      challenge: "Create a professional online presence that reflects the company's values and expertise.",
-      solution: "Designed and developed a responsive website with custom CMS for easy content management.",
-      results: [
-        "200% increase in inquiries",
-        "Improved brand perception",
-        "Better client engagement",
-        "SEO ranking improvements",
-      ],
-      technologies: ["Next.js", "React", "Node.js", "MongoDB"],
-      features: [
-        "Custom CMS",
-        "Blog system",
-        "Team showcase",
-        "Service pages",
-        "Contact forms",
-        "SEO optimization",
-      ],
-      screenshots: ["🎨", "📊", "✨", "🚀"],
-    },
+  const getLocalizedContent = (content) => {
+    if (!content) return "";
+    if (typeof content === 'string') return content;
+    return content[i18n.language] || content.en || "";
   };
 
-  const project = projects[projectId] || projects["1"];
+  // Find project by slug (the URL param 'id' is actually the slug)
+  const project = projects.find(p => p.slug === projectSlug || p.id === projectSlug) || projects[0];
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[var(--brand-dark)] to-black pt-20">
@@ -96,7 +53,7 @@ export default function PortfolioDetailPage({ params }) {
               {project.category}
             </div>
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-              {project.title}
+              {getLocalizedContent(project.title)}
             </h1>
 
             <div className="flex flex-wrap items-center gap-6 text-white/70 mb-8">
@@ -106,13 +63,17 @@ export default function PortfolioDetailPage({ params }) {
               </div>
               <div className="flex items-center gap-2">
                 <FiCalendar />
-                <span>{project.date}</span>
+                <span>{project.year}</span>
               </div>
             </div>
 
             {/* Featured Image */}
-            <div className="aspect-video bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-dark)] rounded-2xl flex items-center justify-center text-9xl mb-12">
-              {project.image}
+            <div className="aspect-video bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-dark)] rounded-2xl overflow-hidden mb-12">
+              <img
+                src={project.image}
+                alt={getLocalizedContent(project.title)}
+                className="w-full h-full object-cover"
+              />
             </div>
           </motion.div>
         </div>
@@ -133,77 +94,39 @@ export default function PortfolioDetailPage({ params }) {
               >
                 <h2 className="text-3xl font-bold text-white mb-4">Overview</h2>
                 <p className="text-white/80 text-lg leading-relaxed">
-                  {project.description}
-                </p>
-              </motion.div>
-
-              {/* Challenge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="glass p-8 rounded-2xl"
-              >
-                <h2 className="text-3xl font-bold text-white mb-4">The Challenge</h2>
-                <p className="text-white/80 text-lg leading-relaxed">
-                  {project.challenge}
-                </p>
-              </motion.div>
-
-              {/* Solution */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="glass p-8 rounded-2xl"
-              >
-                <h2 className="text-3xl font-bold text-white mb-4">Our Solution</h2>
-                <p className="text-white/80 text-lg leading-relaxed">
-                  {project.solution}
+                  {getLocalizedContent(project.description)}
                 </p>
               </motion.div>
 
               {/* Screenshots */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                <h2 className="text-3xl font-bold text-white mb-6">Screenshots</h2>
-                <div className="grid md:grid-cols-2 gap-6">
-                  {project.screenshots.map((screenshot, index) => (
-                    <motion.div
-                      key={index}
-                      whileHover={{ scale: 1.05 }}
-                      className="aspect-video bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-dark)] rounded-2xl flex items-center justify-center text-8xl cursor-pointer"
-                    >
-                      {screenshot}
-                    </motion.div>
-                  ))}
-                </div>
-              </motion.div>
+              {project.images && project.images.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                >
+                  <h2 className="text-3xl font-bold text-white mb-6">Screenshots</h2>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {project.images.map((screenshot, index) => (
+                      <motion.div
+                        key={index}
+                        whileHover={{ scale: 1.05 }}
+                        className="aspect-video bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-dark)] rounded-2xl overflow-hidden cursor-pointer"
+                      >
+                        <img
+                          src={screenshot}
+                          alt={`Screenshot ${index + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+                </motion.div>
+              )}
             </div>
 
             {/* Sidebar */}
             <div className="space-y-8">
-              {/* Results */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="glass p-6 rounded-2xl"
-              >
-                <h3 className="text-2xl font-bold text-white mb-4">Results</h3>
-                <ul className="space-y-3">
-                  {project.results.map((result, index) => (
-                    <li key={index} className="flex items-start gap-3 text-white/80">
-                      <span className="text-[var(--brand-gold)] text-xl">✓</span>
-                      {result}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-
               {/* Technologies */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -213,7 +136,7 @@ export default function PortfolioDetailPage({ params }) {
               >
                 <h3 className="text-2xl font-bold text-white mb-4">Technologies</h3>
                 <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech, index) => (
+                  {project.tags.map((tech, index) => (
                     <span
                       key={index}
                       className="px-3 py-1 rounded-full bg-white/5 text-white/80 text-sm"
@@ -225,22 +148,48 @@ export default function PortfolioDetailPage({ params }) {
               </motion.div>
 
               {/* Features */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="glass p-6 rounded-2xl"
-              >
-                <h3 className="text-2xl font-bold text-white mb-4">Key Features</h3>
-                <ul className="space-y-2">
-                  {project.features.map((feature, index) => (
-                    <li key={index} className="text-white/80 flex items-center gap-2">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-gold)]" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
+              {project.features && project.features.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="glass p-6 rounded-2xl"
+                >
+                  <h3 className="text-2xl font-bold text-white mb-4">Key Features</h3>
+                  <ul className="space-y-2">
+                    {project.features.map((feature, index) => (
+                      <li key={index} className="text-white/80 flex items-start gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-gold)] mt-2 flex-shrink-0" />
+                        {getLocalizedContent(feature)}
+                      </li>
+                    ))}
+                  </ul>
+                </motion.div>
+              )}
+
+              {/* Visit Link */}
+              {project.link && (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="glass p-6 rounded-2xl"
+                >
+                  <h3 className="text-xl font-bold text-white mb-4">
+                    Visit Website
+                  </h3>
+                  <a href={project.link} target="_blank" rel="noopener noreferrer">
+                    <motion.button
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full px-6 py-3 rounded-full bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] text-white font-semibold flex items-center justify-center gap-2"
+                    >
+                      Visit Live Site
+                      <FiExternalLink />
+                    </motion.button>
+                  </a>
+                </motion.div>
+              )}
 
               {/* CTA */}
               <motion.div
@@ -259,10 +208,10 @@ export default function PortfolioDetailPage({ params }) {
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full px-6 py-3 rounded-full bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] text-white font-semibold flex items-center justify-center gap-2"
+                    className="w-full px-6 py-3 rounded-full glass text-white hover:bg-white/10 font-semibold flex items-center justify-center gap-2"
                   >
                     Start Your Project
-                    <FiExternalLink />
+                    <FiArrowRight />
                   </motion.button>
                 </Link>
               </motion.div>

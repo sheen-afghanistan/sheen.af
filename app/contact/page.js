@@ -20,12 +20,43 @@ export default function ContactPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("sending");
-    
-    // Simulate API call
-    setTimeout(() => {
-      setStatus("success");
-      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-    }, 1500);
+
+    try {
+      const response = await fetch('/api/send-contact-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+
+        // Clear success message after 5 seconds
+        setTimeout(() => {
+          setStatus("");
+        }, 5000);
+      } else {
+        const error = await response.json();
+        setStatus("error");
+        console.error('Email error:', error);
+
+        // Clear error message after 5 seconds
+        setTimeout(() => {
+          setStatus("");
+        }, 5000);
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setStatus("error");
+
+      // Clear error message after 5 seconds
+      setTimeout(() => {
+        setStatus("");
+      }, 5000);
+    }
   };
 
   const handleChange = (e) => {
@@ -35,32 +66,32 @@ export default function ContactPage() {
   const contactInfo = [
     {
       icon: FiMail,
-      title: "Email",
-      value: "sheen.af.co@gmail.com",
-      link: "mailto:sheen.af.co@gmail.com",
+      title: t("contact.email"),
+      value: "info@sheen.af",
+      link: "mailto:info@sheen.af",
     },
     {
       icon: FiPhone,
-      title: "Phone",
+      title: t("contact.phone"),
       value: "+93 784 966 018",
       link: "tel:+93784966018",
     },
     {
       icon: FaWhatsapp,
-      title: "WhatsApp",
+      title: t("contact.whatsapp"),
       value: "+93 784 966 018",
       link: "https://wa.me/93784966018",
     },
     {
       icon: FiMapPin,
-      title: "Address",
-      value: "Kabul, Afghanistan",
+      title: t("contact.address"),
+      value: t("contact.addressValue"),
       link: "#",
     },
     {
       icon: FiClock,
-      title: "Support Hours",
-      value: "24/7 Available",
+      title: t("contact.supportHours"),
+      value: t("contact.available247"),
       link: "#",
     },
   ];
@@ -84,10 +115,10 @@ export default function ContactPage() {
             className="text-center mb-16"
           >
             <h1 className="text-5xl md:text-7xl font-bold text-gradient mb-6">
-              {t("nav.contact")}
+              {t("contact.title")}
             </h1>
             <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto">
-              Let's discuss your next project. We're here to help!
+              {t("contact.subtitle")}
             </p>
           </motion.div>
         </div>
@@ -104,11 +135,11 @@ export default function ContactPage() {
               viewport={{ once: true }}
               className="glass p-8 rounded-2xl"
             >
-              <h2 className="text-3xl font-bold text-white mb-6">Send us a Message</h2>
-              
+              <h2 className="text-3xl font-bold text-white mb-6">{t("contact.formTitle")}</h2>
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label className="block text-white/80 mb-2">Name *</label>
+                  <label className="block text-white/80 mb-2">{t("contact.nameLabel")} *</label>
                   <input
                     type="text"
                     name="name"
@@ -116,12 +147,12 @@ export default function ContactPage() {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:border-[var(--brand-gold)] focus:outline-none transition-all"
-                    placeholder="Your name"
+                    placeholder={t("contact.namePlaceholder")}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-white/80 mb-2">Email *</label>
+                  <label className="block text-white/80 mb-2">{t("contact.emailLabel")} *</label>
                   <input
                     type="email"
                     name="email"
@@ -129,24 +160,24 @@ export default function ContactPage() {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:border-[var(--brand-gold)] focus:outline-none transition-all"
-                    placeholder="your@email.com"
+                    placeholder={t("contact.emailPlaceholder")}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-white/80 mb-2">Phone</label>
+                  <label className="block text-white/80 mb-2">{t("contact.phoneLabel")}</label>
                   <input
                     type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:border-[var(--brand-gold)] focus:outline-none transition-all"
-                    placeholder="+93 XXX XXX XXX"
+                    placeholder={t("contact.phonePlaceholder")}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-white/80 mb-2">Subject *</label>
+                  <label className="block text-white/80 mb-2">{t("contact.subjectLabel")} *</label>
                   <input
                     type="text"
                     name="subject"
@@ -154,12 +185,12 @@ export default function ContactPage() {
                     onChange={handleChange}
                     required
                     className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:border-[var(--brand-gold)] focus:outline-none transition-all"
-                    placeholder="How can we help?"
+                    placeholder={t("contact.subjectPlaceholder")}
                   />
                 </div>
 
                 <div>
-                  <label className="block text-white/80 mb-2">Message *</label>
+                  <label className="block text-white/80 mb-2">{t("contact.messageLabel")} *</label>
                   <textarea
                     name="message"
                     value={formData.message}
@@ -167,7 +198,7 @@ export default function ContactPage() {
                     required
                     rows={5}
                     className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:border-[var(--brand-gold)] focus:outline-none transition-all resize-none"
-                    placeholder="Tell us about your project..."
+                    placeholder={t("contact.messagePlaceholder")}
                   />
                 </div>
 
@@ -178,7 +209,7 @@ export default function ContactPage() {
                   disabled={status === "sending"}
                   className="w-full px-8 py-4 rounded-full bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] text-white font-semibold flex items-center justify-center gap-2 disabled:opacity-50"
                 >
-                  {status === "sending" ? "Sending..." : "Send Message"}
+                  {status === "sending" ? t("contact.sending") : t("contact.send")}
                   <FiSend />
                 </motion.button>
 
@@ -188,7 +219,17 @@ export default function ContactPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="p-4 rounded-lg bg-green-500/20 border border-green-500/50 text-green-400 text-center"
                   >
-                    Message sent successfully! We'll get back to you soon.
+                    {t("contact.success")}
+                  </motion.div>
+                )}
+
+                {status === "error" && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-4 rounded-lg bg-red-500/20 border border-red-500/50 text-red-400 text-center"
+                  >
+                    {t("contact.error") || "Failed to send message. Please try again."}
                   </motion.div>
                 )}
               </form>
@@ -201,8 +242,8 @@ export default function ContactPage() {
               viewport={{ once: true }}
               className="space-y-6"
             >
-              <h2 className="text-3xl font-bold text-white mb-8">Contact Information</h2>
-              
+              <h2 className="text-3xl font-bold text-white mb-8">{t("contact.infoTitle")}</h2>
+
               {contactInfo.map((info, index) => (
                 <motion.a
                   key={index}
@@ -233,7 +274,7 @@ export default function ContactPage() {
               >
                 <div className="text-center text-white/60">
                   <FiMapPin className="text-5xl mx-auto mb-4" />
-                  <p>Map Integration</p>
+                  {/* <p>{t("contact.mapIntegration")}</p> */}
                 </div>
               </motion.div>
             </motion.div>

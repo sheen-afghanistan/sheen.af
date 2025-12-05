@@ -6,87 +6,53 @@ import { motion } from "framer-motion";
 import { FiArrowRight, FiCheck } from "react-icons/fi";
 import Link from "next/link";
 import "../lib/i18n";
+import servicesData from "../data/services";
 
 export default function HomePage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     // Initialize i18n on mount
   }, []);
 
-  const services = [
-    {
-      title: t("services.webDesign"),
-      desc: t("services.webDesignDesc"),
-      icon: "🌐",
-    },
-    {
-      title: t("services.seo"),
-      desc: t("services.seoDesc"),
-      icon: "🚀",
-    },
-    {
-      title: t("services.googleAds"),
-      desc: t("services.googleAdsDesc"),
-      icon: "📊",
-    },
-    {
-      title: t("services.socialAds"),
-      desc: t("services.socialAdsDesc"),
-      icon: "📱",
-    },
-    {
-      title: t("services.apiIntegration"),
-      desc: t("services.apiIntegrationDesc"),
-      icon: "🔗",
-    },
-    {
-      title: t("services.ecommerce"),
-      desc: t("services.ecommerceDesc"),
-      icon: "🛒",
-    },
-    {
-      title: t("services.3dWeb"),
-      desc: t("services.3dWebDesc"),
-      icon: "✨",
-    },
-    {
-      title: t("services.automation"),
-      desc: t("services.automationDesc"),
-      icon: "⚙️",
-    },
-  ];
+  // Get services from data file with current language
+  const services = servicesData.map(service => ({
+    id: service.id,
+    title: service.title[i18n.language] || service.title.en,
+    desc: service.shortDesc[i18n.language] || service.shortDesc.en,
+    link: `/services/${service.slug}`
+  }));
 
   const stats = [
-    { number: "200+", label: "Projects Completed" },
-    { number: "50+", label: "Happy Clients" },
-    { number: "15+", label: "Team Members" },
-    { number: "5+", label: "Years Experience" },
+    { number: "50+", label: t("stats.projectsCompleted") },
+    { number: "20+", label: t("stats.happyClients") },
+    { number: "5+", label: t("stats.teamMembers") },
+    { number: "2+", label: t("stats.yearsExperience") },
   ];
 
   const testimonials = [
     {
-      name: "Ahmad Rezai",
-      position: "CEO, TechCorp",
-      text: "Sheen transformed our online presence. Their expertise in web development and SEO is unmatched.",
+      name: "Unknown",
+      position: t("testimonials.position1"),
+      text: t("testimonials.testimonial1"),
       avatar: "/client-ahmad.png",
     },
     {
-      name: "Sara Ahmadi",
-      position: "Marketing Director",
-      text: "The Google Ads campaigns they managed increased our ROI by 300%. Highly recommended!",
+      name: "Unknown",
+      position: t("testimonials.position2"),
+      text: t("testimonials.testimonial2"),
       avatar: "/client-sara.png",
     },
     {
-      name: "Rohullah Karimi",
-      position: "Founder, Laatulakki Oy",
-      text: "Our e-commerce platform built by Sheen is fast, beautiful, and converts like crazy.",
+      name: "Unknown",
+      position: t("testimonials.position3"),
+      text: t("testimonials.testimonial3"),
       avatar: "/client-hamid.png",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[var(--brand-dark)] to-black">
+    <div className="min-h-screen bg-gradient-to-b from-[var(--brand-dark)] to-black overflow-hidden">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
         {/* Animated Background Elements */}
@@ -217,7 +183,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((service, index) => (
               <motion.div
-                key={index}
+                key={service.id || index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -229,7 +195,7 @@ export default function HomePage() {
                   {service.title}
                 </h3>
                 <p className="text-white/70">{service.desc}</p>
-                <Link href="/services">
+                <Link href={service.link}>
                   <motion.div
                     className="mt-4 text-[var(--brand-gold)] flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity"
                   >
@@ -253,16 +219,16 @@ export default function HomePage() {
               viewport={{ once: true }}
             >
               <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Why Choose Sheen?
+                {t("whyChoose.title")}
               </h2>
               <div className="space-y-4">
                 {[
-                  "Premium Quality & Modern Design",
-                  "Expert Team with 5+ Years Experience",
-                  "24/7 Support & Maintenance",
-                  "SEO-Optimized Solutions",
-                  "Fast Delivery & Agile Process",
-                  "Competitive Pricing",
+                  t("whyChoose.feature1"),
+                  t("whyChoose.feature2"),
+                  t("whyChoose.feature3"),
+                  t("whyChoose.feature4"),
+                  t("whyChoose.feature5"),
+                  t("whyChoose.feature6"),
                 ].map((item, index) => (
                   <motion.div
                     key={index}
@@ -288,10 +254,10 @@ export default function HomePage() {
               className="glass p-8 rounded-2xl"
             >
               <h3 className="text-2xl font-bold text-white mb-6">
-                Ready to Start Your Project?
+                {t("whyChoose.ctaTitle")}
               </h3>
               <p className="text-white/70 mb-6">
-                Get a free consultation and quote for your next digital project.
+                {t("whyChoose.ctaDesc")}
               </p>
               <Link href="/contact">
                 <motion.button
@@ -317,7 +283,7 @@ export default function HomePage() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              What Our Clients Say
+              {t("testimonials.title")}
             </h2>
           </motion.div>
 
@@ -332,8 +298,8 @@ export default function HomePage() {
                 className="glass p-6 rounded-2xl"
               >
                 <div className="w-20 h-20 rounded-full overflow-hidden mb-4 mx-auto border-2 border-[var(--brand-gold)]">
-                  <img 
-                    src={testimonial.avatar} 
+                  <img
+                    src={testimonial.avatar}
                     alt={testimonial.name}
                     className="w-full h-full object-cover"
                   />
@@ -358,10 +324,10 @@ export default function HomePage() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Let&apos;s Build Something Amazing Together
+              {t("cta.title")}
             </h2>
             <p className="text-xl text-white/80 mb-8">
-              Book a free consultation call with our experts today
+              {t("cta.subtitle")}
             </p>
             <Link href="/book">
               <motion.button

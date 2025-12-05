@@ -7,14 +7,19 @@
     "portfolio": "Portfolio",
     "blog": "Blog",
     "contact": "Contact",
-    "book": "Book Online",
-    "shop": "Shop"
+    "book": "Book Online"
   },
   "hero": {
     "title": "Digital Excellence for the Modern Era",
-    "subtitle": "We build premium digital experiences that elevate your brand and drive results.",
+    "subtitle": "We build premium digital experiences that elevate your brand and drive results",
     "cta": "Get Started",
     "viewWork": "View Our Work"
+  },
+  "stats": {
+    "projectsCompleted": "Projects Completed",
+    "happyClients": "Happy Clients",
+    "teamMembers": "Team Members",
+    "yearsExperience": "Years Experience"
   },
   "services": {
     "title": "Our Services",
@@ -34,7 +39,226 @@
     "3dWeb": "3D & Modern Web Solutions",
     "3dWebDesc": "Cutting-edge interactive experiences",
     "automation": "Business Automation",
-    "automationDesc": "Streamline operations with custom tools"
+    "automationDesc": "Streamline operations with custom tools",
+    "keyFeatures": "Key Features",
+    "webFeatures": {
+      "f1": "Responsive Design",
+      "f2": "Modern UI/UX",
+      "f3": "Fast Loading",
+      "f4": "SEO-Friendly",
+      "f5": "Cross-Browser Compatible"
+    },
+    "seoFeatures": {
+      "f1": "Keyword Research",
+      "f2": "On-Page SEO",
+      "f3": "Technical SEO",
+      "f4": "Link Building",
+      "f5": "Analytics & Reporting"
+    },
+    "googleAdsFeatures": {
+      "f1": "Campaign Setup",
+      "f2": "Ad Optimization",
+      "f3": "Keyword Management",
+      "f4": "A/B Testing",
+      "f5": "ROI Tracking"
+    },
+    "socialAdsFeatures": {
+      "f1": "Facebook Ads",
+      "f2": "Instagram Ads",
+      "f3": "LinkedIn Ads",
+      "f4": "Audience Targeting",
+      "f5": "Creative Design"
+    },
+    "apiFeatures": {
+      "f1": "Shipit Integration",
+      "f2": "Payment Gateways",
+      "f3": "CRM Integration",
+      "f4": "Custom APIs",
+      "f5": "Third-Party Services"
+    },
+    "ecommerceFeatures": {
+      "f1": "Product Management",
+      "f2": "Shopping Cart",
+      "f3": "Payment Integration",
+      "f4": "Inventory System",
+      "f5": "Order Tracking"
+    },
+    "web3dFeatures": {
+      "f1": "3D Modeling",
+      "f2": "Interactive Experiences",
+      "f3": "WebGL",
+      "f4": "Animations",
+      "f5": "Virtual Tours"
+    },
+    "automationFeatures": {
+      "f1": "Workflow Automation",
+      "f2": "Email Automation",
+      "f3": "Data Processing",
+      "f4": "Custom Tools",
+      "f5": "Integration Services"
+    },
+    "readyToStart": "Ready to Get Started?",
+    "contactForConsultation": "Contact us today for a free consultation"
+  },
+  "whyChoose": {
+    "title": "Why Choose Sheen?",
+    "feature1": "Premium Quality & Modern Design",
+    "feature2": "Expert Team with 2+ Years Experience",
+    "feature3": "24/7 Support & Maintenance",
+    "feature4": "SEO-Optimized Solutions",
+    "feature5": "Fast Delivery & Agile Process",
+    "feature6": "Competitive Pricing",
+    "ctaTitle": "Ready to Start Your Project?",
+    "ctaDesc": "Get a free consultation and quote for your next digital project."
+  },
+  "testimonials": {
+    "title": "What Our Clients Say",
+    "testimonial1": "Sheen transformed our online presence. Their expertise in web development and SEO is unmatched",
+    "testimonial2": "The Google Ads campaigns they managed increased our ROI by 300%. Highly recommended!",
+    "testimonial3": "Our e-commerce platform built by Sheen is fast, beautiful, and converts like crazy",
+    "position1": "CEO, Leader",
+    "position2": "Marketing Director",
+    "position3": "Founder, X"
+  },
+  "cta": {
+    "title": "Let's Build Something Amazing Together",
+    "subtitle": "Book a free consultation call with our experts today"
+  },
+  "about": {
+    "title": "About Sheen",
+    "subtitle": "We are a team of passionate digital experts dedicated to transforming businesses through innovative technology solutions",
+    "ourStory": "Our Story",
+    "storyP1": "Founded in 2022, Sheen started with a simple mission: to help Afghan businesses thrive in the digital age. What began as a small team of developers has grown into a full-service digital agency.",
+    "storyP2": "Today, we serve clients across Afghanistan and beyond, delivering world-class web solutions, SEO services, advertising campaigns, and custom automation tools.",
+    "storyP3": "Our commitment to excellence and innovation has made us one of the most trusted digital agencies in the region.",
+    "missionVision": "Mission & Vision",
+    "mission": "Mission",
+    "missionText": "To empower businesses with cutting-edge digital solutions that drive growth, enhance user experiences, and deliver measurable results.",
+    "vision": "Vision",
+    "visionText": "To become the leading digital agency in Afghanistan, known for innovation, quality, and transforming businesses through technology.",
+    "ourValues": "Our Values",
+    "valuesSubtitle": "The principles that guide everything we do",
+    "value1Title": "Innovation",
+    "value1Desc": "We stay ahead of trends and use cutting-edge technologies",
+    "value2Title": "Quality",
+    "value2Desc": "Premium results that exceed expectations every time",
+    "value3Title": "Integrity",
+    "value3Desc": "Honest, transparent communication and ethical practices",
+    "value4Title": "Results",
+    "value4Desc": "Data-driven strategies that deliver measurable outcomes",
+    "meetTeam": "Meet Our Team",
+    "teamSubtitle": "The talented people behind Sheen",
+    "whySheen": "Why Sheen Stands Out",
+    "why1Title": "Local Expertise, Global Standards",
+    "why1Desc": "We understand the Afghan market while delivering international-quality work",
+    "why2Title": "Full-Service Solutions",
+    "why2Desc": "From design to development to marketing - we handle it all",
+    "why3Title": "Proven Track Record",
+    "why3Desc": "50+ successful projects and countless satisfied clients",
+    "why4Title": "Cutting-Edge Technology",
+    "why4Desc": "We use the latest tools and frameworks for optimal results",
+    "why5Title": "Dedicated Support",
+    "why5Desc": "24/7 support and maintenance to keep your business running",
+    "why6Title": "Transparent Pricing",
+    "why6Desc": "No hidden fees - clear, competitive pricing from the start"
+  },
+  "packages": {
+    "title": "Pricing Packages",
+    "subtitle": "Choose the perfect package for your business needs",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "save": "Save 17%",
+    "mostPopular": "Most Popular",
+    "oneTimeServices": "One-Time Services",
+    "oneTimeSubtitle": "Additional services available à la carte",
+    "purchase": "Purchase",
+    "perMonth": "month",
+    "perYear": "year"
+  },
+  "blog": {
+    "title": "Our Blog",
+    "subtitle": "Insights, tips, and trends in digital marketing",
+    "search": "Search articles...",
+    "noResults": "No articles found. Try a different search or category.",
+    "allPosts": "All Posts"
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Let's discuss your next project. We're here to help!",
+    "formTitle": "Send us a Message",
+    "nameLabel": "Name",
+    "namePlaceholder": "Your name",
+    "emailLabel": "Email",
+    "emailPlaceholder": "your@email.com",
+    "phoneLabel": "Phone",
+    "phonePlaceholder": "+93 XXX XXX XXX",
+    "subjectLabel": "Subject",
+    "subjectPlaceholder": "How can we help?",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Tell us about your project...",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Message sent successfully! We'll get back to you soon.",
+    "error": "Failed to send message. Please try again.",
+    "infoTitle": "Contact Information",
+    "email": "Email",
+    "phone": "Phone",
+    "whatsapp": "WhatsApp",
+    "address": "Address",
+    "addressValue": "Kabul, Afghanistan",
+    "supportHours": "Support Hours",
+    "available247": "24/7 Available",
+    "mapIntegration": "Map Integration"
+  },
+  "book": {
+    "title": "Book a Consultation",
+    "subtitle": "Schedule a free consultation with our experts",
+    "step1": "Service",
+    "step2": "Date & Time",
+    "step3": "Your Info",
+    "selectService": "Select a Service",
+    "chooseDateTime": "Choose Date & Time",
+    "yourInfo": "Your Information",
+    "selectDate": "Select Date",
+    "selectTime": "Select Time",
+    "fullName": "Full Name",
+    "additionalMessage": "Additional Message",
+    "messagePlaceholder": "Tell us about your project...",
+    "back": "Back",
+    "next": "Next",
+    "confirmBooking": "Confirm Booking",
+    "bookingConfirmed": "Booking Confirmed!",
+    "bookingMessage": "We've received your booking request. Our team will contact you shortly to confirm the details.",
+    "bookingSummary": "Booking Summary",
+    "service": "Service",
+    "date": "Date",
+    "time": "Time",
+    "name": "Name",
+    "email": "Email",
+    "bookAnother": "Book Another Consultation"
+  },
+  "portfolio": {
+    "title": "Our Portfolio",
+    "subtitle": "Explore our successful projects and see what we can do for you",
+    "allProjects": "All Projects",
+    "webDev": "Web Development",
+    "ecommerce": "E-Commerce",
+    "mobileApps": "Mobile Apps",
+    "3dInteractive": "3D & Interactive",
+    "marketing": "Marketing",
+    "project1Title": "E-Commerce Platform",
+    "project1Desc": "Modern online store with advanced features",
+    "project2Title": "Corporate Website",
+    "project2Desc": "Professional business website with CMS",
+    "project3Title": "Restaurant App",
+    "project3Desc": "Food ordering mobile application",
+    "project4Title": "3D Product Configurator",
+    "project4Desc": "Interactive 3D product customization",
+    "project5Title": "Marketing Campaign",
+    "project5Desc": "Successful Google Ads campaign",
+    "project6Title": "Logistics Platform",
+    "project6Desc": "Shipping management system",
+    "readyToStart": "Ready to Start Your Project?"
   },
   "footer": {
     "about": "About Sheen",
@@ -50,6 +274,377 @@
     "buyNow": "Buy Now",
     "viewAll": "View All",
     "readMore": "Read More",
-    "contactUs": "Contact Us"
+    "contactUs": "Contact Us",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  },
+  "serviceDetails": {
+    "web-design": {
+      "title": "Website Design & Development",
+      "description": "Create stunning, responsive websites that captivate your audience and drive conversions.",
+      "whatsIncluded": "What's Included",
+      "pricingPlans": "Pricing Plans",
+      "choosePlan": "Choose the plan that fits your needs",
+      "mostPopular": "Most Popular",
+      "getStarted": "Get Started",
+      "backToServices": "Back to Services",
+      "features": {
+        "f1": "Custom responsive design",
+        "f2": "Modern UI/UX principles",
+        "f3": "Fast loading speeds",
+        "f4": "SEO-optimized structure",
+        "f5": "Cross-browser compatibility",
+        "f6": "Mobile-first approach",
+        "f7": "Content Management System",
+        "f8": "Security best practices"
+      },
+      "pricing": {
+        "basic": {
+          "name": "Basic",
+          "features": {
+            "f1": "5 Pages",
+            "f2": "Responsive Design",
+            "f3": "Basic SEO",
+            "f4": "1 Month Support"
+          }
+        },
+        "professional": {
+          "name": "Professional",
+          "features": {
+            "f1": "10 Pages",
+            "f2": "Advanced Design",
+            "f3": "SEO Optimization",
+            "f4": "3 Months Support",
+            "f5": "Blog System"
+          }
+        },
+        "enterprise": {
+          "name": "Enterprise",
+          "features": {
+            "f1": "Unlimited Pages",
+            "f2": "Premium Design",
+            "f3": "Advanced SEO",
+            "f4": "6 Months Support",
+            "f5": "Custom Features"
+          }
+        }
+      }
+    },
+    "seo": {
+      "title": "SEO Optimization & Technical SEO",
+      "description": "Boost your search engine rankings and drive organic traffic to your website.",
+      "features": {
+        "f1": "Comprehensive SEO audit",
+        "f2": "Keyword research & strategy",
+        "f3": "On-page optimization",
+        "f4": "Technical SEO fixes",
+        "f5": "Link building campaigns",
+        "f6": "Content optimization",
+        "f7": "Performance monitoring",
+        "f8": "Monthly reports"
+      },
+      "pricing": {
+        "basic": {
+          "name": "Starter",
+          "features": {
+            "f1": "Basic SEO Audit",
+            "f2": "Keyword Research",
+            "f3": "On-Page SEO",
+            "f4": "Monthly Report"
+          }
+        },
+        "professional": {
+          "name": "Growth",
+          "features": {
+            "f1": "Full SEO Audit",
+            "f2": "Advanced Keywords",
+            "f3": "Technical SEO",
+            "f4": "Link Building",
+            "f5": "Bi-weekly Reports"
+          }
+        },
+        "enterprise": {
+          "name": "Enterprise",
+          "features": {
+            "f1": "Complete SEO Suite",
+            "f2": "Competitor Analysis",
+            "f3": "Content Strategy",
+            "f4": "Priority Support",
+            "f5": "Weekly Reports"
+          }
+        }
+      }
+    },
+    "google-ads": {
+      "title": "Google Ads Management",
+      "description": "Maximize your ROI with expertly managed Google Ads campaigns.",
+      "features": {
+        "f1": "Campaign strategy & setup",
+        "f2": "Keyword research & selection",
+        "f3": "Ad copy creation",
+        "f4": "Landing page optimization",
+        "f5": "A/B testing",
+        "f6": "Bid management",
+        "f7": "Conversion tracking",
+        "f8": "Performance reporting"
+      },
+      "pricing": {
+        "basic": {
+          "name": "Starter",
+          "features": {
+            "f1": "1 Campaign",
+            "f2": "Basic Setup",
+            "f3": "Monthly Optimization",
+            "f4": "Monthly Report"
+          }
+        },
+        "professional": {
+          "name": "Professional",
+          "features": {
+            "f1": "3 Campaigns",
+            "f2": "Advanced Setup",
+            "f3": "Weekly Optimization",
+            "f4": "A/B Testing",
+            "f5": "Bi-weekly Reports"
+          }
+        },
+        "enterprise": {
+          "name": "Enterprise",
+          "features": {
+            "f1": "Unlimited Campaigns",
+            "f2": "Full Management",
+            "f3": "Daily Optimization",
+            "f4": "Advanced Analytics",
+            "f5": "Weekly Reports"
+          }
+        }
+      }
+    },
+    "social-ads": {
+      "title": "Social Media Advertising",
+      "description": "Targeted campaigns across all major platforms to reach your ideal audience.",
+      "features": {
+        "f1": "Platform selection strategy",
+        "f2": "Audience targeting & segmentation",
+        "f3": "Creative ad design",
+        "f4": "Copywriting for ads",
+        "f5": "Campaign monitoring",
+        "f6": "Retargeting campaigns",
+        "f7": "Budget management",
+        "f8": "Detailed analytics"
+      },
+      "pricing": {
+        "basic": {
+          "name": "Starter",
+          "features": {
+            "f1": "1 Platform",
+            "f2": "Basic Ad Creation",
+            "f3": "Monthly Monitoring",
+            "f4": "Monthly Report"
+          }
+        },
+        "professional": {
+          "name": "Growth",
+          "features": {
+            "f1": "2 Platforms",
+            "f2": "Advanced Creatives",
+            "f3": "Weekly Optimization",
+            "f4": "Retargeting",
+            "f5": "Bi-weekly Reports"
+          }
+        },
+        "enterprise": {
+          "name": "Dominance",
+          "features": {
+            "f1": "All Platforms",
+            "f2": "Premium Creatives",
+            "f3": "Daily Management",
+            "f4": "Full Funnel Strategy",
+            "f5": "Weekly Reports"
+          }
+        }
+      }
+    },
+    "api-integration": {
+      "title": "API Integrations",
+      "description": "Seamlessly connect your software systems for better efficiency and data flow.",
+      "features": {
+        "f1": "Custom API development",
+        "f2": "Third-party API integration",
+        "f3": "Secure data transfer",
+        "f4": "Real-time synchronization",
+        "f5": "Error handling & logging",
+        "f6": "Documentation",
+        "f7": "Maintenance & support",
+        "f8": "Performance optimization"
+      },
+      "pricing": {
+        "basic": {
+          "name": "Basic",
+          "features": {
+            "f1": "1 Integration",
+            "f2": "Standard API",
+            "f3": "Basic Testing",
+            "f4": "Documentation"
+          }
+        },
+        "professional": {
+          "name": "Complex",
+          "features": {
+            "f1": "Up to 3 Integrations",
+            "f2": "Custom Endpoints",
+            "f3": "Advanced Security",
+            "f4": "Performance Tuning",
+            "f5": "3 Months Support"
+          }
+        },
+        "enterprise": {
+          "name": "Enterprise",
+          "features": {
+            "f1": "Unlimited Integrations",
+            "f2": "Full System Architecture",
+            "f3": "Real-time Sync",
+            "f4": "Priority Support",
+            "f5": "SLA"
+          }
+        }
+      }
+    },
+    "ecommerce": {
+      "title": "E-Commerce Development",
+      "description": "Build robust online stores that provide seamless shopping experiences.",
+      "features": {
+        "f1": "Custom store design",
+        "f2": "Product catalog management",
+        "f3": "Secure payment gateways",
+        "f4": "Shopping cart & checkout",
+        "f5": "Order management system",
+        "f6": "Customer accounts",
+        "f7": "Inventory tracking",
+        "f8": "Mobile responsiveness"
+      },
+      "pricing": {
+        "basic": {
+          "name": "Startup",
+          "features": {
+            "f1": "Up to 50 Products",
+            "f2": "Standard Theme",
+            "f3": "PayPal/Stripe",
+            "f4": "Basic Support"
+          }
+        },
+        "professional": {
+          "name": "Business",
+          "features": {
+            "f1": "Up to 500 Products",
+            "f2": "Custom Design",
+            "f3": "Multiple Gateways",
+            "f4": "Abandoned Cart",
+            "f5": "SEO Tools"
+          }
+        },
+        "enterprise": {
+          "name": "Scale",
+          "features": {
+            "f1": "Unlimited Products",
+            "f2": "Premium Customization",
+            "f3": "Advanced Analytics",
+            "f4": "B2B Features",
+            "f5": "Priority Support"
+          }
+        }
+      }
+    },
+    "3d-web": {
+      "title": "3D & Modern Web Solutions",
+      "description": "Immersive web experiences using WebGL and 3D technologies.",
+      "features": {
+        "f1": "3D product visualization",
+        "f2": "Interactive configurators",
+        "f3": "WebGL animations",
+        "f4": "Virtual tours",
+        "f5": "Gamified experiences",
+        "f6": "Performance optimization",
+        "f7": "Cross-device compatibility",
+        "f8": "Custom shaders"
+      },
+      "pricing": {
+        "basic": {
+          "name": "Basic 3D",
+          "features": {
+            "f1": "Single Model Viewer",
+            "f2": "Basic Interaction",
+            "f3": "Mobile Compatible",
+            "f4": "Integration"
+          }
+        },
+        "professional": {
+          "name": "Interactive",
+          "features": {
+            "f1": "Product Configurator",
+            "f2": "Advanced Materials",
+            "f3": "Animation",
+            "f4": "UI Controls",
+            "f5": "Analytics"
+          }
+        },
+        "enterprise": {
+          "name": "Immersive",
+          "features": {
+            "f1": "Full 3D Environment",
+            "f2": "Physics Engine",
+            "f3": "Multi-user Support",
+            "f4": "VR/AR Ready",
+            "f5": "Custom Development"
+          }
+        }
+      }
+    },
+    "automation": {
+      "title": "Business Automation",
+      "description": "Automate repetitive tasks and streamline your business workflows.",
+      "features": {
+        "f1": "Workflow analysis",
+        "f2": "Custom bot development",
+        "f3": "Email automation",
+        "f4": "Data entry automation",
+        "f5": "CRM automation",
+        "f6": "Report generation",
+        "f7": "Integration with tools",
+        "f8": "Monitoring dashboard"
+      },
+      "pricing": {
+        "basic": {
+          "name": "Starter",
+          "features": {
+            "f1": "1 Workflow",
+            "f2": "Email Bot",
+            "f3": "Basic Triggers",
+            "f4": "Setup Guide"
+          }
+        },
+        "professional": {
+          "name": "Efficiency",
+          "features": {
+            "f1": "5 Workflows",
+            "f2": "Data Processing",
+            "f3": "Multi-step Logic",
+            "f4": "Dashboard",
+            "f5": "Support"
+          }
+        },
+        "enterprise": {
+          "name": "Full Auto",
+          "features": {
+            "f1": "Unlimited Workflows",
+            "f2": "AI Integration",
+            "f3": "Custom Dashboard",
+            "f4": "Server Setup",
+            "f5": "Priority Support"
+          }
+        }
+      }
+    }
   }
 }

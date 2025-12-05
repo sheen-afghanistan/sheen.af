@@ -4,73 +4,30 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
+import projects from "../../data/portfolio";
 
 export default function PortfolioPage() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [filter, setFilter] = useState("all");
 
-  const projects = [
-    {
-      id: 1,
-      title: "E-Commerce Platform",
-      category: "ecommerce",
-      image: "🛍️",
-      description: "Modern online store with advanced features",
-      tags: ["Next.js", "MongoDB", "Stripe"],
-    },
-    {
-      id: 2,
-      title: "Corporate Website",
-      category: "web",
-      image: "🏢",
-      description: "Professional business website with CMS",
-      tags: ["React", "Node.js", "SEO"],
-    },
-    {
-      id: 3,
-      title: "Restaurant App",
-      category: "mobile",
-      image: "🍔",
-      description: "Food ordering mobile application",
-      tags: ["React Native", "Firebase"],
-    },
-    {
-      id: 4,
-      title: "3D Product Configurator",
-      category: "3d",
-      image: "✨",
-      description: "Interactive 3D product customization",
-      tags: ["Three.js", "WebGL", "React"],
-    },
-    {
-      id: 5,
-      title: "Marketing Campaign",
-      category: "marketing",
-      image: "📊",
-      description: "Successful Google Ads campaign",
-      tags: ["Google Ads", "Analytics"],
-    },
-    {
-      id: 6,
-      title: "Logistics Platform",
-      category: "web",
-      image: "🚚",
-      description: "Shipping management system",
-      tags: ["API Integration", "Shipit"],
-    },
-  ];
+  const getLocalizedContent = (content) => {
+    if (!content) return "";
+    if (typeof content === 'string') return content;
+    return content[i18n.language] || content.en || "";
+  };
 
   const categories = [
-    { id: "all", label: "All Projects" },
-    { id: "web", label: "Web Development" },
-    { id: "ecommerce", label: "E-Commerce" },
-    { id: "mobile", label: "Mobile Apps" },
-    { id: "3d", label: "3D & Interactive" },
-    { id: "marketing", label: "Marketing" },
+    { id: "all", label: t("portfolio.allProjects") },
+    { id: "web", label: t("portfolio.webDev") },
+    { id: "ecommerce", label: t("portfolio.ecommerce") },
+    { id: "mobile", label: t("portfolio.mobileApps") },
+    { id: "3d", label: t("portfolio.3dInteractive") },
+    { id: "marketing", label: t("portfolio.marketing") },
   ];
 
-  const filteredProjects = filter === "all" 
-    ? projects 
+  const filteredProjects = filter === "all"
+    ? projects
     : projects.filter(p => p.category === filter);
 
   return (
@@ -92,10 +49,10 @@ export default function PortfolioPage() {
             className="text-center mb-16"
           >
             <h1 className="text-5xl md:text-7xl font-bold text-gradient mb-6">
-              Our Portfolio
+              {t("portfolio.title")}
             </h1>
             <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto">
-              Explore our successful projects and see what we can do for you
+              {t("portfolio.subtitle")}
             </p>
           </motion.div>
         </div>
@@ -111,11 +68,10 @@ export default function PortfolioPage() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => setFilter(cat.id)}
-                className={`px-6 py-3 rounded-full font-semibold transition-all ${
-                  filter === cat.id
-                    ? "bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] text-white"
-                    : "glass text-white/80 hover:bg-white/10"
-                }`}
+                className={`px-6 py-3 rounded-full font-semibold transition-all ${filter === cat.id
+                  ? "bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] text-white"
+                  : "glass text-white/80 hover:bg-white/10"
+                  }`}
               >
                 {cat.label}
               </motion.button>
@@ -137,15 +93,15 @@ export default function PortfolioPage() {
                 whileHover={{ y: -10 }}
                 className="glass rounded-2xl overflow-hidden group cursor-pointer"
               >
-                <Link href={`/portfolio/${project.id}`}>
+                <Link href={`/portfolio/${project.slug}`}>
                   <div className="aspect-video bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-dark)] flex items-center justify-center text-8xl">
-                    {project.image}
+                    <Image className="object-cover w-full h-full" src={project.image} alt={getLocalizedContent(project.title)} width={1000} height={1000} />
                   </div>
                   <div className="p-6">
                     <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-[var(--brand-gold)] transition-colors">
-                      {project.title}
+                      {getLocalizedContent(project.title)}
                     </h3>
-                    <p className="text-white/70 mb-4">{project.description}</p>
+                    <p className="text-white/70 mb-4">{getLocalizedContent(project.description)}</p>
                     <div className="flex flex-wrap gap-2">
                       {project.tags.map((tag, idx) => (
                         <span
@@ -173,7 +129,7 @@ export default function PortfolioPage() {
             viewport={{ once: true }}
           >
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to Start Your Project?
+              {t("portfolio.readyToStart")}
             </h2>
             <Link href="/contact">
               <motion.button

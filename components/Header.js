@@ -33,7 +33,6 @@ export default function Header() {
     { href: "/packages", label: t("nav.packages") },
     { href: "/portfolio", label: t("nav.portfolio") },
     { href: "/blog", label: t("nav.blog") },
-    { href: "/shop", label: t("nav.shop") },
     { href: "/contact", label: t("nav.contact") },
   ];
 
@@ -41,24 +40,23 @@ export default function Header() {
     <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "glass-dark shadow-lg" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? "glass-dark shadow-lg" : "bg-transparent"
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
+          <Link href="/" className="flex items-center space-x-2 z-50 relative">
             <motion.div
               whileHover={{ scale: 1.05 }}
               className="text-3xl font-bold text-gradient-gold"
             >
-              SHEEN
+              {i18n.language === 'da' || i18n.language === 'pa' ? 'شین' : 'SHEEN'}
             </motion.div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          <nav className={`hidden lg:flex items-center ${i18n.language === 'da' || i18n.language === 'pa' ? 'space-x-reverse space-x-8' : 'space-x-8'}`}>
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -74,7 +72,7 @@ export default function Header() {
           {/* Right Side Actions */}
           <div className="flex items-center space-x-4">
             {/* Language Switcher */}
-            <div className="relative">
+            <div className="relative hidden lg:block">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -99,9 +97,8 @@ export default function Header() {
                       <button
                         key={lng}
                         // onClick={() => changeLanguage(lng)}
-                        className={`block w-full text-left px-4 py-2 text-white hover:bg-white/10 transition-colors ${
-                          i18n.language === lng ? "bg-white/5" : ""
-                        }`}
+                        className={`block w-full text-left px-4 py-2 text-white hover:bg-white/10 transition-colors ${i18n.language === lng ? "bg-white/5" : ""
+                          }`}
                       >
                         {lng === "en" ? "English" : lng === "da" ? "دری" : "پښتو"}
                       </button>
@@ -126,7 +123,7 @@ export default function Header() {
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden text-white text-2xl"
+              className="lg:hidden text-white text-2xl z-50 relative p-2"
             >
               {isMobileMenuOpen ? <FiX /> : <FiMenu />}
             </motion.button>
@@ -134,31 +131,61 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu Overlay */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden glass-dark border-t border-white/10"
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-40 bg-black/95 backdrop-blur-xl lg:hidden flex flex-col justify-center items-center"
           >
-            <nav className="px-4 py-6 space-y-4">
-              {navLinks.map((link) => (
-                <Link
+            <nav className="flex flex-col items-center space-y-8 p-8 w-full max-w-sm">
+              {navLinks.map((link, index) => (
+                <motion.div
                   key={link.href}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-white/90 hover:text-white py-2 transition-colors"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="w-full text-center"
                 >
-                  {link.label}
-                </Link>
+                  <Link
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="block text-2xl font-semibold text-white/90 hover:text-[var(--brand-gold)] transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
               ))}
-              <Link href="/book" onClick={() => setIsMobileMenuOpen(false)}>
-                <button className="w-full px-6 py-3 rounded-full bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] text-white font-semibold">
-                  {t("nav.book")}
-                </button>
-              </Link>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: navLinks.length * 0.1 }}
+                className="flex flex-col items-center space-y-6 w-full pt-8 border-t border-white/10"
+              >
+                {/* Mobile Language Switcher */}
+                <div className="flex space-x-4">
+                  {["en", "da", "pa"].map((lng) => (
+                    <button
+                      key={lng}
+                      onClick={() => changeLanguage(lng)}
+                      className={`px-4 py-2 rounded-full border border-white/20 text-white ${i18n.language === lng ? "bg-white/10 border-[var(--brand-gold)]" : ""
+                        }`}
+                    >
+                      {lng === "en" ? "EN" : lng === "da" ? "دری" : "پښتو"}
+                    </button>
+                  ))}
+                </div>
+
+                <Link href="/book" onClick={() => setIsMobileMenuOpen(false)} className="w-full">
+                  <button className="w-full px-8 py-4 rounded-full bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] text-white font-bold text-lg shadow-xl">
+                    {t("nav.book")}
+                  </button>
+                </Link>
+              </motion.div>
             </nav>
           </motion.div>
         )}

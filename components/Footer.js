@@ -67,11 +67,27 @@ export default function Footer() {
           {/* Services */}
           <div>
             <h4 className="text-lg font-semibold mb-4">{t("services.title")}</h4>
-            <ul className="space-y-2 text-white/70">
-              <li>{t("services.webDesign")}</li>
-              <li>{t("services.seo")}</li>
-              <li>{t("services.googleAds")}</li>
-              <li>{t("services.ecommerce")}</li>
+            <ul className="space-y-2">
+              <li>
+                <Link href="/services/web-design" className="text-white/70 hover:text-white transition-colors">
+                  {t("services.webDesign")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/seo" className="text-white/70 hover:text-white transition-colors">
+                  {t("services.seo")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/google-ads" className="text-white/70 hover:text-white transition-colors">
+                  {t("services.googleAds")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/ecommerce" className="text-white/70 hover:text-white transition-colors">
+                  {t("services.ecommerce")}
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -79,7 +95,7 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4">{t("footer.contact")}</h4>
             <ul className="space-y-3 text-white/70">
-              <li>Email: sheen.af.co@gmail.com</li>
+              <li>Email: info@sheen.af</li>
               <li>Phone: +93 784 966 018</li>
               <li>Address: Kabul, Afghanistan</li>
             </ul>
