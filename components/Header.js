@@ -171,7 +171,7 @@ export default function Header() {
                   {["en", "da", "pa"].map((lng) => (
                     <button
                       key={lng}
-                      onClick={() => changeLanguage(lng)}
+                      // onClick={() => changeLanguage(lng)}
                       className={`px-4 py-2 rounded-full border border-white/20 text-white ${i18n.language === lng ? "bg-white/10 border-[var(--brand-gold)]" : ""
                         }`}
                     >
