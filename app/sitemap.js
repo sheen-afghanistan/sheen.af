@@ -1,6 +1,6 @@
-import { blogsData } from '@/data/blogs';
-import { servicesData } from '@/data/services';
-import { projects } from '@/data/portfolio';
+import blogsData from '@/data/blogs';
+import servicesData from '@/data/services';
+import projects from '@/data/portfolio';
 
 export default function sitemap() {
     const baseUrl = 'https://agency.sheen.af';
