@@ -270,9 +270,21 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="msvalidate.01" content="42CD6515D45991F50EF8A5B9905C25C6" />  
+        <meta name="msvalidate.01" content="42CD6515D45991F50EF8A5B9905C25C6" />
         <meta name="yandex-verification" content="bbabd6975c43efe7" />
         <meta name="google-site-verification" content="CpREQ-7SAyuXuLNBBfGuS98cdDg3pywRTLPpGZ9Rsqw" />
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-X8D31HXBFJ"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments)}
+              gtag('js', new Date());
+              gtag('config', 'G-X8D31HXBFJ');
+            `,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
