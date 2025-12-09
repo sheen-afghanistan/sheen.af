@@ -1,5 +1,329 @@
 export const blogsData = [
     {
+        id: "17",
+        slug: "top-10-seo-tips-afghanistan-2025",
+        title: {
+            en: "Top 10 SEO Tips for Afghan Businesses in 2025",
+            da: "۱۰ نکته برتر سئو برای کسب‌وکارهای افغان در ۲۰۲۵",
+            pa: "د ۲۰۲۵ لپاره د افغان سوداګرۍ لپاره ۱۰ غوره SEO لارښوونې"
+        },
+        excerpt: {
+            en: "Dominate Google search results in Afghanistan with these essential SEO strategies designed for the local market.",
+            da: "با این استراتژی‌های اساسی سئو که برای بازار محلی طراحی شده‌اند، بر نتایج جستجوی گوگل در افغانستان مسلط شوید.",
+            pa: "په افغانستان کې د ګوګل لټون پایلو باندې واک ترلاسه کړئ د دې اړین SEO ستراتیژیو سره چې د ځایی بازار لپاره ډیزاین شوي."
+        },
+        content: {
+            en: `In the rapidly evolving digital landscape of Afghanistan, simply having a website is no longer enough. To truly succeed, your business needs to be visible to the millions of Afghans searching online every day. Here are the top 10 SEO tips to rank your **digital agency in Afghanistan** or local business at the top of Google in 2025.
+
+**1. Focus on Local SEO Keywords**
+The Afghan market is unique. Instead of just targeting "best shoes," target "best shoes in Kabul" or "shoe store in Herat." Local intent is improved by being specific. Use keywords like "**digital marketing Kabul**" or "**web design Afghanistan**" to capture ready-to-buy traffic.
+
+**2. Optimize for Pashto and Dari**
+Google is getting smarter at understanding local languages. Ensure your important pages have content in Dari and Pashto. This not only helps with ranking but builds trust with your local audience.
+
+**3. Mobile-First is a Must**
+Over 90% of internet users in Afghanistan are on mobile. If your site isn't responsive, Google will penalize you. Ensure your **web design in Afghanistan** is mobile-friendly and loads fast on 3G/4G networks.
+
+**4. Speed Up Your Website**
+Internet speeds can be inconsistent. Optimize your images, minify CSS/JS, and use a fast hosting provider. A slow site increases bounce rates, which kills your SEO rankings.
+
+**5. Create High-Quality Local Content**
+Don't just copy content from international sites. Write about local issues, local events, and local solutions. For example, a **digital agency in Afghanistan** should write about "How to market during Eid in Kabul."
+
+**6. Get Listed on Google My Business**
+This is a quick win. Claim your business on Google Maps. Add photos of your office in Kabul, your phone number, and opening hours. Encourage happy clients to leave reviews.
+
+**7. Build Local Backlinks**
+Links from other reputable Afghan websites (like news portals, educational institutes, or partners) signal to Google that you are a trusted entity in the region.
+
+**8. Use Schema Markup**
+Help Google understand your business by adding 'LocalBusiness' schema to your site. This can help you show up in rich snippets and map packs.
+
+**9. Secure Your Website (HTTPS)**
+Security is a ranking factor. Ensure your site uses SSL. It builds trust, especially if you are offering **e-commerce development in Afghanistan**.
+
+**10. Monitor and Adapt**
+SEO isn't a one-time task. Use tools like Google Search Console to see what people are searching for to find you, and double down on those terms.
+
+**Ready to Boost Your Rankings?**
+Sheen is a premier **digital agency in Afghanistan** specializing in **SEO services** and **web design in Kabul**. 
+[Book a free consultation](https://agency.sheen.af/book) today to discuss your growth strategy!`,
+            da: "در چشم‌انداز دیجیتال به سرعت در حال تحول افغانستان، داشتن یک وب‌سایت دیگر کافی نیست. برای موفقیت واقعی، کسب‌وکار شما باید برای میلیون‌ها افغان که هر روز آنلاین جستجو می‌کنند قابل مشاهده باشد...",
+            pa: "د افغانستان په ګړندۍ وده کونکي ډیجیټل چاپیریال کې ، یوازې د ویب پاڼې درلودل نور کافي ندي. د ریښتیني بریا لپاره ، ستاسو سوداګرۍ باید د ملیونونو افغانانو لپاره د لیدو وړ وي..."
+        },
+        category: "seo",
+        author: "Suliman Hakimi",
+        date: "2025-01-15",
+        readTime: "8 min read",
+        image: "/blog/seo-tips-2025.jpg",
+        tags: ["SEO", "Afghanistan", "Digital Marketing", "2025"]
+    },
+    {
+        id: "16",
+        slug: "why-every-kabul-business-needs-website",
+        title: {
+            en: "Why Every Kabul Business Needs a Website in 2025",
+            da: "چرا هر کسب‌وکار در کابل به یک وب‌سایت نیاز دارد",
+            pa: "ولې په کابل کې هره سوداګرۍ یوې ویب پاڼې ته اړتیا لري"
+        },
+        excerpt: {
+            en: "From visibility to credibility, discover why a professional website is the most critical asset for your Kabul-based business.",
+            da: "از قابلیت مشاهده تا اعتبار، کشف کنید چرا یک وب‌سایت حرفه‌ای مهم‌ترین دارایی برای کسب‌وکار شما در کابل است.",
+            pa: "د لید څخه تر اعتبار پورې، ومومئ چې ولې یوه مسلکي ویب پاڼه ستاسو د کابل میشتې سوداګرۍ لپاره خورا مهم شتمني ده."
+        },
+        content: {
+            en: `The traditional bazaar is moving online. In Kabul, customers now check their phones before they check the streets. If you don't have a website, you don't exist for a growing segment of the market.
+            
+**Credibility and Trust**
+A professional **web design in Afghanistan** confers instant legitimacy. It shows you are a modern, serious business.
+
+**24/7 Availability**
+Your physical shop in Shahr-e-Naw might close at 8 PM, but your website is open 24/7, ready to answer questions and take orders.
+            `,
+            da: "بازار سنتی در حال انتقال به آنلاین است. در کابل، مشتریان اکنون قبل از چک کردن خیابان‌ها، گوشی‌های خود را چک می‌کنند...",
+            pa: "دودیز بازار آنلاین ته حرکت کوي. په کابل کې، پیرودونکي اوس د سړکونو چک کولو دمخه خپل تلیفونونه ګوري..."
+        },
+        category: "web-dev",
+        author: "Suliman Hakimi",
+        date: "2025-01-12",
+        readTime: "5 min read",
+        image: "/blog/kabul-business-website.jpg",
+        tags: ["Web Design", "Kabul", "Business Growth"]
+    },
+    {
+        id: "15",
+        slug: "digital-marketing-vs-traditional-afghanistan",
+        title: {
+            en: "Digital Marketing vs Traditional Marketing in Afghanistan",
+            da: "بازاریابی دیجیتال در مقابل بازاریابی سنتی در افغانستان",
+            pa: "په افغانستان کې ډیجیټل بازارموندنه د دودیز بازارموندنې په مقابل کې"
+        },
+        excerpt: {
+            en: "Compare the costs, reach, and effectiveness of billboards vs Facebook ads in the Afghan market.",
+            da: "مقایسه هزینه‌ها، دسترسی و اثربخشی بیلبوردها در مقابل تبلیغات فیسبوک در بازار افغانستان.",
+            pa: "په افغان بازار کې د بلبورډونو په مقابل کې د فیسبوک اعلاناتو لګښتونه، لاسرسی او اغیزمنتوب پرتله کړئ."
+        },
+        content: {
+            en: `For decades, billboards and TV spots ruled advertising in Afghanistan. But **digital marketing in Kabul** is changing the game.
+            
+**Cost Effectiveness**
+A billboard in a prime Kabul location costs thousands of dollars a month. With **Google Ads Afghanistan**, you can start with a fraction of that budget and track every click.
+
+**Targeting**
+Traditional media is "spray and pray." Digital marketing allows you to target specific ages, locations, and interests.
+            `,
+            da: "برای دهه‌ها، بیلبوردها و تبلیغات تلویزیونی بر تبلیغات در افغانستان حکمرانی می‌کردند. اما بازاریابی دیجیتال در کابل بازی را تغییر می‌دهد...",
+            pa: "د لسیزو راهیسې، بلبورډونو او تلویزیوني اعلاناتو په افغانستان کې په اعلاناتو حکومت کاوه. مګر په کابل کې ډیجیټل بازارموندنه لوبه بدلوي..."
+        },
+        category: "marketing",
+        author: "Suliman Hakimi",
+        date: "2025-01-10",
+        readTime: "6 min read",
+        image: "/blog/digital-vs-traditional.jpg",
+        tags: ["Marketing", "Comparison", "ROI"]
+    },
+    {
+        id: "14",
+        slug: "best-web-design-agencies-afghanistan-2025",
+        title: {
+            en: "Best Web Design Agencies in Afghanistan 2025 Review",
+            da: "بررسی بهترین آژانس‌های طراحی وب در افغانستان ۲۰۲۵",
+            pa: "په افغانستان کې د غوره ویب ډیزاین ادارو 2025 بیاکتنه"
+        },
+        excerpt: {
+            en: "What to look for when choosing a digital partner for your business in Afghanistan.",
+            da: "هنگام انتخاب یک شریک دیجیتال برای کسب‌وکار خود در افغانستان به چه نکاتی توجه کنید.",
+            pa: "په افغانستان کې ستاسو د سوداګرۍ لپاره د ډیجیټل ملګري غوره کولو پرمهال څه باید وګورئ."
+        },
+        content: {
+            en: `Choosing the right **digital agency in Afghanistan** can make or break your online presence. Look for agencies that offer custom designs, not just templates. Check their portfolio for local examples. Ensure they understand **SEO services Afghanistan** to get your site ranked. Sheen stands out by combining premium aesthetics with technical performance.`,
+            da: "انتخاب آژانس دیجیتال مناسب در افغانستان می‌تواند حضور آنلاین شما را بسازد یا خراب کند...",
+            pa: "په افغانستان کې د سم ډیجیټل ایجنسۍ غوره کول کولی شي ستاسو آنلاین شتون رامینځته کړي یا مات کړي..."
+        },
+        category: "web-dev",
+        author: "Suliman Hakimi",
+        date: "2025-01-08",
+        readTime: "7 min read",
+        image: "/blog/best-agencies.jpg",
+        tags: ["Web Design", "Agency", "Review"]
+    },
+    {
+        id: "13",
+        slug: "start-ecommerce-business-afghanistan",
+        title: {
+            en: "How to Start an E-commerce Business in Afghanistan",
+            da: "چگونه یک کسب‌وکار تجارت الکترونیک در افغانستان راه اندازی کنیم",
+            pa: "څنګه په افغانستان کې د ای کامرس سوداګرۍ پیل کړو"
+        },
+        excerpt: {
+            en: "A step-by-step guide to logistics, payments, and platform choice for Afghan entrepreneurs.",
+            da: "راهنمای گام‌به‌گام برای لجستیک، پرداخت‌ها و انتخاب پلتفرم برای کارآفرینان افغان.",
+            pa: "د افغان متشبثینو لپاره د لوژستیک، تادیاتو او پلیټ فارم انتخاب لپاره ګام په ګام لارښود."
+        },
+        content: {
+            en: `E-commerce is booming. To start, you need a robust platform. **E-commerce website development** services from Sheen ensure your store is secure and easy to manage. Don't forget to solve the delivery puzzle—partnerships with local courier services in Kabul are key.`,
+            da: "تجارت الکترونیک در حال رونق است. برای شروع، به یک پلتفرم قوی نیاز دارید...",
+            pa: "ای کامرس مخ په ډیریدو دی. د پیل کولو لپاره، تاسو یو پیاوړي پلیټ فارم ته اړتیا لرئ..."
+        },
+        category: "ecommerce",
+        author: "Suliman Hakimi",
+        date: "2025-01-05",
+        readTime: "9 min read",
+        image: "/blog/start-ecommerce.jpg",
+        tags: ["Ecommerce", "Startup", "Guide"]
+    },
+    {
+        id: "12",
+        slug: "state-of-digital-marketing-kabul-2025",
+        title: {
+            en: "The State of Digital Marketing in Kabul: 2025 Report",
+            da: "وضعیت بازاریابی دیجیتال در کابل: گزارش ۲۰۲۵",
+            pa: "په کابل کې د ډیجیټل بازارموندنې حالت: د ۲۰۲۵ راپور"
+        },
+        excerpt: {
+            en: "Key statistics and trends defining the online landscape in Afghanistan's capital.",
+            da: "آمار و روندهای کلیدی که چشم‌انداز آنلاین در پایتخت افغانستان را تعریف می‌کنند.",
+            pa: "کلیدي احصایې او رجحانات چې د افغانستان په پلازمینه کې آنلاین چاپیریال تعریفوي."
+        },
+        content: {
+            en: `Kabul is going digital. Internet penetration is at an all-time high. Businesses investing in **digital marketing Kabul** are seeing 3x ROI compared to traditional print media. Social media consumption is driving this change, with TikTok and Facebook leading the way.`,
+            da: "کابل در حال دیجیتالی شدن است. نفوذ اینترنت در بالاترین حد خود قرار دارد...",
+            pa: "کابل ډیجیټل کیږي. د انټرنیټ نفوذ په هر وخت کې لوړ دی..."
+        },
+        category: "marketing",
+        author: "Suliman Hakimi",
+        date: "2025-01-03",
+        readTime: "6 min read",
+        image: "/blog/kabul-marketing-report.jpg",
+        tags: ["Marketing", "Trends", "Kabul"]
+    },
+    {
+        id: "11",
+        slug: "google-ads-afghan-companies-guide",
+        title: {
+            en: "Google Ads for Afghan Companies: Simple Guide",
+            da: "گوگل ادز برای شرکت‌های افغان: راهنمای ساده",
+            pa: "د افغان شرکتونو لپاره د ګوګل اعلانات: ساده لارښود"
+        },
+        excerpt: {
+            en: "Stop wasting money. Learn how to target customers in Kabul and Herat effectively.",
+            da: "هدر دادن پول را متوقف کنید. یاد بگیرید چگونه مشتریان را در کابل و هرات به طور مؤثر هدف قرار دهید.",
+            pa: "د پیسو ضایع کول بند کړئ. زده کړئ چې څنګه په کابل او هرات کې پیرودونکي په مؤثره توګه په نښه کړئ."
+        },
+        content: {
+            en: `Google Ads allows you to show up exactly when people are searching for your services. For specific niches like **SEO services Afghanistan** or car rentals, it's a goldmine. The key is negative keywords—exclude people looking for "free" or "jobs" to save your budget.`,
+            da: "گوگل ادز به شما امکان می‌دهد دقیقاً زمانی که مردم به دنبال خدمات شما هستند ظاهر شوید...",
+            pa: "ګوګل اعلانات تاسو ته اجازه درکوي چې دقیقا هغه وخت څرګند شئ کله چې خلک ستاسو د خدماتو په لټه کې وي..."
+        },
+        category: "ads",
+        author: "Suliman Hakimi",
+        date: "2025-01-01",
+        readTime: "5 min read",
+        image: "/blog/google-ads-guide.jpg",
+        tags: ["Google Ads", "PPC", "Guide"]
+    },
+    {
+        id: "10",
+        slug: "social-media-marketing-trends-afghanistan",
+        title: {
+            en: "Social Media Marketing Trends in Afghanistan",
+            da: "روندهای بازاریابی رسانه‌های اجتماعی در افغانستان",
+            pa: "په افغانستان کې د ټولنیزو رسنیو بازار موندنې رجحانات"
+        },
+        excerpt: {
+            en: "From TikTok's rise to the enduring power of Facebook in the Afghan community.",
+            da: "از ظهور تیک‌تاک تا قدرت پایدار فیسبوک در جامعه افغان.",
+            pa: "د ټیک ټاک له ودې څخه په افغان ټولنه کې د فیسبوک تر دوامدار ځواک پورې."
+        },
+        content: {
+            en: `Video content is king in Afghanistan. Short, engaging clips on social platforms are the best way to build brand awareness. Influencer marketing is also maturing, with local personalities driving significant engagement for brands.`,
+            da: "محتوای ویدیویی در افغانستان پادشاه است. کلیپ‌های کوتاه و جذاب...",
+            pa: "ویډیو مینځپانګه په افغانستان کې پاچا دی. لنډ، ښکیل کلپونه..."
+        },
+        category: "marketing",
+        author: "Suliman Hakimi",
+        date: "2024-12-28",
+        readTime: "4 min read",
+        image: "/blog/social-trends-afghan.jpg",
+        tags: ["Social Media", "Trends", "Afghanistan"]
+    },
+    {
+        id: "9",
+        slug: "cost-website-design-afghanistan-2025",
+        title: {
+            en: "Cost of Website Design in Afghanistan 2025",
+            da: "هزینه طراحی وب‌سایت در افغانستان ۲۰۲۵",
+            pa: "په افغانستان کې د ویب پاڼې ډیزاین لګښت ۲۰۲۵"
+        },
+        excerpt: {
+            en: "Understanding the pricing models for web development in Kabul. What do you get for your money?",
+            da: "درک مدل‌های قیمت‌گذاری برای توسعه وب در کابل. در ازای پول خود چه چیزی دریافت می‌کنید؟",
+            pa: "په کابل کې د ویب پراختیا لپاره د نرخ ماډلونو پوهیدل. تاسو د خپلو پیسو لپاره څه ترلاسه کوئ؟"
+        },
+        content: {
+            en: `Pricing for **web design Afghanistan** varies wildly. Cheap templates might cost $200, but a custom, secure solution for a serious business starts higher. Remember, a website is an investment, not an expense. A cheap site often costs more in the long run due to lost customers and security fixes.`,
+            da: "قیمت‌گذاری برای طراحی وب در افغانستان بسیار متفاوت است...",
+            pa: "په افغانستان کې د ویب ډیزاین قیمت خورا توپیر لري..."
+        },
+        category: "web-dev",
+        author: "Suliman Hakimi",
+        date: "2024-12-25",
+        readTime: "5 min read",
+        image: "/blog/web-cost-afghanistan.jpg",
+        tags: ["Pricing", "Web Design", "Budget"]
+    },
+    {
+        id: "8",
+        slug: "seo-services-kabul-what-to-look-for",
+        title: {
+            en: "SEO Services in Kabul: What to Look For",
+            da: "خدمات سئو در کابل: دنبال چه چیزی باشید",
+            pa: "په کابل کې د SEO خدمات: د څه په لټه کې شئ"
+        },
+        excerpt: {
+            en: "Don't get scammed by fake promises. Here is a checklist for hiring an SEO agency.",
+            da: "فریب وعده‌های دروغین را نخورید. در اینجا چک‌لیستی برای استخدام یک آژانس سئو وجود دارد.",
+            pa: "د جعلي ژمنو لخوا مه غولوئ. دلته د SEO ادارې ګمارلو لپاره چک لیست دی."
+        },
+        content: {
+            en: `Real SEO takes time. Avoid any **digital agency in Afghanistan** that promises "Page 1 in 24 hours." Look for transparent reporting, clear strategies, and a focus on long-term growth. Ask about their backlink strategy and content planning.`,
+            da: "سئوی واقعی زمان می‌برد. از هر آژانس دیجیتالی که وعده صفحه اول در ۲۴ ساعت را می‌دهد اجتناب کنید...",
+            pa: "ریښتیني SEO وخت نیسي. په افغانستان کې د هر ډیجیټل ایجنسۍ څخه ډډه وکړئ چې ژمنه کوي..."
+        },
+        category: "seo",
+        author: "Suliman Hakimi",
+        date: "2024-12-20",
+        readTime: "6 min read",
+        image: "/blog/seo-checklist.jpg",
+        tags: ["SEO", "Hiring", "Tips"]
+    },
+    {
+        id: "7",
+        slug: "growing-afghan-brand-digital-marketing",
+        title: {
+            en: "Growing Your Afghan Brand with Digital Marketing",
+            da: "رشد برند افغان شما با بازاریابی دیجیتال",
+            pa: "د ډیجیټل بازارموندنې سره ستاسو د افغان برانډ وده کول"
+        },
+        excerpt: {
+            en: "Strategies for local brands to compete with international giants in the Afghan market.",
+            da: "استراتژی‌هایی برای برندهای محلی برای رقابت با غول‌های بین‌المللی در بازار افغانستان.",
+            pa: "په افغان بازار کې د نړیوالو لویانو سره د سیالۍ لپاره د محلي برانڈونو ستراتیژۍ."
+        },
+        content: {
+            en: `Local brands have a unique advantage: they understand the culture. Use this in your **digital marketing Kabul** efforts. Speak the language of the people, celebrate local holidays, and show real Afghan faces in your advertising. Authenticity wins.`,
+            da: "برندهای محلی یک مزیت منحصر به فرد دارند: آنها فرهنگ را درک می‌کنند...",
+            pa: "محلي برانډونه ځانګړې ګټه لري: دوی په کلتور پوهیږي..."
+        },
+        category: "branding",
+        author: "Suliman Hakimi",
+        date: "2024-12-15",
+        readTime: "5 min read",
+        image: "/blog/brand-growth.jpg",
+        tags: ["Branding", "Growth", "Strategy"]
+    },
+
+    {
         id: "1",
         slug: "web-design-trends-2025",
         title: {

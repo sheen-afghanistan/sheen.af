@@ -85,27 +85,6 @@ export default function Header() {
                 </span>
               </motion.button>
 
-              <AnimatePresence>
-                {isLangOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="absolute top-full mt-2 right-0 glass rounded-lg overflow-hidden shadow-xl min-w-[120px]"
-                  >
-                    {["en", "da", "pa"].map((lng) => (
-                      <button
-                        key={lng}
-                        // onClick={() => changeLanguage(lng)}
-                        className={`block w-full text-left px-4 py-2 text-white hover:bg-white/10 transition-colors ${i18n.language === lng ? "bg-white/5" : ""
-                          }`}
-                      >
-                        {lng === "en" ? "English" : lng === "da" ? "دری" : "پښتو"}
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </div>
 
             {/* Book Now Button */}
@@ -165,20 +144,7 @@ export default function Header() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: navLinks.length * 0.1 }}
                 className="flex flex-col items-center space-y-6 w-full pt-8 border-t border-white/10"
-              >
-                {/* Mobile Language Switcher */}
-                <div className="flex space-x-4">
-                  {["en", "da", "pa"].map((lng) => (
-                    <button
-                      key={lng}
-                      // onClick={() => changeLanguage(lng)}
-                      className={`px-4 py-2 rounded-full border border-white/20 text-white ${i18n.language === lng ? "bg-white/10 border-[var(--brand-gold)]" : ""
-                        }`}
-                    >
-                      {lng === "en" ? "EN" : lng === "da" ? "دری" : "پښتو"}
-                    </button>
-                  ))}
-                </div>
+              >                
 
                 <Link href="/book" onClick={() => setIsMobileMenuOpen(false)} className="w-full">
                   <button className="w-full px-8 py-4 rounded-full bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] text-white font-bold text-lg shadow-xl">

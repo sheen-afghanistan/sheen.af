@@ -90,7 +90,7 @@ export default function HomePage() {
               {t("hero.title")}
             </motion.h1>
             <motion.p
-              className="text-xl md:text-2xl text-white/80 mb-12 max-w-3xl mx-auto"
+              className="text-xl md:text-xl text-white/80 mb-12 max-w-3xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}

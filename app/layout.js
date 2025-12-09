@@ -20,31 +20,55 @@ const geistMono = Geist_Mono({
 export const metadata = {
   metadataBase: new URL("https://agency.sheen.af"),
   title: {
-    default: "Sheen - Premium Digital Agency in Afghanistan | Web Design & SEO",
+    default: "Sheen: Top Digital Agency Afghanistan | Web Design & SEO",
     template: "%s | Sheen Digital Agency",
   },
   description:
-    "Sheen is the leading digital agency in Afghanistan specializing in premium web design, SEO, Google Ads, social media marketing, and business automation. ساخت ویبسایت در افغانستان",
+    "Premium digital agency in Afghanistan offering web design, SEO, Google Ads & more. Boost your business in Kabul—book a free consultation! | agency.sheen.af",
   keywords: [
-    "Afghanistan web agency",
-    "web design Kabul",
-    "digital marketing Afghanistan",
-    "SEO services Kabul",
-    "Google Ads Afghanistan",
-    "social media marketing",
-    "business automation",
-    "software company Afghanistan",
+    "digital agency Afghanistan",
+    "web design Afghanistan",
+    "SEO services Afghanistan",
+    "digital marketing Kabul",
+    
+    // Long-tail Keywords
+    "best digital marketing agency in Afghanistan",
+    "e-commerce website development Afghanistan",
+    "top web design company Kabul",
+    "affordable SEO services Afghanistan",
+    "Google Ads management Afghanistan",
+    "professional website design Kabul",
+    
+    // Location-based
+    "digital agency Kabul",
+    "web design Herat",
+    "SEO company Afghanistan",
+    "digital marketing agency Kabul",
+    "website development Afghanistan",
+    
+    // Service-specific
+    "social media marketing Afghanistan",
+    "business automation Afghanistan",
+    "e-commerce development Kabul",
+    "API integration Afghanistan",
+    "3D web experiences Afghanistan",
+    "mobile app development Afghanistan",
+    
+    // Local Language
     "ساخت ویبسایت در افغانستان",
     "طراحی سایت کابل",
-    "دیجیتال مارکتینگ",
-    "Sheen",
-    "شین",
+    "دیجیتال مارکتینگ افغانستان",
+    "سئو افغانستان",
+    
+    // Brand
     "Sheen Digital Agency",
+    "Sheen Afghanistan",
+    "شین",
+    
+    // Technology
     "Next.js development Afghanistan",
     "React development Kabul",
-    "e-commerce Afghanistan",
-    "API integration",
-    "3D web experiences",
+    "modern web design Afghanistan",
   ],
   authors: [{ name: "Sheen Digital Agency", url: "https://agency.sheen.af" }],
   creator: "Sheen Digital Agency",
