@@ -12,7 +12,7 @@ export default function AboutClient() {
     {
       name: "Suliman Hakimi",
       position: "CEO & Founder",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUbJD2QbgkvF7V-CkPeqqyjps2W0pND9tSnA&s",
+      image: "/suli.jpeg",
       social: { linkedin: "https://www.linkedin.com/in/suliman-hakimi/", twitter: "#" },
     }
   ];
