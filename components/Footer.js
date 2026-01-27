@@ -98,7 +98,7 @@ export default function Footer() {
               <li>Email: info@sheen.af</li>
               <li>Phone: +93 784 966 018</li>
               <li>Address: Kabul, Afghanistan</li>
-              <li className="pt-2 text-sm opacity-80">Serving Kabul, Herat, Mazar-i-Sharif, and all of Afghanistan</li>
+              <li className="pt-2 text-sm opacity-80">Serving all of Afghanistan NATIONAL AND INTERNATIONAL</li>
             </ul>
           </div>
         </div>

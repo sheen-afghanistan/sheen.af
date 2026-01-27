@@ -13,7 +13,19 @@ export default function AboutClient() {
       name: "Suliman Hakimi",
       position: "CEO & Founder",
       image: "/suli.jpeg",
-      social: { linkedin: "https://www.linkedin.com/in/suliman-hakimi/", twitter: "#" },
+      social: { linkedin: "https://www.linkedin.com/in/suliman-hakimi/", twitter: "https://x.com/SulimanHakimi12", github: "https://github.com/SulimanHakimi" },
+    },
+    {
+      name: "Jawad Hakimi",
+      position: "Full Stack Web Developer & Designer",
+      image: "/jawad.jpg",
+      social: { linkedin: "https://www.linkedin.com/in/jawad-hakimi-061a512a4/", twitter: "#", github: "https://github.com/jawad-hakimee" },
+    },
+    {
+      name: "Layla Wakily",
+      position: "Mobile App & Web Developer, UI/UX Designer",
+      image: "https://thumbs.dreamstime.com/b/smiling-muslim-woman-wearing-blue-hijab-circle-profile-smiling-muslim-woman-wearing-blue-hijab-circle-profile-ai-generated-402854748.jpg",
+      social: { linkedin: "https://www.linkedin.com/in/layla-wakily-4b453a31a/", twitter: "https://x.com/la_wakily", github: "https://github.com/Laylawakily" },
     }
   ];
 
@@ -176,7 +188,7 @@ export default function AboutClient() {
                 whileHover={{ y: -10 }}
                 className="glass p-6 rounded-2xl text-center group hover:bg-white/10 transition-all"
               >
-                <img src={member.image} className="text-7xl rounded-full justify-center items-center mb-4" />
+                <img src={member.image} className="w-32 h-32 mx-auto object-cover rounded-full mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-2">
                   {member.name}
                 </h3>
