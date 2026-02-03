@@ -16,11 +16,11 @@ export default function HomePage() {
   }, []);
 
   // Get services from data file with current language
-  const services = servicesData.map(service => ({
+  const services = servicesData.map((service) => ({
     id: service.id,
     title: service.title[i18n.language] || service.title.en,
     desc: service.shortDesc[i18n.language] || service.shortDesc.en,
-    link: `/services/${service.slug}`
+    link: `/services/${service.slug}`,
   }));
 
   const stats = [
@@ -54,7 +54,20 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-[var(--brand-dark)] to-black overflow-hidden">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      <section
+        style={{
+          backgroundImage: "url('/lonely-work.jpg')",
+          width: "100%",
+          height: "100%",
+          opacity: "0.7",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+        }}
+        className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20"
+      >
+        <div className="absolute inset-0 backdrop-blur-sm" />
+
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <motion.div
@@ -82,7 +95,7 @@ export default function HomePage() {
             transition={{ duration: 0.8 }}
           >
             <motion.h1
-              className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-gradient"
+              className="text-5xl md:text-7xl lg:text-[4.8rem] font-bold mb-6 text-gradient"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -117,7 +130,7 @@ export default function HomePage() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 rounded-full glass text-white font-semibold text-lg hover:bg-white/10 transition-all"
+                  className="px-8 py-4 rounded-full glass text-black bg-white/50 font-semibold text-lg hover:bg-white/80 transition-all"
                 >
                   {t("hero.viewWork")}
                 </motion.button>
@@ -127,7 +140,8 @@ export default function HomePage() {
         </div>
 
         {/* Scroll Indicator */}
-        <motion.div
+        
+        {/* <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
@@ -139,7 +153,7 @@ export default function HomePage() {
               className="w-1.5 h-1.5 bg-white rounded-full mt-2"
             />
           </div>
-        </motion.div>
+        </motion.div> */}
       </section>
 
       {/* Stats Section */}
@@ -196,9 +210,7 @@ export default function HomePage() {
                 </h3>
                 <p className="text-white/70">{service.desc}</p>
                 <Link href={service.link}>
-                  <motion.div
-                    className="mt-4 text-[var(--brand-gold)] flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity"
-                  >
+                  <motion.div className="mt-4 text-[var(--brand-gold)] flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                     {t("common.learnMore")}
                     <FiArrowRight />
                   </motion.div>
@@ -256,9 +268,7 @@ export default function HomePage() {
               <h3 className="text-2xl font-bold text-white mb-6">
                 {t("whyChoose.ctaTitle")}
               </h3>
-              <p className="text-white/70 mb-6">
-                {t("whyChoose.ctaDesc")}
-              </p>
+              <p className="text-white/70 mb-6">{t("whyChoose.ctaDesc")}</p>
               <Link href="/contact">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
@@ -304,10 +314,16 @@ export default function HomePage() {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <p className="text-white/80 mb-4 italic">&quot;{testimonial.text}&quot;</p>
+                <p className="text-white/80 mb-4 italic">
+                  &quot;{testimonial.text}&quot;
+                </p>
                 <div>
-                  <div className="font-semibold text-white">{testimonial.name}</div>
-                  <div className="text-sm text-white/60">{testimonial.position}</div>
+                  <div className="font-semibold text-white">
+                    {testimonial.name}
+                  </div>
+                  <div className="text-sm text-white/60">
+                    {testimonial.position}
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -326,9 +342,7 @@ export default function HomePage() {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               {t("cta.title")}
             </h2>
-            <p className="text-xl text-white/80 mb-8">
-              {t("cta.subtitle")}
-            </p>
+            <p className="text-xl text-white/80 mb-8">{t("cta.subtitle")}</p>
             <Link href="/book">
               <motion.button
                 whileHover={{ scale: 1.05 }}
