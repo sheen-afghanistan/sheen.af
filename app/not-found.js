@@ -6,44 +6,32 @@ import { FiHome, FiArrowLeft } from "react-icons/fi";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[var(--brand-dark)] to-black flex items-center justify-center px-4">
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 90, 0],
-          }}
-          transition={{ duration: 20, repeat: Infinity }}
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-[var(--brand-accent)]/10 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            scale: [1.2, 1, 1.2],
-            rotate: [90, 0, 90],
-          }}
-          transition={{ duration: 15, repeat: Infinity }}
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[var(--brand-gold)]/10 rounded-full blur-3xl"
-        />
+    <div className="min-h-screen bg-[#020617] text-white flex items-center justify-center px-4 relative overflow-hidden">
+      {/* Abstract Background Shapes */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-[20%] right-[30%] w-[400px] h-[400px] rounded-full bg-brand-primary/10 blur-[100px] animate-pulse-glow"></div>
+        <div className="absolute bottom-[20%] left-[20%] w-[500px] h-[500px] rounded-full bg-brand-dark/20 blur-[120px]"></div>
       </div>
 
       <div className="relative z-10 text-center max-w-2xl">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="glass-card p-12 rounded-3xl border border-white/5 shadow-2xl shadow-brand-primary/10"
         >
-          <motion.h1
-            className="text-9xl md:text-[200px] font-bold text-gradient-gold mb-4"
-            animate={{ scale: [1, 1.05, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
+          <motion.div
+            className="text-9xl md:text-[200px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-primary to-brand-accent mb-4 leading-none"
+            animate={{ scale: [1, 1.05, 1], filter: ["blur(0px)", "blur(2px)", "blur(0px)"] }}
+            transition={{ duration: 3, repeat: Infinity }}
           >
             404
-          </motion.h1>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+          </motion.div>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
             Page Not Found
           </h2>
-          <p className="text-xl text-white/70 mb-12">
-            Oops! The page you're looking for doesn't exist. It might have been moved or deleted.
+          <p className="text-lg text-gray-400 mb-10 max-w-md mx-auto">
+            Oops! The page you're looking for seems to have vanished into the digital void.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -51,38 +39,13 @@ export default function NotFound() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 rounded-full bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] text-white font-semibold flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-primary to-brand-accent text-white font-bold shadow-lg shadow-brand-primary/20 hover:shadow-brand-primary/40 transition-all flex items-center justify-center gap-2"
               >
                 <FiHome />
                 Go Home
               </motion.button>
             </Link>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => window.history.back()}
-              className="px-8 py-4 rounded-full glass text-white font-semibold hover:bg-white/10 transition-all flex items-center justify-center gap-2"
-            >
-              <FiArrowLeft />
-              Go Back
-            </motion.button>
           </div>
-        </motion.div>
-
-        {/* Floating Elements */}
-        <motion.div
-          animate={{ y: [0, -20, 0] }}
-          transition={{ duration: 3, repeat: Infinity }}
-          className="absolute -top-20 -left-20 text-8xl opacity-20"
-        >
-          🚀
-        </motion.div>
-        <motion.div
-          animate={{ y: [0, 20, 0] }}
-          transition={{ duration: 4, repeat: Infinity }}
-          className="absolute -bottom-20 -right-20 text-8xl opacity-20"
-        >
-          ✨
         </motion.div>
       </div>
     </div>

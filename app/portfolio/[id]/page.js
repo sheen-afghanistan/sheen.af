@@ -23,202 +23,225 @@ export default function PortfolioDetailPage({ params }) {
   const project = projects.find(p => p.slug === projectSlug || p.id === projectSlug) || projects[0];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[var(--brand-dark)] to-black pt-20">
-      {/* Hero Section */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <motion.div
-            animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
-            transition={{ duration: 20, repeat: Infinity }}
-            className="absolute top-1/4 right-1/4 w-96 h-96 bg-[var(--brand-accent)]/10 rounded-full blur-3xl"
-          />
-        </div>
+    <div className="min-h-screen bg-[#020617] text-white overflow-hidden py-20 relative">
+      {/* Abstract Background Shapes */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-[10%] right-[5%] w-[500px] h-[500px] rounded-full bg-brand-primary/10 blur-[100px] animate-pulse-glow"></div>
+        <div className="absolute bottom-[20%] left-[10%] w-[600px] h-[600px] rounded-full bg-brand-dark/20 blur-[120px]"></div>
+      </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link href="/portfolio">
-            <motion.button
-              whileHover={{ x: -5 }}
-              className="flex items-center gap-2 text-white/70 hover:text-white mb-8 transition-colors"
-            >
-              <FiArrowLeft />
-              Back to Portfolio
-            </motion.button>
-          </Link>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <div className="inline-block px-4 py-2 rounded-full glass text-[var(--brand-gold)] mb-6">
-              {project.category}
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-              {getLocalizedContent(project.title)}
-            </h1>
-
-            <div className="flex flex-wrap items-center gap-6 text-white/70 mb-8">
-              <div className="flex items-center gap-2">
-                <FiUsers />
-                <span>{project.client}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <FiCalendar />
-                <span>{project.year}</span>
-              </div>
-            </div>
-
-            {/* Featured Image */}
-            <div className="aspect-video bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-dark)] rounded-2xl overflow-hidden mb-12">
-              <img
-                src={project.image}
-                alt={getLocalizedContent(project.title)}
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Project Details */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-3 gap-12">
-            {/* Main Content */}
-            <div className="lg:col-span-2 space-y-12">
-              {/* Overview */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="glass p-8 rounded-2xl"
+      <div className="relative z-10">
+        {/* Navigation & Hero */}
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <Link href="/portfolio">
+              <motion.button
+                whileHover={{ x: -5 }}
+                className="flex items-center gap-2 text-gray-400 hover:text-brand-primary mb-8 transition-colors group font-medium"
               >
-                <h2 className="text-3xl font-bold text-white mb-4">Overview</h2>
-                <p className="text-white/80 text-lg leading-relaxed">
-                  {getLocalizedContent(project.description)}
-                </p>
-              </motion.div>
+                <FiArrowLeft className="group-hover:-translate-x-1 transition-transform" />
+                Back to Portfolio
+              </motion.button>
+            </Link>
 
-              {/* Screenshots */}
-              {project.images && project.images.length > 0 && (
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <div className="inline-block px-4 py-2 rounded-full glass border border-brand-primary/30 text-brand-primary mb-6 font-mono text-sm uppercase tracking-wider">
+                {project.category}
+              </div>
+              <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
+                {getLocalizedContent(project.title)}
+              </h1>
+
+              <div className="flex flex-wrap items-center gap-8 text-gray-300 mb-12 text-lg">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary">
+                    <FiUsers />
+                  </div>
+                  <div>
+                    <span className="block text-xs text-gray-500 uppercase font-bold">Client</span>
+                    <span className="font-semibold">{project.client}</span>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary">
+                    <FiCalendar />
+                  </div>
+                  <div>
+                    <span className="block text-xs text-gray-500 uppercase font-bold">Year</span>
+                    <span className="font-semibold">{project.year}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Featured Image */}
+              <div className="aspect-video bg-white/5 rounded-3xl overflow-hidden mb-12 border border-white/10 shadow-2xl relative">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent opacity-50 z-10"></div>
+                <img
+                  src={project.image}
+                  alt={getLocalizedContent(project.title)}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Project Details */}
+        <section className="pb-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid lg:grid-cols-3 gap-12">
+              {/* Main Content */}
+              <div className="lg:col-span-2 space-y-12">
+                {/* Overview */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
+                  className="glass-card p-8 md:p-10 rounded-3xl border border-white/5"
                 >
-                  <h2 className="text-3xl font-bold text-white mb-6">Screenshots</h2>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    {project.images.map((screenshot, index) => (
-                      <motion.div
+                  <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
+                    <span className="w-2 h-8 bg-brand-primary rounded-full"></span>
+                    Overview
+                  </h2>
+                  <p className="text-gray-300 text-lg leading-relaxed">
+                    {getLocalizedContent(project.description)}
+                  </p>
+                </motion.div>
+
+                {/* Screenshots */}
+                {project.images && project.images.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                  >
+                    <h2 className="text-3xl font-bold text-white mb-8 flex items-center gap-3">
+                      <span className="w-2 h-8 bg-brand-primary rounded-full"></span>
+                      Screenshots
+                    </h2>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      {project.images.map((screenshot, index) => (
+                        <motion.div
+                          key={index}
+                          whileHover={{ scale: 1.02 }}
+                          className="aspect-video bg-white/5 rounded-2xl overflow-hidden cursor-pointer border border-white/5 hover:border-brand-primary/50 transition-all shadow-lg"
+                        >
+                          <img
+                            src={screenshot}
+                            alt={`Screenshot ${index + 1}`}
+                            className="w-full h-full object-cover"
+                          />
+                        </motion.div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+
+              {/* Sidebar */}
+              <div className="space-y-8">
+                {/* Technologies */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="glass-card p-8 rounded-3xl border border-white/5"
+                >
+                  <h3 className="text-xl font-bold text-white mb-6">Technologies</h3>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tech, index) => (
+                      <span
                         key={index}
-                        whileHover={{ scale: 1.05 }}
-                        className="aspect-video bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-dark)] rounded-2xl overflow-hidden cursor-pointer"
+                        className="px-4 py-2 rounded-lg bg-brand-primary/10 text-brand-primary text-sm font-semibold border border-brand-primary/20"
                       >
-                        <img
-                          src={screenshot}
-                          alt={`Screenshot ${index + 1}`}
-                          className="w-full h-full object-cover"
-                        />
-                      </motion.div>
+                        {tech}
+                      </span>
                     ))}
                   </div>
                 </motion.div>
-              )}
-            </div>
 
-            {/* Sidebar */}
-            <div className="space-y-8">
-              {/* Technologies */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="glass p-6 rounded-2xl"
-              >
-                <h3 className="text-2xl font-bold text-white mb-4">Technologies</h3>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tech, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1 rounded-full bg-white/5 text-white/80 text-sm"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
+                {/* Features */}
+                {project.features && project.features.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="glass-card p-8 rounded-3xl border border-white/5"
+                  >
+                    <h3 className="text-xl font-bold text-white mb-6">Key Features</h3>
+                    <ul className="space-y-4">
+                      {project.features.map((feature, index) => (
+                        <li key={index} className="text-gray-300 flex items-start gap-3">
+                          <span className="w-6 h-6 rounded-full bg-brand-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <span className="w-2 h-2 bg-brand-primary rounded-full"></span>
+                          </span>
+                          <span className="text-sm leading-relaxed">{getLocalizedContent(feature)}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                )}
 
-              {/* Features */}
-              {project.features && project.features.length > 0 && (
+                {/* Visit Link */}
+                {project.link && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    className="glass-card p-8 rounded-3xl border border-white/5 relative overflow-hidden group"
+                  >
+                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                      <FiExternalLink className="text-8xl text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-4 relative z-10">
+                      Visit Website
+                    </h3>
+                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="relative z-10 w-full block">
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        className="w-full px-6 py-4 rounded-xl bg-gradient-to-r from-brand-primary to-brand-accent text-white font-bold flex items-center justify-center gap-2 shadow-lg shadow-brand-primary/20"
+                      >
+                        Visit Live Site
+                        <FiExternalLink />
+                      </motion.button>
+                    </a>
+                  </motion.div>
+                )}
+
+                {/* CTA */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="glass p-6 rounded-2xl"
+                  className="glass-card p-8 rounded-3xl border border-brand-primary/30 bg-gradient-to-br from-brand-primary/5 to-transparent relative overflow-hidden"
                 >
-                  <h3 className="text-2xl font-bold text-white mb-4">Key Features</h3>
-                  <ul className="space-y-2">
-                    {project.features.map((feature, index) => (
-                      <li key={index} className="text-white/80 flex items-start gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-gold)] mt-2 flex-shrink-0" />
-                        {getLocalizedContent(feature)}
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              )}
-
-              {/* Visit Link */}
-              {project.link && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="glass p-6 rounded-2xl"
-                >
-                  <h3 className="text-xl font-bold text-white mb-4">
-                    Visit Website
+                  <div className="absolute inset-0 bg-brand-primary/5"></div>
+                  <h3 className="text-xl font-bold text-white mb-4 relative z-10">
+                    Want Similar Results?
                   </h3>
-                  <a href={project.link} target="_blank" rel="noopener noreferrer">
+                  <p className="text-gray-400 mb-8 relative z-10 text-sm">
+                    Let's discuss your project and create something amazing together.
+                  </p>
+                  <Link href="/contact" className="relative z-10 w-full block">
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="w-full px-6 py-3 rounded-full bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] text-white font-semibold flex items-center justify-center gap-2"
+                      className="w-full px-6 py-4 rounded-xl border border-white/10 text-white hover:bg-white/10 font-bold flex items-center justify-center gap-2 transition-all"
                     >
-                      Visit Live Site
-                      <FiExternalLink />
+                      Start Your Project
+                      <FiArrowRight />
                     </motion.button>
-                  </a>
+                  </Link>
                 </motion.div>
-              )}
-
-              {/* CTA */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="glass p-6 rounded-2xl"
-              >
-                <h3 className="text-xl font-bold text-white mb-4">
-                  Want Similar Results?
-                </h3>
-                <p className="text-white/70 mb-4">
-                  Let's discuss your project and create something amazing together.
-                </p>
-                <Link href="/contact">
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full px-6 py-3 rounded-full glass text-white hover:bg-white/10 font-semibold flex items-center justify-center gap-2"
-                  >
-                    Start Your Project
-                    <FiArrowRight />
-                  </motion.button>
-                </Link>
-              </motion.div>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </div>
   );
 }

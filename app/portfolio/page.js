@@ -31,118 +31,135 @@ export default function PortfolioPage() {
     : projects.filter(p => p.category === filter);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[var(--brand-dark)] to-black pt-20">
-      {/* Hero Section */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <motion.div
-            animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
-            transition={{ duration: 20, repeat: Infinity }}
-            className="absolute top-1/4 right-1/4 w-96 h-96 bg-[var(--brand-accent)]/10 rounded-full blur-3xl"
-          />
-        </div>
+    <div className="min-h-screen bg-[#020617] text-white overflow-hidden py-20 relative">
+      {/* Abstract Background Shapes */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-brand-primary/10 blur-[100px] animate-pulse-glow"></div>
+        <div className="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] rounded-full bg-brand-dark/20 blur-[120px]"></div>
+        <div className="absolute top-[40%] left-[20%] w-[300px] h-[300px] rounded-full bg-brand-accent/5 blur-[80px]"></div>
+      </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-16"
-          >
-            <h1 className="text-5xl md:text-7xl font-bold text-gradient mb-6">
-              {t("portfolio.title")}
-            </h1>
-            <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto">
-              {t("portfolio.subtitle")}
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Filter */}
-      <section className="pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-4">
-            {categories.map((cat) => (
-              <motion.button
-                key={cat.id}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setFilter(cat.id)}
-                className={`px-6 py-3 rounded-full font-semibold transition-all ${filter === cat.id
-                  ? "bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] text-white"
-                  : "glass text-white/80 hover:bg-white/10"
-                  }`}
-              >
-                {cat.label}
-              </motion.button>
-            ))}
+      <div className="relative z-10">
+        {/* Hero Section */}
+        <section className="py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-center mb-16"
+            >
+              <div className="inline-block px-4 py-2 rounded-full glass border border-brand-primary/30 text-brand-accent mb-6 font-mono text-sm">
+                Our Work
+              </div>
+              <h1 className="text-5xl md:text-7xl font-bold mb-8">
+                {t("portfolio.title")}
+              </h1>
+              <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+                {t("portfolio.subtitle")}
+              </p>
+            </motion.div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Projects Grid */}
-      <section className="pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="glass rounded-2xl overflow-hidden group cursor-pointer"
-              >
-                <Link href={`/portfolio/${project.slug}`}>
-                  <div className="aspect-video bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-dark)] flex items-center justify-center text-8xl">
-                    <Image className="object-cover w-full h-full" src={project.image} alt={getLocalizedContent(project.title)} width={1000} height={1000} />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-[var(--brand-gold)] transition-colors">
-                      {getLocalizedContent(project.title)}
-                    </h3>
-                    <p className="text-white/70 mb-4">{getLocalizedContent(project.description)}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag, idx) => (
-                        <span
-                          key={idx}
-                          className="px-3 py-1 rounded-full bg-white/5 text-white/60 text-sm"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+        {/* Filter */}
+        <section className="pb-12">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-wrap justify-center gap-4">
+              {categories.map((cat) => (
+                <motion.button
+                  key={cat.id}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setFilter(cat.id)}
+                  className={`px-6 py-3 rounded-full font-semibold transition-all ${filter === cat.id
+                    ? "bg-gradient-to-r from-brand-primary to-brand-accent text-white shadow-lg shadow-brand-primary/25"
+                    : "glass text-gray-400 hover:bg-white/10 hover:text-white"
+                    }`}
+                >
+                  {cat.label}
+                </motion.button>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Projects Grid */}
+        <section className="pb-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredProjects.map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ y: -10 }}
+                  className="glass-card rounded-3xl overflow-hidden group cursor-pointer border border-white/5 hover:border-brand-primary/50"
+                >
+                  <Link href={`/portfolio/${project.slug}`}>
+                    <div className="aspect-video bg-gradient-to-br from-brand-dark to-[#020617] flex items-center justify-center text-8xl relative overflow-hidden">
+                      <Image
+                        className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-500"
+                        src={project.image}
+                        alt={getLocalizedContent(project.title)}
+                        width={1000}
+                        height={1000}
+                      />
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <span className="px-6 py-2 rounded-full border border-white/30 bg-white/10 backdrop-blur-md text-white font-medium">View Project</span>
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
+                    <div className="p-8">
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.tags.map((tag, idx) => (
+                          <span
+                            key={idx}
+                            className="px-3 py-1 rounded-full bg-brand-primary/10 text-brand-primary text-xs font-semibold uppercase tracking-wider"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-brand-primary transition-colors">
+                        {getLocalizedContent(project.title)}
+                      </h3>
+                      <p className="text-gray-400 leading-relaxed mb-4 line-clamp-2">{getLocalizedContent(project.description)}</p>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA */}
-      <section className="py-20 bg-gradient-to-r from-[var(--brand-dark)] to-[var(--brand-primary)]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              {t("portfolio.readyToStart")}
-            </h2>
-            <Link href="/contact">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-10 py-5 rounded-full bg-white text-[var(--brand-dark)] font-bold text-lg shadow-2xl"
-              >
-                {t("common.contactUs")}
-              </motion.button>
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+        {/* CTA */}
+        <section className="py-20 relative overflow-hidden">
+          <div className="absolute inset-0 bg-brand-primary/5"></div>
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                {t("portfolio.readyToStart")}
+              </h2>
+              <p className="text-xl text-gray-400 mb-10">
+                Let's turn your vision into reality.
+              </p>
+              <Link href="/contact">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-10 py-5 rounded-full bg-gradient-to-r from-brand-primary to-brand-accent text-white font-bold text-lg shadow-lg shadow-brand-primary/20 hover:shadow-brand-primary/40 transition-all"
+                >
+                  {t("common.contactUs")}
+                </motion.button>
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
