@@ -7,6 +7,7 @@ import { FiArrowRight, FiCheck } from "react-icons/fi";
 import Link from "next/link";
 import "../lib/i18n";
 import servicesData from "../data/services";
+import { FaUser } from "react-icons/fa";
 
 export default function HomePage() {
   const { t, i18n } = useTranslation();
@@ -21,6 +22,8 @@ export default function HomePage() {
     title: service.title[i18n.language] || service.title.en,
     desc: service.shortDesc[i18n.language] || service.shortDesc.en,
     link: `/services/${service.slug}`,
+    icon: <FaUser className="w-10 h-10" />,
+
   }));
 
   const stats = [
@@ -52,21 +55,26 @@ export default function HomePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[var(--brand-dark)] to-black overflow-hidden">
+    <div className="min-h-screen overflow-hidden">
       {/* Hero Section */}
-      <section
-        style={{
-          backgroundImage: "url('/lonely-work.jpg')",
-          width: "100%",
-          height: "100%",
-          opacity: "0.7",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-        className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20"
-      >
-        <div className="absolute inset-0 backdrop-blur-sm" />
+      <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden pt-20 bg-opacity-40">
+        {/* Background pseudo-element */}
+        <div className="absolute inset-0 -z-10">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: "url('/team-work.jpg')",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+              opacity: "0.5"
+            }}
+          />
+
+          {/* Blur overlay */}
+          <div className="absolute inset-0" />
+
+        </div>
 
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
@@ -95,7 +103,7 @@ export default function HomePage() {
             transition={{ duration: 0.8 }}
           >
             <motion.h1
-              className="text-5xl md:text-7xl lg:text-[4.8rem] font-bold mb-6 text-gradient"
+              className="text-5xl md:text-7xl lg:text-[4.8rem] font-bold mb-6 text-greidant"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
@@ -140,7 +148,6 @@ export default function HomePage() {
         </div>
 
         {/* Scroll Indicator */}
-        
         {/* <motion.div
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
@@ -180,7 +187,7 @@ export default function HomePage() {
       </section>
 
       {/* Services Section */}
-      <section className="py-20">
+      <section className="py-20 bg-white text-black ">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -188,13 +195,14 @@ export default function HomePage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
               {t("services.title")}
             </h2>
-            <p className="text-xl text-white/70">{t("services.subtitle")}</p>
+            <p className="text-xl ">{t("services.subtitle")}</p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service, index) => (
               <motion.div
                 key={service.id || index}
@@ -202,19 +210,35 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="glass p-6 rounded-2xl hover:bg-white/10 transition-all cursor-pointer group"
+                whileHover={{ y: -4 }}
+                className="group h-full"
               >
-                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-[var(--brand-gold)] transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-white/70">{service.desc}</p>
-                <Link href={service.link}>
-                  <motion.div className="mt-4 text-[var(--brand-gold)] flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    {t("common.learnMore")}
-                    <FiArrowRight />
-                  </motion.div>
-                </Link>
+                <div className="h-full p-8 rounded-2xl border-2 border-gray-200 hover:border-indigo-300 hover:bg-indigo-50/30 transition-all duration-300 flex flex-col">
+                  {/* Icon */}
+                  <div className="flex justify-center mb-6">
+                    <div className="p-4 rounded-full bg-indigo-100 text-indigo-600 group-hover:bg-indigo-200 group-hover:scale-110 transition-all duration-300">
+                      {service.icon}
+                    </div>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-center text-gray-800 mb-4 group-hover:text-indigo-700">
+                    {service.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-gray-600 text-center flex-grow mb-6">
+                    {service.desc}
+                  </p>
+
+                  {/* Link */}
+                  <Link href={service.link} className="mt-auto">
+                    <div className="flex items-center justify-center gap-2 text-indigo-600 font-medium hover:text-indigo-700">
+                      <span>{t("common.learnMore")}</span>
+                      <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </Link>
+                </div>
               </motion.div>
             ))}
           </div>
