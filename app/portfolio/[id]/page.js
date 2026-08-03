@@ -8,117 +8,119 @@ import { FiArrowLeft, FiExternalLink, FiCalendar, FiUsers, FiArrowRight } from "
 import projects from "../../../data/portfolio";
 import { use } from "react";
 
+const EASE = [0.16, 1, 0.3, 1];
+
 export default function PortfolioDetailPage({ params }) {
   const { i18n } = useTranslation();
   const { id } = use(params);
-  const projectSlug = id; // URL param
+  const projectSlug = id;
 
   const getLocalizedContent = (content) => {
     if (!content) return "";
-    if (typeof content === 'string') return content;
+    if (typeof content === "string") return content;
     return content[i18n.language] || content.en || "";
   };
 
-  // Find project by slug (the URL param 'id' is actually the slug)
-  const project = projects.find(p => p.slug === projectSlug || p.id === projectSlug) || projects[0];
+  const project =
+    projects.find((p) => p.slug === projectSlug || p.id === projectSlug) || projects[0];
+
+  const title = getLocalizedContent(project.title);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[var(--brand-dark)] to-black pt-20">
-      {/* Hero Section */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <motion.div
-            animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
-            transition={{ duration: 20, repeat: Infinity }}
-            className="absolute top-1/4 right-1/4 w-96 h-96 bg-[var(--brand-accent)]/10 rounded-full blur-3xl"
-          />
-        </div>
+    <div className="page">
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Link href="/portfolio">
-            <motion.button
-              whileHover={{ x: -5 }}
-              className="flex items-center gap-2 text-white/70 hover:text-white mb-8 transition-colors"
-            >
-              <FiArrowLeft />
-              Back to Portfolio
-            </motion.button>
+      {/* ---------------------------------------------------------- Masthead */}
+      <section className="relative pt-28 pb-12 sm:pt-32">
+        <div className="shell relative z-10">
+          <Link
+            href="/portfolio"
+            className="inline-flex items-center gap-2 mb-10 text-fluid-sm t-soft transition-colors group"
+          >
+            <FiArrowLeft className="transition-transform duration-300 group-hover:-translate-x-1 flip-rtl" />
+            Back to Portfolio
           </Link>
+
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: EASE }}
+            className="max-w-3xl"
+          >
+            <span className="eyebrow mb-5">{project.category}</span>
+            <h1 className="display-lg">{title}</h1>
+
+            <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-3 text-fluid-sm t-soft">
+              <span className="flex items-center gap-2">
+                <FiUsers className="text-[var(--jade-deep)]" />
+                {project.client}
+              </span>
+              <span className="flex items-center gap-2">
+                <FiCalendar className="text-[var(--jade-deep)]" />
+                {project.year}
+              </span>
+            </div>
+          </motion.div>
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.15, ease: EASE }}
+            className="mt-12 relative aspect-[16/9] rounded-[var(--r-lg)] overflow-hidden border border-[var(--rule)] bg-[var(--ink)]"
           >
-            <div className="inline-block px-4 py-2 rounded-full glass text-[var(--brand-gold)] mb-6">
-              {project.category}
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">
-              {getLocalizedContent(project.title)}
-            </h1>
-
-            <div className="flex flex-wrap items-center gap-6 text-white/70 mb-8">
-              <div className="flex items-center gap-2">
-                <FiUsers />
-                <span>{project.client}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <FiCalendar />
-                <span>{project.year}</span>
-              </div>
-            </div>
-
-            {/* Featured Image */}
-            <div className="aspect-video bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-dark)] rounded-2xl overflow-hidden mb-12">
-              <img
-                src={project.image}
-                alt={getLocalizedContent(project.title)}
-                className="w-full h-full object-cover"
-              />
-            </div>
+            <Image
+              src={project.image}
+              alt={title}
+              width={1600}
+              height={900}
+              priority
+              className="w-full h-full object-cover"
+            />
           </motion.div>
         </div>
       </section>
 
-      {/* Project Details */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-3 gap-12">
-            {/* Main Content */}
-            <div className="lg:col-span-2 space-y-12">
-              {/* Overview */}
+      {/* ----------------------------------------------------------- Details */}
+      <section className="section-tight pb-24 relative">
+        <div className="shell">
+          <div className="grid lg:grid-cols-3 gap-8 lg:gap-10 items-start">
+            {/* Main column */}
+            <div className="lg:col-span-2 space-y-8">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="glass p-8 rounded-2xl"
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ duration: 0.55, ease: EASE }}
+                className="card card-pad !p-8"
               >
-                <h2 className="text-3xl font-bold text-white mb-4">Overview</h2>
-                <p className="text-white/80 text-lg leading-relaxed">
+                <span className="eyebrow mb-4">Overview</span>
+                <p className="text-fluid-lg t-muted leading-relaxed">
                   {getLocalizedContent(project.description)}
                 </p>
               </motion.div>
 
-              {/* Screenshots */}
               {project.images && project.images.length > 0 && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
+                  viewport={{ once: true, margin: "-60px" }}
+                  transition={{ duration: 0.55, ease: EASE }}
                 >
-                  <h2 className="text-3xl font-bold text-white mb-6">Screenshots</h2>
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <span className="eyebrow mb-5">Screenshots</span>
+                  <div className="grid sm:grid-cols-2 gap-4 mt-2">
                     {project.images.map((screenshot, index) => (
-                      <motion.div
+                      <div
                         key={index}
-                        whileHover={{ scale: 1.05 }}
-                        className="aspect-video bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-dark)] rounded-2xl overflow-hidden cursor-pointer"
+                        className="group relative aspect-video rounded-[var(--r-lg)] overflow-hidden border border-[var(--rule)] bg-[var(--ink)]"
                       >
-                        <img
+                        <Image
                           src={screenshot}
-                          alt={`Screenshot ${index + 1}`}
-                          className="w-full h-full object-cover"
+                          alt={`${title} — screenshot ${index + 1}`}
+                          width={900}
+                          height={506}
+                          loading="lazy"
+                          className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                         />
-                      </motion.div>
+                      </div>
                     ))}
                   </div>
                 </motion.div>
@@ -126,40 +128,44 @@ export default function PortfolioDetailPage({ params }) {
             </div>
 
             {/* Sidebar */}
-            <div className="space-y-8">
-              {/* Technologies */}
+            <aside className="space-y-5 lg:sticky lg:top-24">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="glass p-6 rounded-2xl"
+                transition={{ duration: 0.5, ease: EASE }}
+                className="card card-pad !p-6"
               >
-                <h3 className="text-2xl font-bold text-white mb-4">Technologies</h3>
-                <div className="flex flex-wrap gap-2">
+                <h2 className="data uppercase tracking-[0.18em] t-soft mb-4">
+                  Technologies
+                </h2>
+                <div className="flex flex-wrap gap-1.5">
                   {project.tags.map((tech, index) => (
-                    <span
-                      key={index}
-                      className="px-3 py-1 rounded-full bg-white/5 text-white/80 text-sm"
-                    >
+                    <span key={index} className="tag">
                       {tech}
                     </span>
                   ))}
                 </div>
               </motion.div>
 
-              {/* Features */}
               {project.features && project.features.length > 0 && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="glass p-6 rounded-2xl"
+                  transition={{ duration: 0.5, delay: 0.05, ease: EASE }}
+                  className="card card-pad !p-6"
                 >
-                  <h3 className="text-2xl font-bold text-white mb-4">Key Features</h3>
-                  <ul className="space-y-2">
+                  <h2 className="data uppercase tracking-[0.18em] t-soft mb-4">
+                    Key Features
+                  </h2>
+                  <ul className="space-y-2.5">
                     {project.features.map((feature, index) => (
-                      <li key={index} className="text-white/80 flex items-start gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--brand-gold)] mt-2 flex-shrink-0" />
+                      <li
+                        key={index}
+                        className="flex items-start gap-2.5 text-fluid-sm t-muted"
+                      >
+                        <span className="mt-[0.5rem] w-1 h-1 rounded-full bg-[var(--jade-deep)] shrink-0" />
                         {getLocalizedContent(feature)}
                       </li>
                     ))}
@@ -167,55 +173,41 @@ export default function PortfolioDetailPage({ params }) {
                 </motion.div>
               )}
 
-              {/* Visit Link */}
               {project.link && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="glass p-6 rounded-2xl"
+                  transition={{ duration: 0.5, delay: 0.1, ease: EASE }}
                 >
-                  <h3 className="text-xl font-bold text-white mb-4">
-                    Visit Website
-                  </h3>
                   <a href={project.link} target="_blank" rel="noopener noreferrer">
-                    <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="w-full px-6 py-3 rounded-full bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] text-white font-semibold flex items-center justify-center gap-2"
-                    >
+                    <span className="btn btn-primary btn-block">
                       Visit Live Site
                       <FiExternalLink />
-                    </motion.button>
+                    </span>
                   </a>
                 </motion.div>
               )}
 
-              {/* CTA */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="glass p-6 rounded-2xl"
+                transition={{ duration: 0.5, delay: 0.15, ease: EASE }}
+                className="card card-marked card-pad !p-6"
               >
-                <h3 className="text-xl font-bold text-white mb-4">
-                  Want Similar Results?
-                </h3>
-                <p className="text-white/70 mb-4">
-                  Let's discuss your project and create something amazing together.
+                <h2 className="text-fluid-lg font-bold">Want Similar Results?</h2>
+                <p className="t-muted text-fluid-sm mt-2.5">
+                  Let&apos;s discuss your project and create something great together.
                 </p>
-                <Link href="/contact">
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="w-full px-6 py-3 rounded-full glass text-white hover:bg-white/10 font-semibold flex items-center justify-center gap-2"
-                  >
+                <Link href="/contact" className="mt-6">
+                  <span className="btn btn-secondary btn-block">
                     Start Your Project
-                    <FiArrowRight />
-                  </motion.button>
+                    <FiArrowRight className="flip-rtl" />
+                  </span>
                 </Link>
               </motion.div>
-            </div>
+            </aside>
           </div>
         </div>
       </section>

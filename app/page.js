@@ -1,26 +1,28 @@
 "use client";
 
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
-import { FiArrowRight, FiCheck } from "react-icons/fi";
+import { FiArrowRight, FiArrowUpRight, FiCheck } from "react-icons/fi";
 import Link from "next/link";
 import "../lib/i18n";
 import servicesData from "../data/services";
+import projects from "../data/portfolio";
+import SectionHead from "../components/SectionHead";
+
+const EASE = [0.16, 1, 0.3, 1];
+
+const domainOf = (url) => (url || "").replace(/^https?:\/\//, "").replace(/\/$/, "");
 
 export default function HomePage() {
   const { t, i18n } = useTranslation();
 
-  useEffect(() => {
-    // Initialize i18n on mount
-  }, []);
+  const localize = (v) => (typeof v === "string" ? v : v?.[i18n.language] || v?.en || "");
 
-  // Get services from data file with current language
-  const services = servicesData.map(service => ({
+  const services = servicesData.map((service) => ({
     id: service.id,
     title: service.title[i18n.language] || service.title.en,
     desc: service.shortDesc[i18n.language] || service.shortDesc.en,
-    link: `/services/${service.slug}`
+    link: `/services/${service.slug}`,
   }));
 
   const stats = [
@@ -31,177 +33,158 @@ export default function HomePage() {
   ];
 
   const testimonials = [
-    {
-      name: "Unknown",
-      position: t("testimonials.position1"),
-      text: t("testimonials.testimonial1"),
-      avatar: "/client-ahmad.png",
-    },
-    {
-      name: "Unknown",
-      position: t("testimonials.position2"),
-      text: t("testimonials.testimonial2"),
-      avatar: "/client-sara.png",
-    },
-    {
-      name: "Unknown",
-      position: t("testimonials.position3"),
-      text: t("testimonials.testimonial3"),
-      avatar: "/client-hamid.png",
-    },
+    { name: "Unknown", position: t("testimonials.position1"), text: t("testimonials.testimonial1"), avatar: "/client-ahmad.png" },
+    { name: "Unknown", position: t("testimonials.position2"), text: t("testimonials.testimonial2"), avatar: "/client-sara.png" },
+    { name: "Unknown", position: t("testimonials.position3"), text: t("testimonials.testimonial3"), avatar: "/client-hamid.png" },
+  ];
+
+  const advantages = [
+    t("whyChoose.feature1"), t("whyChoose.feature2"), t("whyChoose.feature3"),
+    t("whyChoose.feature4"), t("whyChoose.feature5"), t("whyChoose.feature6"),
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[var(--brand-dark)] to-black overflow-hidden">
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 90, 0],
-            }}
-            transition={{ duration: 20, repeat: Infinity }}
-            className="absolute top-1/4 left-1/4 w-96 h-96 bg-[var(--brand-accent)]/10 rounded-full blur-3xl"
-          />
-          <motion.div
-            animate={{
-              scale: [1.2, 1, 1.2],
-              rotate: [90, 0, 90],
-            }}
-            transition={{ duration: 15, repeat: Infinity }}
-            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[var(--brand-gold)]/10 rounded-full blur-3xl"
-          />
-        </div>
+    <div className="page">
+      {/* ---------------------------------------------------------------- Hero */}
+      <section className="pt-32 pb-16 sm:pt-40 sm:pb-20">
+        <div className="shell">
+          <div className="max-w-4xl">
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, ease: EASE }}
+              className="eyebrow mb-6"
+            >
+              {t("contact.addressValue")}
+            </motion.span>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
             <motion.h1
-              className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 text-gradient"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              transition={{ duration: 0.7, delay: 0.06, ease: EASE }}
+              className="display-xl"
             >
               {t("hero.title")}
             </motion.h1>
+
             <motion.p
-              className="text-xl md:text-xl text-white/80 mb-12 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.16, ease: EASE }}
+              className="lede mt-6 max-w-xl"
             >
               {t("hero.subtitle")}
             </motion.p>
+
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
+              transition={{ duration: 0.6, delay: 0.26, ease: EASE }}
+              className="mt-9 flex flex-wrap gap-3"
             >
               <Link href="/contact">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 rounded-full bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] text-white font-semibold text-lg shadow-2xl hover:shadow-[var(--brand-gold)]/50 transition-all flex items-center justify-center gap-2"
-                >
+                <span className="btn btn-primary btn-lg">
                   {t("hero.cta")}
-                  <FiArrowRight />
-                </motion.button>
+                  <FiArrowRight className="flip-rtl" />
+                </span>
               </Link>
               <Link href="/portfolio">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 rounded-full glass text-white font-semibold text-lg hover:bg-white/10 transition-all"
-                >
-                  {t("hero.viewWork")}
-                </motion.button>
+                <span className="btn btn-secondary btn-lg">{t("hero.viewWork")}</span>
               </Link>
             </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-        >
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-            <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-1.5 h-1.5 bg-white rounded-full mt-2"
-            />
           </div>
-        </motion.div>
+        </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-20 bg-[var(--brand-primary)]/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
+      {/* --------------------------------------------- Signature: the work index
+          A studio's credibility is its shipped work, so it sits directly under
+          the headline — real clients, real years, real live domains. */}
+      <section className="band-alt border-y border-[var(--rule)]">
+        <div className="shell py-14 sm:py-16">
+          <div className="flex items-baseline justify-between gap-4 mb-8">
+            <span className="eyebrow">{t("portfolio.title")}</span>
+            <Link href="/portfolio" className="link text-fluid-sm">
+              {t("common.viewAll")}
+            </Link>
+          </div>
+
+          <ul>
+            {projects.map((project, index) => (
+              <motion.li
+                key={project.id}
+                initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center"
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ delay: index * 0.06, duration: 0.45, ease: EASE }}
+                className="border-t border-[var(--rule)] last:border-b"
               >
-                <div className="text-4xl md:text-5xl font-bold text-gradient-gold mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-white/70">{stat.label}</div>
-              </motion.div>
+                <Link
+                  href={`/portfolio/${project.slug}`}
+                  className="group grid grid-cols-[1fr_auto] sm:grid-cols-[1.6fr_1fr_auto] items-center gap-x-6 gap-y-1 py-5"
+                >
+                  <span className="font-display text-fluid-xl font-bold tracking-tight transition-colors duration-200 group-hover:text-[var(--jade-deep)]">
+                    {localize(project.title)}
+                  </span>
+                  <span className="data t-soft col-span-2 sm:col-span-1 sm:text-center">
+                    {domainOf(project.link)} · {project.year}
+                  </span>
+                  <FiArrowUpRight className="row-start-1 col-start-2 sm:col-start-3 t-soft transition-all duration-200 group-hover:text-[var(--jade-deep)] group-hover:-translate-y-0.5 flip-rtl" />
+                </Link>
+              </motion.li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
-      {/* Services Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              {t("services.title")}
-            </h2>
-            <p className="text-xl text-white/70">{t("services.subtitle")}</p>
-          </motion.div>
+      {/* --------------------------------------------------------------- Stats */}
+      <section className="shell py-14">
+        <dl className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8">
+          {stats.map((stat, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.06, duration: 0.45, ease: EASE }}
+            >
+              {/* Reversed so the figure reads first while dt still precedes dd
+                  in the DOM — otherwise the label is announced twice. */}
+              <div className="flex flex-col-reverse">
+                <dt className="text-fluid-sm t-muted mt-2">{stat.label}</dt>
+                <dd className="numeric font-display text-[2.4rem] sm:text-[2.9rem] font-extrabold leading-none text-[var(--jade-deep)]">
+                  {stat.number}
+                </dd>
+              </div>
+            </motion.div>
+          ))}
+        </dl>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* ------------------------------------------------------------ Services */}
+      <section className="section border-t border-[var(--rule)]">
+        <div className="shell">
+          <SectionHead title={t("services.title")} subtitle={t("services.subtitle")} />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {services.map((service, index) => (
               <motion.div
                 key={service.id || index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="glass p-6 rounded-2xl hover:bg-white/10 transition-all cursor-pointer group"
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ delay: (index % 4) * 0.06, duration: 0.45, ease: EASE }}
               >
-                <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-[var(--brand-gold)] transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-white/70">{service.desc}</p>
-                <Link href={service.link}>
-                  <motion.div
-                    className="mt-4 text-[var(--brand-gold)] flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity"
-                  >
-                    {t("common.learnMore")}
-                    <FiArrowRight />
-                  </motion.div>
+                <Link href={service.link} className="block h-full group">
+                  <article className="card card-lift card-pad h-full">
+                    <h3 className="text-fluid-lg font-bold transition-colors duration-200 group-hover:text-[var(--jade-deep)]">
+                      {service.title}
+                    </h3>
+                    <p className="t-muted text-fluid-sm mt-2.5">{service.desc}</p>
+                    <span className="mt-auto pt-6 inline-flex items-center gap-1.5 text-fluid-sm font-semibold text-[var(--jade-deep)]">
+                      {t("common.learnMore")}
+                      <FiArrowUpRight className="transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 flip-rtl" />
+                    </span>
+                  </article>
                 </Link>
               </motion.div>
             ))}
@@ -209,136 +192,76 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="py-20 bg-[var(--brand-primary)]/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+      {/* ----------------------------------------------------------- Why Sheen */}
+      <section className="section band-alt border-y border-[var(--rule)]">
+        <div className="shell">
+          <div className="grid lg:grid-cols-[1fr_1.15fr] gap-12 lg:gap-16">
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.5, ease: EASE }}
             >
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                {t("whyChoose.title")}
-              </h2>
-              <div className="space-y-4">
-                {[
-                  t("whyChoose.feature1"),
-                  t("whyChoose.feature2"),
-                  t("whyChoose.feature3"),
-                  t("whyChoose.feature4"),
-                  t("whyChoose.feature5"),
-                  t("whyChoose.feature6"),
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="flex items-center gap-3"
-                  >
-                    <div className="w-6 h-6 rounded-full bg-[var(--brand-gold)] flex items-center justify-center flex-shrink-0">
-                      <FiCheck className="text-white text-sm" />
-                    </div>
-                    <span className="text-white/90">{item}</span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="glass p-8 rounded-2xl"
-            >
-              <h3 className="text-2xl font-bold text-white mb-6">
-                {t("whyChoose.ctaTitle")}
-              </h3>
-              <p className="text-white/70 mb-6">
-                {t("whyChoose.ctaDesc")}
-              </p>
-              <Link href="/contact">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-full px-8 py-4 rounded-full bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] text-white font-semibold shadow-xl"
-                >
+              <h2 className="display-md">{t("whyChoose.title")}</h2>
+              <p className="lede mt-4">{t("whyChoose.ctaDesc")}</p>
+              <Link href="/contact" className="inline-block mt-8">
+                <span className="btn btn-primary">
                   {t("common.contactUs")}
-                </motion.button>
+                  <FiArrowRight className="flip-rtl" />
+                </span>
               </Link>
             </motion.div>
+
+            <ul className="grid sm:grid-cols-2 gap-x-8">
+              {advantages.map((item, index) => (
+                <motion.li
+                  key={index}
+                  initial={{ opacity: 0, y: 8 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05, duration: 0.4, ease: EASE }}
+                  className="flex items-start gap-3 py-3.5 border-b border-[var(--rule)]"
+                >
+                  <FiCheck className="mt-1 shrink-0 text-[var(--jade-deep)]" />
+                  <span className="text-fluid-sm">{item}</span>
+                </motion.li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              {t("testimonials.title")}
-            </h2>
-          </motion.div>
+      {/* -------------------------------------------------------- Testimonials */}
+      <section className="section">
+        <div className="shell">
+          <SectionHead title={t("testimonials.title")} />
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-4">
             {testimonials.map((testimonial, index) => (
-              <motion.div
+              <motion.figure
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                className="glass p-6 rounded-2xl"
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ delay: index * 0.08, duration: 0.45, ease: EASE }}
+                className="card card-pad"
               >
-                <div className="w-20 h-20 rounded-full overflow-hidden mb-4 mx-auto border-2 border-[var(--brand-gold)]">
+                <blockquote className="text-fluid-base">{testimonial.text}</blockquote>
+
+                <figcaption className="mt-auto pt-6 flex items-center gap-3">
                   <img
                     src={testimonial.avatar}
-                    alt={testimonial.name}
-                    className="w-full h-full object-cover"
+                    alt=""
+                    className="w-9 h-9 rounded-full object-cover"
                   />
-                </div>
-                <p className="text-white/80 mb-4 italic">&quot;{testimonial.text}&quot;</p>
-                <div>
-                  <div className="font-semibold text-white">{testimonial.name}</div>
-                  <div className="text-sm text-white/60">{testimonial.position}</div>
-                </div>
-              </motion.div>
+                  <span className="text-fluid-sm">
+                    <span className="block font-semibold">{testimonial.name}</span>
+                    <span className="block t-soft text-fluid-xs">{testimonial.position}</span>
+                  </span>
+                </figcaption>
+              </motion.figure>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-[var(--brand-dark)] to-[var(--brand-primary)]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              {t("cta.title")}
-            </h2>
-            <p className="text-xl text-white/80 mb-8">
-              {t("cta.subtitle")}
-            </p>
-            <Link href="/book">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-10 py-5 rounded-full bg-white text-[var(--brand-dark)] font-bold text-lg shadow-2xl hover:shadow-white/30 transition-all"
-              >
-                {t("common.bookNow")}
-              </motion.button>
-            </Link>
-          </motion.div>
         </div>
       </section>
     </div>

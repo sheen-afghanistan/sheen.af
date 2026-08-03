@@ -2,133 +2,742 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ==========================================================================
+   SHEEN — Paper & Jade
+   Jade is sampled from the logo (#30ac88–#43b496). Lapis is the single accent:
+   Badakhshan is the historic source of the world's lapis lazuli, so it is
+   specific to this studio rather than generic. No gradient fills, no glass,
+   no glow — surfaces are opaque and separated by hairlines.
+   ========================================================================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  
-  /* Brand Colors */
-  --brand-dark: #1e6b54;
-  --brand-primary: #30ac8a;
-  --brand-accent: #4bc2a0;
-  --brand-light: #e6f7f2;
-  --brand-gold: #D4AF37;
-  
-  /* Gradients */
-  --gradient-main: linear-gradient(135deg, var(--brand-dark) 0%, var(--brand-primary) 100%);
-  --gradient-premium: linear-gradient(135deg, #1e6b54 0%, #30ac8a 50%, #165240 100%);
+  /* Paper */
+  --paper: #f7f5f0;
+  --paper-alt: #efebe3;
+  --paper-raised: #fffdfa;
+
+  /* Ink */
+  --ink: #12211c;
+  --ink-70: #4a5751;
+  /* Dark enough to clear 4.5:1 on --paper-alt at 13px, which the mono
+     metadata (domains, dates, roles) is set at. */
+  --ink-45: #59645f;
+
+  /* Brand */
+  --jade: #30ac8a;
+  --jade-deep: #1e6b54;
+  --jade-wash: #e6f7f2;
+
+  /* Accent — used on almost nothing */
+  --lapis: #22406e;
+
+  /* Lines */
+  --rule: #dfdad0;
+  --rule-strong: #c9c2b4;
+
+  /* Semantic aliases so components read clearly */
+  --background: var(--paper);
+  --foreground: var(--ink);
+
+  /* Typefaces */
+  --font-display: var(--font-bricolage), "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-body: var(--font-jakarta), "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Type scale — editorial, not shouty */
+  --step--2: clamp(0.75rem, 0.73rem + 0.08vw, 0.8rem);
+  --step--1: clamp(0.86rem, 0.84rem + 0.10vw, 0.92rem);
+  --step-0: clamp(0.97rem, 0.94rem + 0.15vw, 1.05rem);
+  --step-1: clamp(1.08rem, 1.02rem + 0.30vw, 1.22rem);
+  --step-2: clamp(1.3rem, 1.15rem + 0.70vw, 1.7rem);
+  --step-3: clamp(1.6rem, 1.25rem + 1.50vw, 2.3rem);
+  --step-4: clamp(2rem, 1.30rem + 2.60vw, 3.1rem);
+  --step-5: clamp(2.5rem, 1.20rem + 5.00vw, 4.5rem);
+
+  /* Geometry — crisp, not pill, not brutalist */
+  --r-sm: 2px;
+  --r-md: 3px;
+  --r-lg: 4px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Elevation is nearly absent by design; a hairline does the work. */
+  --shadow-raise: 0 1px 2px rgba(18, 33, 28, 0.05), 0 8px 24px -14px rgba(18, 33, 28, 0.18);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #050a05;
-    --foreground: #ededed;
+/* Persian / Pashto get a script-native face and no Latin tracking. */
+[dir="rtl"] {
+  --font-display: var(--font-vazir), "Vazirmatn", "Segoe UI", Tahoma, sans-serif;
+  --font-body: var(--font-vazir), "Vazirmatn", "Segoe UI", Tahoma, sans-serif;
+  --font-mono: var(--font-vazir), "Vazirmatn", "Segoe UI", Tahoma, sans-serif;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: var(--step-0);
+    line-height: 1.68;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.028em;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.24;
+    letter-spacing: -0.018em;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* font-family inherits as a resolved list, so an RTL subtree has to
+     re-declare it for the redefined --font-body to actually apply. */
+  [dir="rtl"] {
+    font-family: var(--font-body);
+  }
+
+  /* Arabic script does not take Latin tracking — it breaks letter joining. */
+  [dir="rtl"] h1,
+  [dir="rtl"] h2,
+  [dir="rtl"] h3,
+  [dir="rtl"] h4,
+  [dir="rtl"] h5,
+  [dir="rtl"] h6 {
+    letter-spacing: 0;
+    line-height: 1.4;
+  }
+
+  [dir="rtl"] body {
+    line-height: 1.95;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--jade-deep);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--jade);
+    color: #fff;
+  }
+
+  option {
+    background: var(--paper-raised);
+    color: var(--ink);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-inter), var(--font-geist-sans), system-ui, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-/* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 12px;
+  height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--brand-dark);
+  background: var(--paper-alt);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--brand-accent);
-  border-radius: 4px;
+  background: var(--rule-strong);
+  border: 3px solid var(--paper-alt);
+  border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--brand-gold);
+  background: var(--ink-45);
 }
+
+/* ==========================================================================
+   Components
+   ========================================================================== */
 
 @layer components {
-  /* Utilities */
-  .glass {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+
+  /* ---------- Layout ---------- */
+
+  .shell {
+    width: min(100% - 2.5rem, 1200px);
+    margin-inline: auto;
   }
 
-  .glass-dark {
-    background: #1e6b54;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  .shell-narrow {
+    width: min(100% - 2.5rem, 760px);
+    margin-inline: auto;
   }
 
-  .text-gradient {
-    background: linear-gradient(to right, #fff, #a3d9a5);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+  .section {
+    padding-block: clamp(3.5rem, 7vw, 6.5rem);
   }
 
-  .text-gradient-gold {
-    background: linear-gradient(to right, #D4AF37, #F2D06B);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+  .section-tight {
+    padding-block: clamp(2.5rem, 4vw, 3.5rem);
+  }
+
+  .page {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  /* Alternating band, one shade down from paper. */
+  .band-alt {
+    background: var(--paper-alt);
+  }
+
+  /* Dark punctuation. One per page at most. */
+  .band-ink {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .band-ink h1,
+  .band-ink h2,
+  .band-ink h3,
+  .band-ink h4 {
+    color: var(--paper);
+  }
+
+  /* Anything that carries its own ink colour has to be reversed out here, or
+     it renders dark-on-dark. */
+  .band-ink .t-muted,
+  .band-ink .lede {
+    color: rgba(247, 245, 240, 0.72);
+  }
+
+  .band-ink .t-soft {
+    color: rgba(247, 245, 240, 0.55);
+  }
+
+  .band-ink .t-jade,
+  .band-ink .link {
+    color: var(--jade);
+  }
+
+  .band-ink .link {
+    text-decoration-color: rgba(48, 172, 138, 0.5);
+  }
+
+  .band-ink .rule {
+    background: rgba(247, 245, 240, 0.18);
+  }
+
+  .band-ink .field {
+    background: rgba(247, 245, 240, 0.06);
+    border-color: rgba(247, 245, 240, 0.24);
+    color: var(--paper);
+  }
+
+  .band-ink .field::placeholder {
+    color: rgba(247, 245, 240, 0.45);
+  }
+
+  .band-ink .field-label {
+    color: var(--paper);
+  }
+
+  .band-jade {
+    background: var(--jade-deep);
+    color: #fff;
+  }
+
+  .band-jade h1,
+  .band-jade h2,
+  .band-jade h3 {
+    color: #fff;
+  }
+
+  .band-jade .t-muted,
+  .band-jade .lede {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .band-jade .t-soft {
+    color: rgba(255, 255, 255, 0.62);
+  }
+
+  /* ---------- Type ---------- */
+
+  .display-xl {
+    font-size: var(--step-5);
+  }
+
+  .display-lg {
+    font-size: var(--step-4);
+  }
+
+  .display-md {
+    font-size: var(--step-3);
+  }
+
+  .display-sm {
+    font-size: var(--step-2);
+  }
+
+  .lede {
+    font-size: var(--step-1);
+    line-height: 1.62;
+    color: var(--ink-70);
+  }
+
+  .t-muted {
+    color: var(--ink-70);
+  }
+
+  .t-soft {
+    color: var(--ink-45);
+  }
+
+  .t-jade {
+    color: var(--jade-deep);
+  }
+
+  /* Real data: domains, dates, prices, phone numbers. Not decoration. */
+  .data {
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+    letter-spacing: 0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  [dir="rtl"] .data {
+    font-family: var(--font-body);
+    letter-spacing: 0;
+  }
+
+  .numeric {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.03em;
+  }
+
+  /* ---------- Signature: the chevron from the logo bracket ---------- */
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-body);
+    font-size: var(--step--2);
+    font-weight: 600;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--jade-deep);
+  }
+
+  /* Half of the logo's diamond bracket, at label scale. */
+  .eyebrow::before {
+    content: "";
+    width: 0.42rem;
+    height: 0.42rem;
+    border-top: 1.5px solid currentColor;
+    border-right: 1.5px solid currentColor;
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  [dir="rtl"] .eyebrow {
+    letter-spacing: 0;
+    text-transform: none;
+    font-weight: 700;
+  }
+
+  [dir="rtl"] .eyebrow::before {
+    transform: rotate(-135deg);
+  }
+
+  .band-ink .eyebrow,
+  .band-jade .eyebrow {
+    color: var(--jade);
+  }
+
+  /* The full bracket, used as a section divider at most twice per page. */
+  .bracket {
+    display: block;
+    width: 100%;
+    height: 10px;
+    border: 0;
+    background: none;
+    position: relative;
+  }
+
+  .bracket::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 50%;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .bracket::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 10px;
+    height: 10px;
+    margin-left: -5px;
+    background: var(--paper);
+    border-right: 1.5px solid var(--jade);
+    border-bottom: 1.5px solid var(--jade);
+    transform: rotate(45deg);
+  }
+
+  .rule {
+    height: 1px;
+    border: 0;
+    background: var(--rule);
+  }
+
+  /* ---------- Surfaces ---------- */
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--paper-raised);
+    border: 1px solid var(--rule);
+    border-radius: var(--r-md);
+    transition:
+      border-color 0.3s var(--ease-soft),
+      box-shadow 0.3s var(--ease-soft),
+      transform 0.3s var(--ease-out);
+  }
+
+  .card-lift:hover {
+    border-color: var(--rule-strong);
+    box-shadow: var(--shadow-raise);
+    transform: translateY(-2px);
+  }
+
+  .card-pad {
+    padding: clamp(1.25rem, 2vw, 1.75rem);
+  }
+
+  /* Marked out by a jade edge, not by a glow. */
+  .card-marked {
+    border-color: var(--jade);
+    box-shadow: inset 3px 0 0 var(--jade);
+  }
+
+  .band-ink .card,
+  .band-jade .card {
+    background: rgba(247, 245, 240, 0.05);
+    border-color: rgba(247, 245, 240, 0.16);
+    color: var(--paper);
+  }
+
+  /* ---------- Buttons ---------- */
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    line-height: 1;
+    padding: 0.85rem 1.4rem;
+    border-radius: var(--r-sm);
+    border: 1px solid transparent;
+    cursor: pointer;
+    white-space: nowrap;
+    text-align: center;
+    transition:
+      background-color 0.25s var(--ease-soft),
+      border-color 0.25s var(--ease-soft),
+      color 0.25s var(--ease-soft),
+      opacity 0.25s var(--ease-soft);
+  }
+
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .btn-lg {
+    padding: 1.05rem 1.8rem;
+    font-size: var(--step-0);
+  }
+
+  .btn-sm {
+    padding: 0.6rem 1rem;
+    font-size: var(--step--2);
+  }
+
+  .btn-block {
+    width: 100%;
+  }
+
+  .btn-primary {
+    background: var(--jade-deep);
+    color: #fff;
+  }
+
+  .btn-primary:hover:not(:disabled) {
+    background: #17513f;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    border-color: var(--rule-strong);
+    color: var(--ink);
+  }
+
+  .btn-secondary:hover:not(:disabled) {
+    border-color: var(--ink);
+    background: rgba(18, 33, 28, 0.04);
+  }
+
+  /* For use inside .band-ink / .band-jade */
+  .btn-inverse {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .btn-inverse:hover:not(:disabled) {
+    background: #fff;
+  }
+
+  .btn-inverse-outline {
+    background: transparent;
+    border-color: rgba(247, 245, 240, 0.35);
+    color: var(--paper);
+  }
+
+  .btn-inverse-outline:hover:not(:disabled) {
+    border-color: var(--paper);
+    background: rgba(247, 245, 240, 0.08);
+  }
+
+  /* Text link with a moving underline */
+  .link {
+    color: var(--jade-deep);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(30, 107, 84, 0.35);
+    transition: text-decoration-color 0.25s var(--ease-soft);
+  }
+
+  .link:hover {
+    text-decoration-color: var(--jade-deep);
+  }
+
+  /* ---------- Controls ---------- */
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--rule);
+    background: transparent;
+    color: var(--ink-70);
+    font-size: var(--step--1);
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+      background-color 0.25s var(--ease-soft),
+      color 0.25s var(--ease-soft),
+      border-color 0.25s var(--ease-soft);
+  }
+
+  .chip:hover {
+    color: var(--ink);
+    border-color: var(--rule-strong);
+  }
+
+  .chip-active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+  }
+
+  .chip-active:hover {
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--rule);
+    background: transparent;
+    color: var(--ink-70);
+    font-family: var(--font-mono);
+    font-size: var(--step--2);
+  }
+
+  [dir="rtl"] .tag {
+    font-family: var(--font-body);
+  }
+
+  .band-ink .tag {
+    border-color: rgba(247, 245, 240, 0.2);
+    color: rgba(247, 245, 240, 0.75);
+  }
+
+  /* ---------- Forms ---------- */
+
+  .field-label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.45rem;
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .field {
+    width: 100%;
+    padding: 0.75rem 0.9rem;
+    border-radius: var(--r-sm);
+    background: var(--paper-raised);
+    border: 1px solid var(--rule-strong);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    line-height: 1.5;
+    transition:
+      border-color 0.25s var(--ease-soft),
+      box-shadow 0.25s var(--ease-soft);
+  }
+
+  .field::placeholder {
+    color: var(--ink-45);
+  }
+
+  .field:hover {
+    border-color: var(--ink-45);
+  }
+
+  .field:focus {
+    outline: none;
+    border-color: var(--jade-deep);
+    box-shadow: 0 0 0 3px rgba(48, 172, 138, 0.18);
+  }
+
+  .field-textarea {
+    resize: vertical;
+    min-height: 7rem;
+    line-height: 1.7;
+  }
+
+  .alert {
+    padding: 0.8rem 1rem;
+    border-radius: var(--r-sm);
+    border: 1px solid;
+    border-inline-start-width: 3px;
+    font-size: var(--step--1);
+  }
+
+  .alert-success {
+    background: var(--jade-wash);
+    border-color: var(--jade);
+    color: #14503e;
+  }
+
+  .alert-error {
+    background: #fbeceb;
+    border-color: #c0503f;
+    color: #8c2f22;
   }
 }
 
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+
 @layer utilities {
-  /* Animations */
   @keyframes fadeIn {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(12px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
 
-  @keyframes slideUp {
-    from {
-      transform: translateY(100%);
-    }
-    to {
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-20px);
-    }
-  }
-
   .animate-fadeIn {
-    animation: fadeIn 0.6s ease-out;
+    animation: fadeIn 0.5s var(--ease-out);
   }
 
-  .animate-slideUp {
-    animation: slideUp 0.5s ease-out;
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
 
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .flip-rtl {
+    transition: transform 0.25s var(--ease-out);
+  }
+
+  [dir="rtl"] .flip-rtl {
+    transform: scaleX(-1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

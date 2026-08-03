@@ -1,70 +1,122 @@
-import { Geist, Geist_Mono, Inter } from "next/font/google";
+import {
+  Bricolage_Grotesque,
+  Plus_Jakarta_Sans,
+  JetBrains_Mono,
+  Vazirmatn,
+} from "next/font/google";
 import "./globals.css";
 import ClientLayout from "./ClientLayout";
 
-const inter = Inter({
+/* Display — editorial grotesque with real character in the headlines. */
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-bricolage",
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
 });
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+/* Body / UI — humanist geometric, holds up at small sizes. */
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
+  variable: "--font-jakarta",
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+/* Eyebrows, tags and metadata — technical counterpoint. */
+const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
+  variable: "--font-jetbrains",
+  display: "swap",
+  weight: ["400", "500"],
+});
+
+/* Dari / Pashto — a script-native face instead of a Latin fallback. */
+const vazirmatn = Vazirmatn({
+  subsets: ["arabic", "latin"],
+  variable: "--font-vazir",
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata = {
   metadataBase: new URL("https://agency.sheen.af"),
   title: {
-    default: "Sheen: Top Digital Agency Afghanistan | Web Design & SEO",
+    default: "Web Design, Mobile Apps & SEO in Afghanistan | Sheen",
     template: "%s | Sheen Digital Agency",
   },
   description:
-    "Premium digital agency in Afghanistan offering web design, SEO, Google Ads & more. Boost your business in Kabul—book a free consultation! | agency.sheen.af",
+    "Sheen builds websites, mobile apps and SEO campaigns for businesses in Afghanistan and for Afghans living abroad. Kabul-based, serving clients worldwide.",
   keywords: [
+    // Core
     "digital agency Afghanistan",
     "web design Afghanistan",
+    "website development Afghanistan",
     "SEO services Afghanistan",
     "digital marketing Kabul",
-    
-    // Long-tail Keywords
-    "best digital marketing agency in Afghanistan",
-    "e-commerce website development Afghanistan",
+
+    // Website building
+    "website builder Afghanistan",
+    "build a website Afghanistan",
+    "professional website design Kabul",
     "top web design company Kabul",
+    "e-commerce website development Afghanistan",
+    "business website Afghanistan",
+    "affordable website design Afghanistan",
+
+    // Mobile apps
+    "mobile app development Afghanistan",
+    "app developer Kabul",
+    "Android app development Afghanistan",
+    "iOS app development Afghanistan",
+    "React Native developer Afghanistan",
+    "Flutter app development Kabul",
+    "build a mobile app Afghanistan",
+
+    // Afghans living abroad / diaspora
+    "web design for Afghans abroad",
+    "website for Afghan business abroad",
+    "Afghan diaspora web agency",
+    "Afghan web developers for overseas clients",
+    "hire Afghan developers remotely",
+    "website for Afghan business in Germany",
+    "website for Afghan business in USA",
+    "website for Afghan business in Europe",
+    "Afghan owned digital agency international clients",
+
+    // Long-tail
+    "best digital marketing agency in Afghanistan",
     "affordable SEO services Afghanistan",
     "Google Ads management Afghanistan",
-    "professional website design Kabul",
-    
+
     // Location-based
     "digital agency Kabul",
     "web design Herat",
     "SEO company Afghanistan",
     "digital marketing agency Kabul",
-    "website development Afghanistan",
-    
+
     // Service-specific
     "social media marketing Afghanistan",
     "business automation Afghanistan",
     "e-commerce development Kabul",
     "API integration Afghanistan",
     "3D web experiences Afghanistan",
-    "mobile app development Afghanistan",
-    
+
     // Local Language
     "ساخت ویبسایت در افغانستان",
     "طراحی سایت کابل",
+    "ساخت اپلیکیشن موبایل افغانستان",
     "دیجیتال مارکتینگ افغانستان",
     "سئو افغانستان",
-    
+    "طراحی سایت برای افغان‌های خارج از کشور",
+    "د ویب پاڼې جوړول افغانستان",
+    "د موبایل اپلیکیشن جوړول",
+
     // Brand
     "Sheen Digital Agency",
     "Sheen Afghanistan",
     "شین",
-    
+
     // Technology
     "Next.js development Afghanistan",
     "React development Kabul",
@@ -100,9 +152,9 @@ export const metadata = {
     locale: "en_US",
     alternateLocale: ["fa_AF", "ps_AF"],
     url: "https://agency.sheen.af",
-    title: "Sheen - Premium Digital Agency in Afghanistan",
+    title: "Sheen — Websites, Mobile Apps & SEO for Afghans Worldwide",
     description:
-      "Transform your business with Sheen's premium web design, SEO, and digital marketing services in Afghanistan. We build digital success.",
+      "Websites, mobile apps, SEO and Google Ads built by a Kabul-based team — for businesses inside Afghanistan and for Afghans running businesses abroad.",
     siteName: "Sheen Digital Agency",
     images: [
       {
@@ -118,9 +170,9 @@ export const metadata = {
     card: "summary_large_image",
     site: "@sheen_af",
     creator: "@sheen_af",
-    title: "Sheen - Premium Digital Agency in Afghanistan",
+    title: "Sheen — Websites, Mobile Apps & SEO for Afghans Worldwide",
     description:
-      "Premium web design, SEO, and digital marketing services in Afghanistan. ساخت ویبسایت در افغانستان",
+      "Websites, mobile apps, SEO and Google Ads for businesses in Afghanistan and Afghans abroad. ساخت ویبسایت و اپلیکیشن در افغانستان",
     images: ["/logo.png"],
   },
   alternates: {
@@ -152,8 +204,9 @@ export default function RootLayout({ children }) {
         },
         image: "https://agency.sheen.af/logo.png",
         description:
-          "Sheen is a premium digital agency in Afghanistan offering web design, SEO, digital marketing, and business automation services.",
+          "Sheen is a digital agency based in Kabul, Afghanistan, building websites, mobile apps, e-commerce stores, SEO and Google Ads campaigns for businesses inside Afghanistan and for Afghans running businesses abroad.",
         slogan: "Transform Your Digital Presence",
+        knowsLanguage: ["en", "fa", "ps"],
         foundingDate: "2020",
         sameAs: [
           "https://www.facebook.com/profile.php?id=100066759369557",
@@ -191,9 +244,20 @@ export default function RootLayout({ children }) {
           latitude: "34.5553",
           longitude: "69.2075",
         },
-        areaServed: {
-          "@type": "Country",
-          name: "Afghanistan",
+        // Kabul-based, but a large share of the work is for Afghans running
+        // businesses overseas — the served area is not just Afghanistan.
+        areaServed: [
+          { "@type": "Country", name: "Afghanistan" },
+          { "@type": "Place", name: "Worldwide" },
+        ],
+        audience: {
+          "@type": "Audience",
+          audienceType:
+            "Businesses in Afghanistan and Afghan-owned businesses abroad",
+          geographicArea: [
+            { "@type": "Country", name: "Afghanistan" },
+            { "@type": "Place", name: "Worldwide" },
+          ],
         },
         priceRange: "$$",
         openingHoursSpecification: [
@@ -220,6 +284,15 @@ export default function RootLayout({ children }) {
                 "@type": "Service",
                 name: "Web Design & Development",
                 description: "Modern, responsive websites that convert visitors into customers",
+              },
+            },
+            {
+              "@type": "Offer",
+              itemOffered: {
+                "@type": "Service",
+                name: "Mobile App Development",
+                description:
+                  "Android and iOS mobile apps for Afghan businesses at home and abroad",
               },
             },
             {
@@ -291,8 +364,16 @@ export default function RootLayout({ children }) {
     ],
   };
 
+  // The font variables live on <html>: the composite --font-body /
+  // --font-display stacks are declared at :root and can only reference
+  // custom properties defined on that same element.
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html
+      lang="en"
+      dir="ltr"
+      className={`${bricolage.variable} ${jakarta.variable} ${jetbrains.variable} ${vazirmatn.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <meta name="msvalidate.01" content="42CD6515D45991F50EF8A5B9905C25C6" />
         <meta name="yandex-verification" content="bbabd6975c43efe7" />
@@ -326,10 +407,7 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body
-        className={`${inter.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
-        suppressHydrationWarning
-      >
+      <body className="antialiased" suppressHydrationWarning>
         <ClientLayout>{children}</ClientLayout>
       </body>
     </html>

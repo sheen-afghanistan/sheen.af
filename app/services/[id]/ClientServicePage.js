@@ -6,179 +6,131 @@ import Link from "next/link";
 import { FiArrowLeft, FiCheck } from "react-icons/fi";
 import servicesData from "../../../data/services";
 import { use } from "react";
+import PageHero from "../../../components/PageHero";
+import SectionHead from "../../../components/SectionHead";
+
+const EASE = [0.16, 1, 0.3, 1];
 
 export default function ClientServicePage({ params }) {
-    const { t, i18n } = useTranslation();
+    const { i18n } = useTranslation();
     const { id } = use(params);
     const serviceId = id || "web-design";
-    // Find the service from data
-    const service = servicesData.find(s => s.slug === serviceId) || servicesData[0];
+    const service = servicesData.find((s) => s.slug === serviceId) || servicesData[0];
 
-    const currentLang = i18n.language || 'en';
+    const currentLang = i18n.language || "en";
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-[var(--brand-dark)] to-black pt-20">
-            {/* Hero Section */}
-            <section className="py-20 relative overflow-hidden">
-                <div className="absolute inset-0">
-                    <motion.div
-                        animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
-                        transition={{ duration: 20, repeat: Infinity }}
-                        className="absolute top-1/4 right-1/4 w-96 h-96 bg-[var(--brand-accent)]/10 rounded-full blur-3xl"
-                    />
-                </div>
+        <div className="page">
 
-                <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <Link href="/services">
-                        <motion.button
-                            whileHover={{ x: -5 }}
-                            className="flex items-center gap-2 text-white/70 hover:text-white mb-8 transition-colors"
-                        >
-                            <FiArrowLeft />
-                            Back to Services
-                        </motion.button>
+            <PageHero
+                eyebrow="Service"
+                title={service.title[currentLang] || service.title.en}
+                subtitle={service.description[currentLang] || service.description.en}
+                back={
+                    <Link
+                        href="/services"
+                        className="inline-flex items-center gap-2 mb-10 text-fluid-sm t-soft transition-colors group"
+                    >
+                        <FiArrowLeft className="transition-transform duration-300 group-hover:-translate-x-1 flip-rtl" />
+                        Back to Services
                     </Link>
+                }
+            />
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-center"
-                    >
-                        <h1 className="text-5xl md:text-7xl font-bold text-gradient mb-6">
-                            {service.title[currentLang] || service.title.en}
-                        </h1>
-                        <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto">
-                            {service.description[currentLang] || service.description.en}
-                        </p>
-                    </motion.div>
-                </div>
-            </section>
+            {/* ------------------------------------------------------- Included */}
+            <section className="section relative border-t border-[var(--rule)] bg-[var(--paper-alt)]">
+                <div className="shell">
+                    <SectionHead title="What's Included" />
 
-            {/* Features Section */}
-            <section className="py-20 bg-[var(--brand-primary)]/10">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-center mb-12"
-                    >
-                        <h2 className="text-4xl font-bold text-white mb-4">
-                            What's Included
-                        </h2>
-                    </motion.div>
-
-                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         {service.features.map((feature, index) => (
                             <motion.div
                                 key={index}
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                className="glass p-6 rounded-2xl flex items-start gap-3"
+                                viewport={{ once: true, margin: "-60px" }}
+                                transition={{ delay: (index % 4) * 0.07, duration: 0.5, ease: EASE }}
+                                className="card card-lift card-pad !p-5 !flex-row items-start gap-3"
                             >
-                                <div className="w-6 h-6 rounded-full bg-[var(--brand-gold)] flex items-center justify-center flex-shrink-0 mt-1">
-                                    <FiCheck className="text-white text-sm" />
-                                </div>
-                                <span className="text-white/90">{feature}</span>
+                                <span className="mt-0.5 w-5 h-5 shrink-0 rounded-full bg-[var(--jade-wash)] border border-[var(--jade)] grid place-items-center">
+                                    <FiCheck className="text-[0.65rem] text-[var(--jade-deep)]" />
+                                </span>
+                                <span className="text-fluid-sm t-muted leading-relaxed">{feature}</span>
                             </motion.div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* Pricing Section */}
-            <section className="py-20">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-center mb-12"
-                    >
-                        <h2 className="text-4xl font-bold text-white mb-4">
-                            Pricing Plans
-                        </h2>
-                        <p className="text-white/70">
-                            Choose the plan that fits your needs
-                        </p>
-                    </motion.div>
+            {/* -------------------------------------------------------- Pricing */}
+            <section className="section relative border-t border-[var(--rule)]">
+                <div className="shell">
+                    <SectionHead
+                        title="Pricing Plans"
+                        subtitle="Choose the plan that fits your needs"
+                    />
 
-                    <div className="grid md:grid-cols-3 gap-8">
-                        {Object.entries(service.pricing).map(([key, plan], index) => (
-                            <motion.div
-                                key={key}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: index * 0.1 }}
-                                whileHover={{ y: -10 }}
-                                className={`glass rounded-2xl p-8 relative ${key === 'professional' ? "border-2 border-[var(--brand-gold)]" : ""
-                                    }`}
-                            >
-                                {key === 'professional' && (
-                                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 px-4 py-1 bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] rounded-full text-white text-sm font-semibold">
-                                        Most Popular
+                    <div className="grid md:grid-cols-3 gap-6">
+                        {Object.entries(service.pricing).map(([key, plan], index) => {
+                            const featured = key === "professional";
+                            return (
+                                <motion.div
+                                    key={key}
+                                    initial={{ opacity: 0, y: 24 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, margin: "-60px" }}
+                                    transition={{ delay: index * 0.1, duration: 0.55, ease: EASE }}
+                                    className={`card card-pad !p-8 relative ${featured ? "card-marked md:-mt-4" : "card-lift"}`}
+                                >
+                                    {featured && (
+                                        <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3.5 py-1 rounded-full bg-[var(--jade-deep)] text-white font-mono text-[0.65rem] uppercase tracking-[0.14em] font-semibold whitespace-nowrap">
+                                            Most Popular
+                                        </span>
+                                    )}
+
+                                    <h3 className="text-fluid-lg font-bold">{plan.name}</h3>
+                                    <div className="numeric font-display text-4xl font-extrabold t-jade mt-4 mb-7">
+                                        {plan.price}
                                     </div>
-                                )}
 
-                                <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
-                                <div className="text-4xl font-bold text-gradient-gold mb-6">
-                                    {plan.price}
-                                </div>
+                                    <hr className="rule mb-6" />
 
-                                <ul className="space-y-3 mb-8">
-                                    {plan.features.map((feature, idx) => (
-                                        <li key={idx} className="flex items-center gap-3 text-white/80">
-                                            <div className="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center flex-shrink-0">
-                                                <FiCheck className="text-green-400 text-sm" />
-                                            </div>
-                                            {feature}
-                                        </li>
-                                    ))}
-                                </ul>
+                                    <ul className="space-y-3">
+                                        {plan.features.map((feature, idx) => (
+                                            <li key={idx} className="flex items-start gap-3 text-fluid-sm t-muted">
+                                                <span className="mt-0.5 w-[1.1rem] h-[1.1rem] shrink-0 rounded-full bg-[var(--jade-wash)] grid place-items-center">
+                                                    <FiCheck className="text-[0.6rem] text-[var(--jade)]" />
+                                                </span>
+                                                {feature}
+                                            </li>
+                                        ))}
+                                    </ul>
 
-                                <Link href="/contact">
-                                    <motion.button
-                                        whileHover={{ scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
-                                        className={`w-full px-6 py-4 rounded-full font-semibold transition-all ${key === 'professional'
-                                            ? "bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] text-white"
-                                            : "glass text-white hover:bg-white/10"
-                                            }`}
-                                    >
-                                        Get Started
-                                    </motion.button>
-                                </Link>
-                            </motion.div>
-                        ))}
+                                    <Link href="/contact" className="mt-auto pt-8">
+                                        <span className={`btn btn-block ${featured ? "btn-primary" : "btn-secondary"}`}>
+                                            Get Started
+                                        </span>
+                                    </Link>
+                                </motion.div>
+                            );
+                        })}
                     </div>
                 </div>
             </section>
 
-            {/* CTA Section */}
-            <section className="py-20 bg-gradient-to-r from-[var(--brand-dark)] to-[var(--brand-primary)]">
-                <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            {/* ------------------------------------------------------------ CTA */}
+            <section className="section band-ink">
+                <div className="shell-narrow text-center relative z-10">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
+                        transition={{ duration: 0.6, ease: EASE }}
                     >
-                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                            Ready to Get Started?
-                        </h2>
-                        <p className="text-xl text-white/80 mb-8">
-                            Contact us for a free consultation
-                        </p>
-                        <Link href="/book">
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="px-10 py-5 rounded-full bg-white text-[var(--brand-dark)] font-bold text-lg shadow-2xl"
-                            >
-                                Book Now
-                            </motion.button>
+                        <h2 className="display-md">Ready to Get Started?</h2>
+                        <p className="lede mt-5">Contact us for a free consultation.</p>
+                        <Link href="/book" className="inline-block mt-9">
+                            <span className="btn btn-inverse btn-lg">Book Now</span>
                         </Link>
                     </motion.div>
                 </div>

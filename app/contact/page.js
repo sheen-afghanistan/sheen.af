@@ -3,8 +3,11 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
-import { FiMail, FiPhone, FiMapPin, FiClock, FiSend } from "react-icons/fi";
+import { FiMail, FiPhone, FiMapPin, FiClock, FiSend, FiArrowUpRight } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
+import PageHero from "../../components/PageHero";
+
+const EASE = [0.16, 1, 0.3, 1];
 
 export default function ContactPage() {
   const { t } = useTranslation();
@@ -86,197 +89,178 @@ export default function ContactPage() {
       icon: FiMapPin,
       title: t("contact.address"),
       value: t("contact.addressValue"),
-      link: "#",
+      link: null,
     },
     {
       icon: FiClock,
       title: t("contact.supportHours"),
       value: t("contact.available247"),
-      link: "#",
+      link: null,
     },
   ];
 
+  const fields = [
+    { name: "name", type: "text", label: t("contact.nameLabel"), placeholder: t("contact.namePlaceholder"), required: true, half: true },
+    { name: "email", type: "email", label: t("contact.emailLabel"), placeholder: t("contact.emailPlaceholder"), required: true, half: true },
+    { name: "phone", type: "tel", label: t("contact.phoneLabel"), placeholder: t("contact.phonePlaceholder"), required: false, half: true },
+    { name: "subject", type: "text", label: t("contact.subjectLabel"), placeholder: t("contact.subjectPlaceholder"), required: true, half: true },
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[var(--brand-dark)] to-black pt-20">
-      {/* Hero Section */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <motion.div
-            animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
-            transition={{ duration: 20, repeat: Infinity }}
-            className="absolute top-1/4 right-1/4 w-96 h-96 bg-[var(--brand-accent)]/10 rounded-full blur-3xl"
-          />
-        </div>
+    <div className="page">
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-16"
-          >
-            <h1 className="text-5xl md:text-7xl font-bold text-gradient mb-6">
-              {t("contact.title")}
-            </h1>
-            <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto">
-              {t("contact.subtitle")}
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={t("nav.contact")}
+        title={t("contact.title")}
+        subtitle={t("contact.subtitle")}
+      />
 
-      {/* Contact Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
+      <section className="section-tight pb-24 relative">
+        <div className="shell">
+          <div className="grid lg:grid-cols-5 gap-6 lg:gap-8 items-start">
+            {/* ------------------------------------------------------- Form */}
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="glass p-8 rounded-2xl"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, ease: EASE }}
+              className="lg:col-span-3 card card-pad !p-7 sm:!p-9"
             >
-              <h2 className="text-3xl font-bold text-white mb-6">{t("contact.formTitle")}</h2>
+              <h2 className="display-sm mb-8">{t("contact.formTitle")}</h2>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className="block text-white/80 mb-2">{t("contact.nameLabel")} *</label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:border-[var(--brand-gold)] focus:outline-none transition-all"
-                    placeholder={t("contact.namePlaceholder")}
-                  />
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div className="grid sm:grid-cols-2 gap-5">
+                  {fields.map((field) => (
+                    <div key={field.name}>
+                      <label htmlFor={field.name} className="field-label">
+                        {field.label}
+                        {field.required && <span className="text-[var(--jade-deep)]">*</span>}
+                      </label>
+                      <input
+                        id={field.name}
+                        type={field.type}
+                        name={field.name}
+                        value={formData[field.name]}
+                        onChange={handleChange}
+                        required={field.required}
+                        className="field"
+                        placeholder={field.placeholder}
+                      />
+                    </div>
+                  ))}
                 </div>
 
                 <div>
-                  <label className="block text-white/80 mb-2">{t("contact.emailLabel")} *</label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:border-[var(--brand-gold)] focus:outline-none transition-all"
-                    placeholder={t("contact.emailPlaceholder")}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-white/80 mb-2">{t("contact.phoneLabel")}</label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:border-[var(--brand-gold)] focus:outline-none transition-all"
-                    placeholder={t("contact.phonePlaceholder")}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-white/80 mb-2">{t("contact.subjectLabel")} *</label>
-                  <input
-                    type="text"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:border-[var(--brand-gold)] focus:outline-none transition-all"
-                    placeholder={t("contact.subjectPlaceholder")}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-white/80 mb-2">{t("contact.messageLabel")} *</label>
+                  <label htmlFor="message" className="field-label">
+                    {t("contact.messageLabel")}
+                    <span className="text-[var(--jade-deep)]">*</span>
+                  </label>
                   <textarea
+                    id="message"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
                     required
                     rows={5}
-                    className="w-full px-4 py-3 rounded-lg bg-white/5 border border-white/10 text-white focus:border-[var(--brand-gold)] focus:outline-none transition-all resize-none"
+                    className="field field-textarea"
                     placeholder={t("contact.messagePlaceholder")}
                   />
                 </div>
 
-                <motion.button
-                  type="submit"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  disabled={status === "sending"}
-                  className="w-full px-8 py-4 rounded-full bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] text-white font-semibold flex items-center justify-center gap-2 disabled:opacity-50"
-                >
+                <button type="submit" disabled={status === "sending"} className="btn btn-primary btn-block btn-lg">
                   {status === "sending" ? t("contact.sending") : t("contact.send")}
-                  <FiSend />
-                </motion.button>
+                  <FiSend className="flip-rtl" />
+                </button>
 
                 {status === "success" && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
+                  <motion.p
+                    initial={{ opacity: 0, y: -8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-4 rounded-lg bg-green-500/20 border border-green-500/50 text-green-400 text-center"
+                    className="alert alert-success"
                   >
                     {t("contact.success")}
-                  </motion.div>
+                  </motion.p>
                 )}
 
                 {status === "error" && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
+                  <motion.p
+                    initial={{ opacity: 0, y: -8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-4 rounded-lg bg-red-500/20 border border-red-500/50 text-red-400 text-center"
+                    className="alert alert-error"
                   >
                     {t("contact.error") || "Failed to send message. Please try again."}
-                  </motion.div>
+                  </motion.p>
                 )}
               </form>
             </motion.div>
 
-            {/* Contact Info */}
+            {/* -------------------------------------------------- Contact info */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="space-y-6"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
+              className="lg:col-span-2"
             >
-              <h2 className="text-3xl font-bold text-white mb-8">{t("contact.infoTitle")}</h2>
+              <h2 className="display-sm mb-7">{t("contact.infoTitle")}</h2>
 
-              {contactInfo.map((info, index) => (
-                <motion.a
-                  key={index}
-                  href={info.link}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ x: 10 }}
-                  className="glass p-6 rounded-2xl flex items-center gap-4 hover:bg-white/10 transition-all block"
+              <ul className="space-y-3">
+                {contactInfo.map((info, index) => {
+                  const inner = (
+                    <span className="card card-pad !p-5 !flex-row items-center gap-4 group-hover:border-[rgba(212,175,55,0.34)] transition-colors duration-300">
+                      <span className="w-11 h-11 shrink-0 grid place-items-center rounded-full border border-[var(--jade)] bg-[var(--jade-wash)]">
+                        <info.icon className="text-[var(--jade-deep)]" />
+                      </span>
+                      <span className="min-w-0">
+                        <span className="block data uppercase tracking-[0.14em] t-soft">
+                          {info.title}
+                        </span>
+                        <span className="block text-fluid-sm font-medium truncate">
+                          {info.value}
+                        </span>
+                      </span>
+                      {info.link && (
+                        <FiArrowUpRight className="ms-auto shrink-0 t-soft transition-colors duration-300 group-hover:text-[var(--jade-deep)] flip-rtl" />
+                      )}
+                    </span>
+                  );
+
+                  return (
+                    <li key={index} className="group">
+                      {info.link ? (
+                        <a
+                          href={info.link}
+                          target={info.link.startsWith("http") ? "_blank" : undefined}
+                          rel={info.link.startsWith("http") ? "noopener noreferrer" : undefined}
+                          className="block"
+                        >
+                          {inner}
+                        </a>
+                      ) : (
+                        inner
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+
+              <div className="card card-marked card-pad !p-6 mt-3">
+                <h3 className="text-fluid-lg font-bold">
+                  {t("whyChoose.ctaTitle")}
+                </h3>
+                <p className="t-muted text-fluid-sm mt-2.5">{t("whyChoose.ctaDesc")}</p>
+                <a
+                  href="https://wa.me/93784966018"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-6"
                 >
-                  <div className="w-14 h-14 rounded-full bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] flex items-center justify-center flex-shrink-0">
-                    <info.icon className="text-white text-xl" />
-                  </div>
-                  <div>
-                    <div className="text-white/60 text-sm mb-1">{info.title}</div>
-                    <div className="text-white font-semibold">{info.value}</div>
-                  </div>
-                </motion.a>
-              ))}
-
-              {/* Map Placeholder */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="glass p-4 rounded-2xl h-64 flex items-center justify-center"
-              >
-                <div className="text-center text-white/60">
-                  <FiMapPin className="text-5xl mx-auto mb-4" />
-                  {/* <p>{t("contact.mapIntegration")}</p> */}
-                </div>
-              </motion.div>
+                  <span className="btn btn-primary btn-block">
+                    <FaWhatsapp className="text-lg" />
+                    {t("contact.whatsapp")}
+                  </span>
+                </a>
+              </div>
             </motion.div>
           </div>
         </div>

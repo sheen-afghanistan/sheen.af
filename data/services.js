@@ -30,7 +30,7 @@ export const servicesData = [
         pricing: {
             basic: {
                 name: "Basic",
-                price: "$299",
+                price: "AFN 21,000",
                 features: [
                     "5 Pages Website",
                     "Responsive Design",
@@ -41,7 +41,7 @@ export const servicesData = [
             },
             professional: {
                 name: "Professional",
-                price: "$399",
+                price: "AFN 28,000",
                 features: [
                     "10 Pages Website",
                     "Custom Design",
@@ -53,12 +53,79 @@ export const servicesData = [
             },
             enterprise: {
                 name: "Enterprise",
-                price: "$499+",
+                price: "AFN 35,000+",
                 features: [
                     "Unlimited Pages",
                     "Advanced Features",
                     "E-commerce Ready",
                     "API Integration",
+                    "Priority Support",
+                    "1 Year Maintenance"
+                ]
+            }
+        }
+    },
+    {
+        id: "mobile-apps",
+        slug: "mobile-apps",
+        title: {
+            en: "Mobile App Development",
+            da: "ساخت اپلیکیشن موبایل",
+            pa: "د موبایل اپلیکیشن جوړول"
+        },
+        shortDesc: {
+            en: "Android and iOS apps built for Afghan businesses at home and abroad",
+            da: "اپلیکیشن اندروید و iOS برای تجارت‌های افغان در داخل و خارج کشور",
+            pa: "د اندروید او iOS اپونه د کورني او بهرني افغاني سوداګرو لپاره"
+        },
+        description: {
+            en: "We design and build mobile apps for Android and iOS, along with the backends and APIs behind them. Apps are built to work on slow and intermittent connections, to support Dari and Pashto with correct right-to-left layout, and to be owned outright by you — source code, store accounts and design files included.",
+            da: "ما اپلیکیشن‌های موبایل برای اندروید و iOS و همچنین بک‌اند و API پشت آن‌ها را دیزاین و می‌سازیم. اپلیکیشن‌ها طوری ساخته می‌شوند که روی انترنت کند و قطع‌و‌وصل کار کنند، از دری و پشتو با چیدمان درست راست‌به‌چپ پشتیبانی کنند، و کاملاً در ملکیت شما باشند — شامل سورس کود، حساب‌های اپ‌ستور و فایل‌های دیزاین.",
+            pa: "موږ د اندروید او iOS لپاره موبایل اپونه او د هغوی شاته بیک اېنډ او API ډیزاین او جوړوو. اپونه داسې جوړ شوي چې په ورو او پرې کیدونکي انټرنټ کار وکړي، د دري او پښتو ملاتړ له سم له ښي څخه کیڼ ته جوړښت سره وکړي، او بشپړ ستاسو ملکیت وي — سرچینه کوډ، د سټور حسابونه او د ډیزاین فایلونه شامل دي."
+        },
+        features: [
+            "Android & iOS Apps",
+            "Cross-Platform Development",
+            "Offline-First Support",
+            "Dari & Pashto (RTL) Interfaces",
+            "Push Notifications",
+            "Backend & API Development",
+            "App Store & Play Store Publishing",
+            "Full Source Code Ownership"
+        ],
+        pricing: {
+            basic: {
+                name: "Starter",
+                price: "On request",
+                features: [
+                    "Single Platform (Android or iOS)",
+                    "Up to 5 Screens",
+                    "Standard UI Components",
+                    "Store Submission",
+                    "1 Month Support"
+                ]
+            },
+            professional: {
+                name: "Business",
+                price: "On request",
+                features: [
+                    "Android & iOS (Cross-Platform)",
+                    "Up to 12 Screens",
+                    "User Accounts & Login",
+                    "Push Notifications",
+                    "Backend & API",
+                    "3 Months Support"
+                ]
+            },
+            enterprise: {
+                name: "Enterprise",
+                price: "On request",
+                features: [
+                    "Android & iOS (Cross-Platform)",
+                    "Unlimited Screens",
+                    "Offline Sync",
+                    "Payment Integration",
+                    "Third-Party API Integration",
                     "Priority Support",
                     "1 Year Maintenance"
                 ]
@@ -96,7 +163,7 @@ export const servicesData = [
         pricing: {
             basic: {
                 name: "Starter",
-                price: "$199/mo",
+                price: "AFN 10,000/mo",
                 features: [
                     "10 Keywords",
                     "Basic On-Page SEO",
@@ -106,7 +173,7 @@ export const servicesData = [
             },
             professional: {
                 name: "Growth",
-                price: "$299/mo",
+                price: "AFN 21,000/mo",
                 features: [
                     "25 Keywords",
                     "Complete On-Page SEO",
@@ -117,7 +184,7 @@ export const servicesData = [
             },
             enterprise: {
                 name: "Premium",
-                price: "$399/mo",
+                price: "AFN 28,000/mo",
                 features: [
                     "Unlimited Keywords",
                     "Advanced SEO Strategy",
@@ -159,7 +226,7 @@ export const servicesData = [
         pricing: {
             basic: {
                 name: "Basic",
-                price: "$99/mo",
+                price: "AFN 7,000/mo",
                 features: [
                     "Up to $500 Ad Spend",
                     "1 Campaign",
@@ -169,7 +236,7 @@ export const servicesData = [
             },
             professional: {
                 name: "Professional",
-                price: "$199/mo",
+                price: "AFN 14,000/mo",
                 features: [
                     "Up to $2,500 Ad Spend",
                     "3 Campaigns",
@@ -180,7 +247,7 @@ export const servicesData = [
             },
             enterprise: {
                 name: "Enterprise",
-                price: "$299/mo",
+                price: "AFN 21,000/mo",
                 features: [
                     "Unlimited Ad Spend",
                     "Unlimited Campaigns",
@@ -222,7 +289,7 @@ export const servicesData = [
         pricing: {
             basic: {
                 name: "Starter",
-                price: "$149/mo",
+                price: "AFN 7,000/mo",
                 features: [
                     "1 Platform",
                     "Up to $500 Ad Spend",
@@ -232,7 +299,7 @@ export const servicesData = [
             },
             professional: {
                 name: "Growth",
-                price: "$299/mo",
+                price: "AFN 21,000/mo",
                 features: [
                     "2 Platforms",
                     "Up to $2,500 Ad Spend",
@@ -243,7 +310,7 @@ export const servicesData = [
             },
             enterprise: {
                 name: "Premium",
-                price: "$499/mo",
+                price: "AFN 35,000/mo",
                 features: [
                     "All Platforms",
                     "Unlimited Ad Spend",
@@ -285,7 +352,7 @@ export const servicesData = [
         pricing: {
             basic: {
                 name: "Basic",
-                price: "$99",
+                price: "AFN 15,000",
                 features: [
                     "1 API Integration",
                     "Simple Configuration",
@@ -295,7 +362,7 @@ export const servicesData = [
             },
             professional: {
                 name: "Professional",
-                price: "$249",
+                price: "AFN 17,500",
                 features: [
                     "Up to 3 APIs",
                     "Complex Workflows",
@@ -348,7 +415,7 @@ export const servicesData = [
         pricing: {
             basic: {
                 name: "Starter",
-                price: "$299",
+                price: "AFN 21,000",
                 features: [
                     "Up to 50 Products",
                     "Basic E-commerce Features",
@@ -359,7 +426,7 @@ export const servicesData = [
             },
             professional: {
                 name: "Business",
-                price: "$499",
+                price: "AFN 35,000",
                 features: [
                     "Up to 500 Products",
                     "Advanced Features",
@@ -412,7 +479,7 @@ export const servicesData = [
         pricing: {
             basic: {
                 name: "Basic",
-                price: "$399",
+                price: "AFN 28,000",
                 features: [
                     "Simple 3D Model",
                     "Basic Interactions",
@@ -422,7 +489,7 @@ export const servicesData = [
             },
             professional: {
                 name: "Professional",
-                price: "$499",
+                price: "AFN 35,000",
                 features: [
                     "Advanced 3D Models",
                     "Product Configurator",
@@ -475,7 +542,7 @@ export const servicesData = [
         pricing: {
             basic: {
                 name: "Starter",
-                price: "$199",
+                price: "AFN 14,000",
                 features: [
                     "1 Automation Workflow",
                     "Basic Integration",
@@ -485,7 +552,7 @@ export const servicesData = [
             },
             professional: {
                 name: "Business",
-                price: "$399",
+                price: "AFN 28,000",
                 features: [
                     "Up to 5 Workflows",
                     "Advanced Integration",

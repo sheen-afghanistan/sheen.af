@@ -1,8 +1,16 @@
 "use client";
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaUser, FaHeartbeat, FaPhone, FaMapMarkerAlt, FaTint, FaCalendarAlt, FaCheckCircle, FaSpinner } from 'react-icons/fa';
+import { FaUser, FaHeartbeat, FaPhone, FaMapMarkerAlt, FaTint, FaCalendarAlt, FaCheckCircle, FaSpinner, FaArrowLeft } from 'react-icons/fa';
+
+const EASE = [0.16, 1, 0.3, 1];
+
+/* Shared field chrome for this standalone red-themed section. */
+const FIELD =
+  "block w-full bg-slate-900/50 border border-slate-700 text-white rounded-xl py-3 px-4 text-sm leading-6 outline-none transition-all duration-300 placeholder:text-slate-500 hover:border-slate-600 focus:border-red-500 focus:ring-4 focus:ring-red-500/15";
+const LABEL = "block text-sm font-medium text-slate-300 mb-2";
 
 export default function BloodDonationPage() {
   const [formData, setFormData] = useState({
@@ -78,91 +86,105 @@ export default function BloodDonationPage() {
     }
   };
 
-  return (
-    <div dir="rtl" className="min-h-screen bg-slate-900 py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-slate-800 to-red-900 font-sans">
-      <div className="max-w-3xl mx-auto">
+  const textInputs = [
+    { name: 'full_name', label: 'نام کامل', placeholder: 'احمد', icon: FaUser, minLength: 3, title: 'نام کامل باید حداقل ۳ حرف باشد', span: 1 },
+    { name: 'father_name', label: 'نام پدر', placeholder: 'محمود', icon: FaUser, minLength: 3, title: 'نام پدر باید حداقل ۳ حرف باشد', span: 1 },
+  ];
 
-        {/* Header Section */}
+  const selects = [
+    { name: 'blood_group', label: 'گروه خون', icon: FaTint, iconClass: 'text-red-500', options: bloodGroups },
+    { name: 'last_donation_date', label: 'تاریخ آخرین اهدای خون', icon: FaCalendarAlt, iconClass: 'text-slate-400', options: donationHistories },
+    { name: 'health_status', label: 'وضعیت صحی', icon: FaHeartbeat, iconClass: 'text-slate-400', options: healthStatuses },
+  ];
+
+  const locations = [
+    { name: 'original_location', label: 'موقعیت اصلی (ولایت/ولسوالی)', placeholder: 'لوگر - پل علم' },
+    { name: 'current_location', label: 'موقعیت فعلی', placeholder: 'کابل - کارته نو' },
+  ];
+
+  return (
+    <div
+      dir="rtl"
+      className="relative min-h-screen overflow-hidden bg-slate-950 py-12 px-4 sm:px-6 lg:px-8"
+    >
+      {/* Ambient light */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-40 start-1/4 w-[32rem] h-[32rem] rounded-full bg-red-600/20 blur-[110px]" />
+        <div className="absolute bottom-0 end-0 w-[26rem] h-[26rem] rounded-full bg-rose-500/10 blur-[110px]" />
+      </div>
+
+      <div className="relative z-10 max-w-3xl mx-auto">
+
+        {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.55, ease: EASE }}
           className="text-center mb-10"
         >
-          <div className="flex justify-center mb-4">
-            <div className="h-20 w-20 bg-red-600 rounded-full flex items-center justify-center shadow-lg shadow-red-500/50">
-              <FaHeartbeat className="text-white text-4xl" />
+          <div className="flex justify-center mb-5">
+            <div className="h-[4.5rem] w-[4.5rem] bg-gradient-to-br from-red-500 to-red-700 rounded-2xl grid place-items-center shadow-[0_16px_40px_-12px_rgba(220,38,38,0.7)] rotate-3">
+              <FaHeartbeat className="text-white text-3xl -rotate-3" />
             </div>
           </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4 tracking-tight drop-shadow-md">
+
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
             اهدای خون🩸کابل - لوگر
           </h1>
-          <p className="text-lg text-red-200/80 max-w-xl mx-auto drop-shadow-sm font-medium">
-            بنیاد بخاطر خون دهندگان ولایت لوگر <br />
+          <p className="text-base sm:text-lg text-red-200/75 max-w-xl mx-auto">
+            بنیاد بخاطر خون دهندگان ولایت لوگر
+            <br />
             با اهدای خون خود، زندگی دوباره ببخشید
           </p>
+
+          <Link
+            href="/blood-donation/donors"
+            className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 rounded-xl border border-slate-700 bg-slate-800/60 text-slate-200 text-sm font-medium hover:border-red-500/50 hover:text-white transition-colors"
+          >
+            دیدن لست اهدا کنندگان
+            <FaArrowLeft className="text-xs" />
+          </Link>
         </motion.div>
 
-        {/* Form Container */}
+        {/* Form panel */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          className="bg-slate-800/80 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl border border-slate-700/50"
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.1, ease: EASE }}
+          className="bg-slate-900/70 backdrop-blur-xl rounded-3xl overflow-hidden shadow-2xl border border-slate-800"
         >
-          <div className="p-8 sm:p-12">
+          <div className="p-6 sm:p-10">
             {!isSubmitted ? (
               <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
 
-                <div className="grid grid-cols-1 gap-y-6 gap-x-6 sm:grid-cols-2">
-
-                  {/* Full Name */}
-                  <div className="col-span-1">
-                    <label htmlFor="full_name" className="block text-sm font-medium text-slate-300 mb-2">نام کامل</label>
-                    <div className="relative rounded-md shadow-sm">
-                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                        <FaUser className="h-4 w-4 text-slate-400" />
+                  {textInputs.map(({ name, label, placeholder, icon: Icon, minLength, title }) => (
+                    <div key={name}>
+                      <label htmlFor={name} className={LABEL}>{label}</label>
+                      <div className="relative">
+                        <Icon
+                          aria-hidden="true"
+                          className="pointer-events-none absolute inset-y-0 end-4 my-auto h-4 w-4 text-slate-500"
+                        />
+                        <input
+                          type="text"
+                          name={name}
+                          id={name}
+                          required
+                          minLength={minLength}
+                          title={title}
+                          className={`${FIELD} pe-11`}
+                          placeholder={placeholder}
+                          value={formData[name]}
+                          onChange={handleChange}
+                        />
                       </div>
-                      <input
-                        type="text"
-                        name="full_name"
-                        id="full_name"
-                        required
-                        minLength={3}
-                        title="نام کامل باید حداقل ۳ حرف باشد"
-                        className="block w-full pr-10 bg-slate-700/50 border border-slate-600 text-white rounded-xl focus:ring-red-500 focus:border-red-500 sm:text-sm py-3 transition-all duration-300 outline-none"
-                        placeholder="احمد"
-                        value={formData.full_name}
-                        onChange={handleChange}
-                      />
                     </div>
-                  </div>
-
-                  {/* Father Name */}
-                  <div className="col-span-1">
-                    <label htmlFor="father_name" className="block text-sm font-medium text-slate-300 mb-2">نام پدر</label>
-                    <div className="relative rounded-md shadow-sm">
-                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                        <FaUser className="h-4 w-4 text-slate-400 opacity-70" />
-                      </div>
-                      <input
-                        type="text"
-                        name="father_name"
-                        id="father_name"
-                        required
-                        minLength={3}
-                        title="نام پدر باید حداقل ۳ حرف باشد"
-                        className="block w-full pr-10 bg-slate-700/50 border border-slate-600 text-white rounded-xl focus:ring-red-500 focus:border-red-500 sm:text-sm py-3 transition-all duration-300 outline-none"
-                        placeholder="محمود"
-                        value={formData.father_name}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  </div>
+                  ))}
 
                   {/* Age */}
-                  <div className="col-span-1">
-                    <label htmlFor="age" className="block text-sm font-medium text-slate-300 mb-2">سن</label>
+                  <div>
+                    <label htmlFor="age" className={LABEL}>سن</label>
                     <input
                       type="number"
                       name="age"
@@ -171,131 +193,69 @@ export default function BloodDonationPage() {
                       min="18"
                       max="65"
                       title="سن اهدا کننده باید بین ۱۸ تا ۶۵ سال باشد"
-                      className="block w-full bg-slate-700/50 border border-slate-600 text-white rounded-xl focus:ring-red-500 focus:border-red-500 sm:text-sm py-3 px-4 transition-all duration-300 outline-none"
+                      className={FIELD}
                       placeholder="25"
                       value={formData.age}
                       onChange={handleChange}
                     />
                   </div>
 
-                  {/* Blood Group */}
-                  <div className="col-span-1">
-                    <label htmlFor="blood_group" className="block text-sm font-medium text-slate-300 mb-2">گروه خون</label>
-                    <div className="relative rounded-md shadow-sm">
-                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                        <FaTint className="h-4 w-4 text-red-500" />
+                  {selects.map(({ name, label, icon: Icon, iconClass, options }) => (
+                    <div key={name}>
+                      <label htmlFor={name} className={LABEL}>{label}</label>
+                      <div className="relative">
+                        <Icon
+                          aria-hidden="true"
+                          className={`pointer-events-none absolute inset-y-0 end-4 my-auto h-4 w-4 ${iconClass}`}
+                        />
+                        <select
+                          id={name}
+                          name={name}
+                          required
+                          className={`${FIELD} pe-11 appearance-none cursor-pointer`}
+                          value={formData[name]}
+                          onChange={handleChange}
+                        >
+                          <option value="" disabled>انتخاب کنید</option>
+                          {options.map((option) => (
+                            <option key={option} value={option}>{option}</option>
+                          ))}
+                        </select>
                       </div>
-                      <select
-                        id="blood_group"
-                        name="blood_group"
-                        required
-                        className="block w-full pr-10 bg-slate-700/50 border border-slate-600 text-white rounded-xl focus:ring-red-500 focus:border-red-500 sm:text-sm py-3 transition-all duration-300 outline-none appearance-none"
-                        value={formData.blood_group}
-                        onChange={handleChange}
-                      >
-                        <option value="" disabled className="text-slate-500">انتخاب کنید</option>
-                        {bloodGroups.map((group) => (
-                          <option key={group} value={group} className="bg-slate-800 text-white">{group}</option>
-                        ))}
-                      </select>
                     </div>
-                  </div>
+                  ))}
 
-                  {/* Last Donation Date */}
-                  <div className="col-span-1">
-                    <label htmlFor="last_donation_date" className="block text-sm font-medium text-slate-300 mb-2">تاریخ آخرین اهدای خون</label>
-                    <div className="relative rounded-md shadow-sm">
-                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                        <FaCalendarAlt className="h-4 w-4 text-slate-400" />
+                  {locations.map(({ name, label, placeholder }) => (
+                    <div key={name} className="sm:col-span-2">
+                      <label htmlFor={name} className={LABEL}>{label}</label>
+                      <div className="relative">
+                        <FaMapMarkerAlt
+                          aria-hidden="true"
+                          className="pointer-events-none absolute inset-y-0 end-4 my-auto h-4 w-4 text-slate-500"
+                        />
+                        <input
+                          type="text"
+                          name={name}
+                          id={name}
+                          required
+                          minLength={2}
+                          className={`${FIELD} pe-11`}
+                          placeholder={placeholder}
+                          value={formData[name]}
+                          onChange={handleChange}
+                        />
                       </div>
-                      <select
-                        id="last_donation_date"
-                        name="last_donation_date"
-                        required
-                        className="block w-full pr-10 bg-slate-700/50 border border-slate-600 text-white rounded-xl focus:ring-red-500 focus:border-red-500 sm:text-sm py-3 transition-all duration-300 outline-none appearance-none"
-                        value={formData.last_donation_date}
-                        onChange={handleChange}
-                      >
-                        <option value="" disabled className="text-slate-500">انتخاب کنید</option>
-                        {donationHistories.map((history) => (
-                          <option key={history} value={history} className="bg-slate-800 text-white">{history}</option>
-                        ))}
-                      </select>
                     </div>
-                  </div>
+                  ))}
 
-                  {/* Health Status */}
-                  <div className="col-span-1">
-                    <label htmlFor="health_status" className="block text-sm font-medium text-slate-300 mb-2">وضعیت صحی</label>
-                    <div className="relative rounded-md shadow-sm">
-                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                        <FaHeartbeat className="h-4 w-4 text-slate-400" />
-                      </div>
-                      <select
-                        id="health_status"
-                        name="health_status"
-                        required
-                        className="block w-full pr-10 bg-slate-700/50 border border-slate-600 text-white rounded-xl focus:ring-red-500 focus:border-red-500 sm:text-sm py-3 transition-all duration-300 outline-none appearance-none"
-                        value={formData.health_status}
-                        onChange={handleChange}
-                      >
-                        <option value="" disabled className="text-slate-500">انتخاب کنید</option>
-                        {healthStatuses.map((status) => (
-                          <option key={status} value={status} className="bg-slate-800 text-white">{status}</option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  {/* Original Location */}
-                  <div className="col-span-1 sm:col-span-2">
-                    <label htmlFor="original_location" className="block text-sm font-medium text-slate-300 mb-2">موقعیت اصلی (ولایت/ولسوالی)</label>
-                    <div className="relative rounded-md shadow-sm">
-                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                        <FaMapMarkerAlt className="h-4 w-4 text-slate-400" />
-                      </div>
-                      <input
-                        type="text"
-                        name="original_location"
-                        id="original_location"
-                        required
-                        minLength={2}
-                        className="block w-full pr-10 bg-slate-700/50 border border-slate-600 text-white rounded-xl focus:ring-red-500 focus:border-red-500 sm:text-sm py-3 transition-all duration-300 outline-none"
-                        placeholder="لوگر - پل علم"
-                        value={formData.original_location}
-                        onChange={handleChange}
+                  {/* Contact */}
+                  <div className="sm:col-span-2">
+                    <label htmlFor="contact_number" className={LABEL}>شماره تماس و واتساپ</label>
+                    <div className="relative">
+                      <FaPhone
+                        aria-hidden="true"
+                        className="pointer-events-none absolute inset-y-0 end-4 my-auto h-4 w-4 text-slate-500"
                       />
-                    </div>
-                  </div>
-
-                  {/* Current Location */}
-                  <div className="col-span-1 sm:col-span-2">
-                    <label htmlFor="current_location" className="block text-sm font-medium text-slate-300 mb-2">موقعیت فعلی</label>
-                    <div className="relative rounded-md shadow-sm">
-                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                        <FaMapMarkerAlt className="h-4 w-4 text-slate-400" />
-                      </div>
-                      <input
-                        type="text"
-                        name="current_location"
-                        id="current_location"
-                        required
-                        minLength={2}
-                        className="block w-full pr-10 bg-slate-700/50 border border-slate-600 text-white rounded-xl focus:ring-red-500 focus:border-red-500 sm:text-sm py-3 transition-all duration-300 outline-none"
-                        placeholder="کابل - کارته نو"
-                        value={formData.current_location}
-                        onChange={handleChange}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Contact and WhatsApp */}
-                  <div className="col-span-1 sm:col-span-2">
-                    <label htmlFor="contact_number" className="block text-sm font-medium text-slate-300 mb-2">شماره تماس و واتساپ</label>
-                    <div className="relative rounded-md shadow-sm">
-                      <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                        <FaPhone className="h-4 w-4 text-slate-400" />
-                      </div>
                       <input
                         type="tel"
                         name="contact_number"
@@ -304,85 +264,84 @@ export default function BloodDonationPage() {
                         pattern="^07[0-9]{8}$"
                         title="شماره تماس باید ۱۰ رقم باشد و با ۰۷ شروع شود (مثال: 0799123456)"
                         dir="ltr"
-                        className="block w-full pr-10 bg-slate-700/50 border border-slate-600 text-white rounded-xl focus:ring-red-500 focus:border-red-500 sm:text-sm py-3 text-right transition-all duration-300 outline-none"
+                        className={`${FIELD} pe-11 text-right`}
                         placeholder="07XX XXX XXX"
                         value={formData.contact_number}
                         onChange={handleChange}
                       />
                     </div>
+                    <p className="mt-2 text-xs text-slate-400">شماره باید با ۰۷ شروع شده و ۱۰ رقم باشد.</p>
                   </div>
                 </div>
 
-                {/* Submit Button */}
-                <div className="pt-4">
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    type="submit"
-                    disabled={loading}
-                    className={`w-full flex justify-center py-4 px-4 border border-transparent rounded-xl shadow-lg text-lg font-bold text-white transition-all duration-300 ${loading ? 'bg-red-700/50 cursor-not-allowed' : 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 shadow-red-600/30 hover:shadow-red-500/50'
-                      }`}
-                  >
-                    {loading ? (
-                      <FaSpinner className="animate-spin h-6 w-6" />
-                    ) : (
-                      'ثبت نام به عنوان اهدا کننده'
-                    )}
-                  </motion.button>
-                </div>
-
+                <motion.button
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.99 }}
+                  type="submit"
+                  disabled={loading}
+                  className={`w-full flex justify-center items-center gap-2 py-4 px-4 rounded-xl text-base font-bold text-white transition-all duration-300 ${
+                    loading
+                      ? 'bg-red-800/60 cursor-not-allowed'
+                      : 'bg-gradient-to-l from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 shadow-[0_14px_36px_-14px_rgba(220,38,38,0.8)]'
+                  }`}
+                >
+                  {loading ? <FaSpinner className="animate-spin h-5 w-5" /> : 'ثبت نام به عنوان اهدا کننده'}
+                </motion.button>
               </form>
             ) : (
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="text-center py-10"
+                transition={{ duration: 0.45, ease: EASE }}
+                className="text-center py-8"
               >
-                <div className="mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-green-100/10 mb-6">
-                  <FaCheckCircle className="h-16 w-16 text-green-400" />
+                <div className="mx-auto grid place-items-center h-20 w-20 rounded-full bg-emerald-500/10 border border-emerald-500/30 mb-6">
+                  <FaCheckCircle className="h-11 w-11 text-emerald-400" />
                 </div>
-                <h2 className="text-3xl font-extrabold text-white mb-4">
-                  تشکر از ثبت نام شما!
-                </h2>
-                <p className="text-lg text-slate-300 mb-8 max-w-md mx-auto">
+                <h2 className="text-3xl font-extrabold text-white mb-4">تشکر از ثبت نام شما!</h2>
+                <p className="text-base text-slate-300 mb-8 max-w-md mx-auto leading-8">
                   اطلاعات شما با موفقیت در سیستم ثبت شد. از اینکه برای اهدای خون و نجات جان انسان‌ها داوطلب شده‌اید، بی‌نهایت سپاسگزاریم.
                 </p>
-                <button
-                  onClick={() => setIsSubmitted(false)}
-                  className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-xl shadow-sm text-white bg-slate-700 hover:bg-slate-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 transition-colors duration-300"
-                >
-                  ثبت نام فرد دیگر
-                </button>
+                <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                  <button
+                    onClick={() => setIsSubmitted(false)}
+                    className="px-6 py-3 rounded-xl text-sm font-semibold text-white bg-slate-800 border border-slate-700 hover:bg-slate-700 transition-colors"
+                  >
+                    ثبت نام فرد دیگر
+                  </button>
+                  <Link
+                    href="/blood-donation/donors"
+                    className="px-6 py-3 rounded-xl text-sm font-semibold text-white bg-gradient-to-l from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 transition-colors"
+                  >
+                    دیدن لست اهدا کنندگان
+                  </Link>
+                </div>
               </motion.div>
             )}
 
-            {/* Notification Message (Only show for errors now) */}
             <AnimatePresence>
               {message && !isSubmitted && (
                 <motion.div
-                  initial={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className={`mt-6 p-4 rounded-xl flex items-center gap-3 ${success ? 'bg-green-900/40 border border-green-500/50 text-green-200' : 'bg-red-900/40 border border-red-500/50 text-red-200'
-                    }`}
+                  exit={{ opacity: 0, y: -8 }}
+                  role="status"
+                  className={`mt-6 p-4 rounded-xl text-sm font-medium border ${
+                    success
+                      ? 'bg-emerald-900/30 border-emerald-500/40 text-emerald-200'
+                      : 'bg-red-900/30 border-red-500/40 text-red-200'
+                  }`}
                 >
-                  <p className="text-sm font-medium">{message}</p>
+                  {message}
                 </motion.div>
               )}
             </AnimatePresence>
-
           </div>
         </motion.div>
 
-        {/* Footer info */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="text-center mt-12 text-slate-400 text-sm"
-        >
-          <p>© {new Date().getFullYear()} بنیاد بخاطر خون دهندگان ولایت لوگر. تمامی حقوق محفوظ است.</p>
-        </motion.div>
+        <p className="text-center mt-12 text-slate-400 text-sm">
+          © {new Date().getFullYear()} بنیاد بخاطر خون دهندگان ولایت لوگر. تمامی حقوق محفوظ است.
+        </p>
       </div>
     </div>
   );

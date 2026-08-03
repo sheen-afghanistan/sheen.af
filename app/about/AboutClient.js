@@ -3,7 +3,10 @@
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { FaLinkedinIn, FaTwitter, FaGithub } from "react-icons/fa";
+import PageHero from "../../components/PageHero";
+import SectionHead from "../../components/SectionHead";
 
+const EASE = [0.16, 1, 0.3, 1];
 
 export default function AboutClient() {
   const { t } = useTranslation();
@@ -13,109 +16,106 @@ export default function AboutClient() {
       name: "Suliman Hakimi",
       position: "CEO & Founder",
       image: "/suli.jpeg",
-      social: { linkedin: "https://www.linkedin.com/in/suliman-hakimi/", twitter: "https://x.com/SulimanHakimi12", github: "https://github.com/SulimanHakimi" },
+      social: {
+        linkedin: "https://www.linkedin.com/in/suliman-hakimi/",
+        twitter: "https://x.com/SulimanHakimi12",
+        github: "https://github.com/SulimanHakimi",
+      },
     },
     {
       name: "Jawad Hakimi",
       position: "Full Stack Web Developer & Designer",
       image: "/jawad.jpg",
-      social: { linkedin: "https://www.linkedin.com/in/jawad-hakimi-061a512a4/", twitter: "#", github: "https://github.com/jawad-hakimee" },
+      social: {
+        linkedin: "https://www.linkedin.com/in/jawad-hakimi-061a512a4/",
+        twitter: "#",
+        github: "https://github.com/jawad-hakimee",
+      },
     },
     {
       name: "Layla Wakily",
       position: "Mobile App & Web Developer, UI/UX Designer",
-      image: "https://thumbs.dreamstime.com/b/smiling-muslim-woman-wearing-blue-hijab-circle-profile-smiling-muslim-woman-wearing-blue-hijab-circle-profile-ai-generated-402854748.jpg",
-      social: { linkedin: "https://www.linkedin.com/in/layla-wakily-4b453a31a/", twitter: "https://x.com/la_wakily", github: "https://github.com/Laylawakily" },
-    }
+      image:
+        "https://thumbs.dreamstime.com/b/smiling-muslim-woman-wearing-blue-hijab-circle-profile-smiling-muslim-woman-wearing-blue-hijab-circle-profile-ai-generated-402854748.jpg",
+      social: {
+        linkedin: "https://www.linkedin.com/in/layla-wakily-4b453a31a/",
+        twitter: "https://x.com/la_wakily",
+        github: "https://github.com/Laylawakily",
+      },
+    },
   ];
 
   const values = [
-    {
-      title: t("about.value1Title"),
-      desc: t("about.value1Desc")
-    },
-    {
-      title: t("about.value2Title"),
-      desc: t("about.value2Desc"),
-    },
-    {
-      title: t("about.value3Title"),
-      desc: t("about.value3Desc")
-    },
-    {
-      title: t("about.value4Title"),
-      desc: t("about.value4Desc")
-    },
+    { title: t("about.value1Title"), desc: t("about.value1Desc") },
+    { title: t("about.value2Title"), desc: t("about.value2Desc") },
+    { title: t("about.value3Title"), desc: t("about.value3Desc") },
+    { title: t("about.value4Title"), desc: t("about.value4Desc") },
+  ];
+
+  const reasons = [
+    { title: t("about.why1Title"), desc: t("about.why1Desc") },
+    { title: t("about.why2Title"), desc: t("about.why2Desc") },
+    { title: t("about.why3Title"), desc: t("about.why3Desc") },
+    { title: t("about.why4Title"), desc: t("about.why4Desc") },
+    { title: t("about.why5Title"), desc: t("about.why5Desc") },
+    { title: t("about.why6Title"), desc: t("about.why6Desc") },
+  ];
+
+  const socialIcons = [
+    { key: "linkedin", Icon: FaLinkedinIn, label: "LinkedIn" },
+    { key: "twitter", Icon: FaTwitter, label: "Twitter" },
+    { key: "github", Icon: FaGithub, label: "GitHub" },
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[var(--brand-dark)] to-black pt-20">
-      {/* Hero Section */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <motion.div
-            animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
-            transition={{ duration: 20, repeat: Infinity }}
-            className="absolute top-1/4 right-1/4 w-96 h-96 bg-[var(--brand-accent)]/10 rounded-full blur-3xl"
-          />
-        </div>
+    <div className="page">
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-16"
-          >
-            <h1 className="text-5xl md:text-7xl font-bold text-gradient mb-6">
-              {t("about.title")}
-            </h1>
-            <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto">
-              {t("about.subtitle")}
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow={t("nav.about")}
+        title={t("about.title")}
+        subtitle={t("about.subtitle")}
+      />
 
-      {/* Story Section */}
-      <section className="py-20 bg-[var(--brand-primary)]/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+      {/* ---------------------------------------------------------- Our story */}
+      <section className="section relative border-t border-[var(--rule)]">
+        <div className="shell">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, ease: EASE }}
             >
-              <h2 className="text-4xl font-bold text-white mb-6">{t("about.ourStory")}</h2>
-              <p className="text-white/80 mb-4">
-                {t("about.storyP1")}
-              </p>
-              <p className="text-white/80 mb-4">
-                {t("about.storyP2")}
-              </p>
-              <p className="text-white/80">
-                {t("about.storyP3")}
-              </p>
+              <h2 className="display-md">{t("about.ourStory")}</h2>
+              <div className="mt-7 space-y-5 t-muted">
+                <p>{t("about.storyP1")}</p>
+                <p>{t("about.storyP2")}</p>
+                <p>{t("about.storyP3")}</p>
+              </div>
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="glass p-8 rounded-2xl"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-80px" }}
+              transition={{ duration: 0.6, delay: 0.1, ease: EASE }}
+              className="card card-marked card-pad !p-8 sm:!p-10"
             >
-              <h3 className="text-2xl font-bold text-white mb-6">{t("about.missionVision")}</h3>
-              <div className="space-y-4">
+              <h3 className="display-sm mb-8">{t("about.missionVision")}</h3>
+
+              <div className="space-y-7">
                 <div>
-                  <h4 className="text-[var(--brand-gold)] font-semibold mb-2">{t("about.mission")}</h4>
-                  <p className="text-white/80">
-                    {t("about.missionText")}
-                  </p>
+                  <h4 className="data uppercase tracking-[0.18em] text-[var(--jade-deep)] mb-2.5">
+                    {t("about.mission")}
+                  </h4>
+                  <p className="t-muted text-fluid-sm">{t("about.missionText")}</p>
                 </div>
+                <hr className="rule" />
                 <div>
-                  <h4 className="text-[var(--brand-gold)] font-semibold mb-2">{t("about.vision")}</h4>
-                  <p className="text-white/80">
-                    {t("about.visionText")}
-                  </p>
+                  <h4 className="data uppercase tracking-[0.18em] text-[var(--jade-deep)] mb-2.5">
+                    {t("about.vision")}
+                  </h4>
+                  <p className="t-muted text-fluid-sm">{t("about.visionText")}</p>
                 </div>
               </div>
             </motion.div>
@@ -123,100 +123,82 @@ export default function AboutClient() {
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              {t("about.ourValues")}
-            </h2>
-            <p className="text-xl text-white/70">
-              {t("about.valuesSubtitle")}
-            </p>
-          </motion.div>
+      {/* ------------------------------------------------------------- Values */}
+      <section className="section relative border-t border-[var(--rule)] bg-[var(--paper-alt)]">
+        <div className="shell">
+          <SectionHead
+            title={t("about.ourValues")}
+            subtitle={t("about.valuesSubtitle")}
+          />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {values.map((value, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="glass p-6 rounded-2xl text-center hover:bg-white/10 transition-all"
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ delay: index * 0.08, duration: 0.55, ease: EASE }}
+                className="card card-lift card-pad"
               >
-                <h3 className="text-xl font-semibold text-white mb-3">
-                  {value.title}
-                </h3>
-                <p className="text-white/70">{value.desc}</p>
+                <h3 className="text-fluid-lg font-bold">{value.title}</h3>
+                <p className="t-muted text-fluid-sm mt-3">{value.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-20 bg-[var(--brand-primary)]/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              {t("about.meetTeam")}
-            </h2>
-            <p className="text-xl text-white/70">
-              {t("about.teamSubtitle")}
-            </p>
-          </motion.div>
+      {/* --------------------------------------------------------------- Team */}
+      <section className="section relative border-t border-[var(--rule)]">
+        <div className="shell">
+          <SectionHead
+            title={t("about.meetTeam")}
+            subtitle={t("about.teamSubtitle")}
+          />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {team.map((member, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="glass p-6 rounded-2xl text-center group hover:bg-white/10 transition-all"
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ delay: index * 0.1, duration: 0.55, ease: EASE }}
+                className="card card-lift card-pad text-center items-center"
               >
-                <img src={member.image} className="w-32 h-32 mx-auto object-cover rounded-full mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-2">
-                  {member.name}
-                </h3>
-                <p className="text-[var(--brand-gold)] mb-4">{member.position}</p>
-                <div className="flex justify-center gap-3">
-                  {member.social.linkedin && (
-                    <a
-                      href={member.social.linkedin}
-                      className="w-8 h-8 rounded-full glass flex items-center justify-center hover:bg-[var(--brand-gold)] transition-all"
-                    >
-                      <FaLinkedinIn className="text-sm" />
-                    </a>
-                  )}
-                  {member.social.twitter && (
-                    <a
-                      href={member.social.twitter}
-                      className="w-8 h-8 rounded-full glass flex items-center justify-center hover:bg-[var(--brand-gold)] transition-all"
-                    >
-                      <FaTwitter className="text-sm" />
-                    </a>
-                  )}
-                  {member.social.github && (
-                    <a
-                      href={member.social.github}
-                      className="w-8 h-8 rounded-full glass flex items-center justify-center hover:bg-[var(--brand-gold)] transition-all"
-                    >
-                      <FaGithub className="text-sm" />
-                    </a>
+                <div className="relative mb-5">
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 rounded-full bg-[var(--jade-wash)]"
+                  />
+                  <img
+                    src={member.image}
+                    alt={`${member.name}, ${member.position}`}
+                    loading="lazy"
+                    className="relative w-28 h-28 rounded-full object-cover ring-1 ring-[var(--rule-strong)]"
+                  />
+                </div>
+
+                <h3 className="text-fluid-lg font-bold">{member.name}</h3>
+                <p className="text-fluid-xs text-[var(--jade-deep)] mt-1.5 px-2">
+                  {member.position}
+                </p>
+
+                <div className="flex justify-center gap-2 mt-6">
+                  {socialIcons.map(({ key, Icon, label }) =>
+                    member.social[key] ? (
+                      <a
+                        key={key}
+                        href={member.social[key]}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${member.name} on ${label}`}
+                        className="w-9 h-9 grid place-items-center rounded-full border border-[var(--rule)] bg-[var(--paper-alt)] t-muted hover:text-[var(--ink)] hover:bg-[var(--jade-deep)] hover:border-transparent transition-colors duration-300"
+                      >
+                        <Icon className="text-[0.8rem]" />
+                      </a>
+                    ) : null
                   )}
                 </div>
               </motion.div>
@@ -225,59 +207,23 @@ export default function AboutClient() {
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              {t("about.whySheen")}
-            </h2>
-          </motion.div>
+      {/* ----------------------------------------------------------- Why Sheen */}
+      <section className="section relative border-t border-[var(--rule)] bg-[var(--paper-alt)]">
+        <div className="shell">
+          <SectionHead title={t("about.whySheen")} />
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: t("about.why1Title"),
-                desc: t("about.why1Desc"),
-              },
-              {
-                title: t("about.why2Title"),
-                desc: t("about.why2Desc"),
-              },
-              {
-                title: t("about.why3Title"),
-                desc: t("about.why3Desc"),
-              },
-              {
-                title: t("about.why4Title"),
-                desc: t("about.why4Desc"),
-              },
-              {
-                title: t("about.why5Title"),
-                desc: t("about.why5Desc"),
-              },
-              {
-                title: t("about.why6Title"),
-                desc: t("about.why6Desc"),
-              },
-            ].map((item, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {reasons.map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="glass p-6 rounded-2xl"
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{ delay: (index % 3) * 0.08, duration: 0.55, ease: EASE }}
+                className="card card-lift card-pad"
               >
-                <h3 className="text-xl font-semibold text-white mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-white/70">{item.desc}</p>
+                <h3 className="text-fluid-lg font-bold">{item.title}</h3>
+                <p className="t-muted text-fluid-sm mt-3">{item.desc}</p>
               </motion.div>
             ))}
           </div>

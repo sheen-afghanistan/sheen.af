@@ -1,11 +1,28 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { FiArrowUpRight } from "react-icons/fi";
 import projects from "../../data/portfolio";
+import PageHero from "../../components/PageHero";
+
+const EASE = [0.16, 1, 0.3, 1];
+
+// Translation keys for categories that have one. Anything else falls back to a
+// prettified version of the raw category, so a new project type still gets a
+// working tab instead of being silently unreachable.
+const CATEGORY_LABEL_KEYS = {
+  web: "portfolio.webDev",
+  ecommerce: "portfolio.ecommerce",
+  mobile: "portfolio.mobileApps",
+  "3d": "portfolio.3dInteractive",
+  marketing: "portfolio.marketing",
+};
+
+const prettify = (id) => id.charAt(0).toUpperCase() + id.slice(1).replace(/-/g, " ");
 
 export default function PortfolioPage() {
   const { t, i18n } = useTranslation();
@@ -13,132 +30,138 @@ export default function PortfolioPage() {
 
   const getLocalizedContent = (content) => {
     if (!content) return "";
-    if (typeof content === 'string') return content;
+    if (typeof content === "string") return content;
     return content[i18n.language] || content.en || "";
   };
 
-  const categories = [
-    { id: "all", label: t("portfolio.allProjects") },
-    { id: "web", label: t("portfolio.webDev") },
-    { id: "ecommerce", label: t("portfolio.ecommerce") },
-    { id: "mobile", label: t("portfolio.mobileApps") },
-    { id: "3d", label: t("portfolio.3dInteractive") },
-    { id: "marketing", label: t("portfolio.marketing") },
-  ];
+  // Built from the categories the projects actually use — a hardcoded list
+  // drifts out of sync with the data and leaves tabs that match nothing.
+  const categories = useMemo(() => {
+    const present = [...new Set(projects.map((p) => p.category).filter(Boolean))];
+    return [
+      { id: "all", label: t("portfolio.allProjects") },
+      ...present.map((id) => ({
+        id,
+        label: CATEGORY_LABEL_KEYS[id] ? t(CATEGORY_LABEL_KEYS[id]) : prettify(id),
+      })),
+    ];
+  }, [t]);
 
-  const filteredProjects = filter === "all"
-    ? projects
-    : projects.filter(p => p.category === filter);
+  const filteredProjects =
+    filter === "all" ? projects : projects.filter((p) => p.category === filter);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[var(--brand-dark)] to-black pt-20">
-      {/* Hero Section */}
-      <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <motion.div
-            animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
-            transition={{ duration: 20, repeat: Infinity }}
-            className="absolute top-1/4 right-1/4 w-96 h-96 bg-[var(--brand-accent)]/10 rounded-full blur-3xl"
-          />
-        </div>
+    <div className="page">
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-16"
+      <PageHero
+        eyebrow={t("nav.portfolio")}
+        title={t("portfolio.title")}
+        subtitle={t("portfolio.subtitle")}
+      />
+
+      {/* -------------------------------------------------------- Filter bar */}
+      <section className="pb-10">
+        <div className="shell">
+          <div
+            role="tablist"
+            aria-label={t("portfolio.title")}
+            className="flex flex-wrap justify-center gap-2"
           >
-            <h1 className="text-5xl md:text-7xl font-bold text-gradient mb-6">
-              {t("portfolio.title")}
-            </h1>
-            <p className="text-xl md:text-2xl text-white/80 max-w-3xl mx-auto">
-              {t("portfolio.subtitle")}
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Filter */}
-      <section className="pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap justify-center gap-4">
             {categories.map((cat) => (
-              <motion.button
+              <button
                 key={cat.id}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                type="button"
+                role="tab"
+                aria-selected={filter === cat.id}
                 onClick={() => setFilter(cat.id)}
-                className={`px-6 py-3 rounded-full font-semibold transition-all ${filter === cat.id
-                  ? "bg-gradient-to-r from-[var(--brand-gold)] to-[var(--brand-accent)] text-white"
-                  : "glass text-white/80 hover:bg-white/10"
-                  }`}
+                className={`chip ${filter === cat.id ? "chip-active" : ""}`}
               >
                 {cat.label}
-              </motion.button>
+              </button>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Projects Grid */}
-      <section className="pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="glass rounded-2xl overflow-hidden group cursor-pointer"
-              >
-                <Link href={`/portfolio/${project.slug}`}>
-                  <div className="aspect-video bg-gradient-to-br from-[var(--brand-primary)] to-[var(--brand-dark)] flex items-center justify-center text-8xl">
-                    <Image className="object-cover w-full h-full" src={project.image} alt={getLocalizedContent(project.title)} width={1000} height={1000} />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-[var(--brand-gold)] transition-colors">
-                      {getLocalizedContent(project.title)}
-                    </h3>
-                    <p className="text-white/70 mb-4">{getLocalizedContent(project.description)}</p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag, idx) => (
-                        <span
-                          key={idx}
-                          className="px-3 py-1 rounded-full bg-white/5 text-white/60 text-sm"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+      {/* ----------------------------------------------------------- Projects */}
+      <section className="pb-24">
+        <div className="shell">
+          <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <AnimatePresence mode="popLayout">
+              {filteredProjects.map((project, index) => (
+                <motion.article
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.96 }}
+                  transition={{ delay: (index % 3) * 0.06, duration: 0.5, ease: EASE }}
+                  className="card card-lift overflow-hidden group"
+                >
+                  <Link href={`/portfolio/${project.slug}`} className="flex flex-col h-full">
+                    <div className="relative aspect-[16/10] overflow-hidden bg-[var(--ink)]">
+                      <Image
+                        src={project.image}
+                        alt={getLocalizedContent(project.title)}
+                        width={1000}
+                        height={625}
+                        className="object-cover w-full h-full transition-transform duration-700 ease-out group-hover:scale-[1.06]"
+                      />
+                      <span
+                        aria-hidden="true"
+                        className="absolute inset-0 bg-gradient-to-t from-[var(--ink)] via-transparent to-transparent opacity-30"
+                      />
+                      <span className="absolute top-3 end-3 tag !bg-[var(--ink)] !text-[var(--paper)] !border-transparent">
+                        {project.category}
+                      </span>
                     </div>
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
+
+                    <div className="card-pad !pt-6 flex flex-col flex-1">
+                      <div className="flex items-start justify-between gap-3">
+                        <h2 className="text-fluid-lg font-bold transition-colors duration-300 group-hover:text-[var(--jade-deep)]">
+                          {getLocalizedContent(project.title)}
+                        </h2>
+                        <FiArrowUpRight className="mt-1 shrink-0 t-soft transition-all duration-300 group-hover:text-[var(--jade-deep)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 flip-rtl" />
+                      </div>
+
+                      <p className="t-muted text-fluid-sm mt-3 line-clamp-3">
+                        {getLocalizedContent(project.description)}
+                      </p>
+
+                      <div className="mt-auto pt-6 flex flex-wrap gap-1.5">
+                        {project.tags.slice(0, 4).map((tag, idx) => (
+                          <span key={idx} className="tag">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </Link>
+                </motion.article>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+
+          {filteredProjects.length === 0 && (
+            <div className="card card-pad !py-20 text-center">
+              <p className="lede">No projects in this category yet.</p>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 bg-gradient-to-r from-[var(--brand-dark)] to-[var(--brand-primary)]">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* ---------------------------------------------------------------- CTA */}
+      <section className="section band-ink">
+        <div className="shell-narrow text-center relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: EASE }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              {t("portfolio.readyToStart")}
-            </h2>
-            <Link href="/contact">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-10 py-5 rounded-full bg-white text-[var(--brand-dark)] font-bold text-lg shadow-2xl"
-              >
-                {t("common.contactUs")}
-              </motion.button>
+            <h2 className="display-md">{t("portfolio.readyToStart")}</h2>
+            <Link href="/contact" className="inline-block mt-9">
+              <span className="btn btn-inverse btn-lg">{t("common.contactUs")}</span>
             </Link>
           </motion.div>
         </div>
