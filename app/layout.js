@@ -6,6 +6,7 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import ClientLayout from "./ClientLayout";
+import { SITE_URL } from '@/lib/site';
 
 /* Display — editorial grotesque with real character in the headlines. */
 const bricolage = Bricolage_Grotesque({
@@ -40,89 +41,14 @@ const vazirmatn = Vazirmatn({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://agency.sheen.af"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Web Design, Mobile Apps & SEO in Afghanistan | Sheen",
     template: "%s | Sheen Digital Agency",
   },
   description:
     "Sheen builds websites, mobile apps and SEO campaigns for businesses in Afghanistan and for Afghans living abroad. Kabul-based, serving clients worldwide.",
-  keywords: [
-    // Core
-    "digital agency Afghanistan",
-    "web design Afghanistan",
-    "website development Afghanistan",
-    "SEO services Afghanistan",
-    "digital marketing Kabul",
-
-    // Website building
-    "website builder Afghanistan",
-    "build a website Afghanistan",
-    "professional website design Kabul",
-    "top web design company Kabul",
-    "e-commerce website development Afghanistan",
-    "business website Afghanistan",
-    "affordable website design Afghanistan",
-
-    // Mobile apps
-    "mobile app development Afghanistan",
-    "app developer Kabul",
-    "Android app development Afghanistan",
-    "iOS app development Afghanistan",
-    "React Native developer Afghanistan",
-    "Flutter app development Kabul",
-    "build a mobile app Afghanistan",
-
-    // Afghans living abroad / diaspora
-    "web design for Afghans abroad",
-    "website for Afghan business abroad",
-    "Afghan diaspora web agency",
-    "Afghan web developers for overseas clients",
-    "hire Afghan developers remotely",
-    "website for Afghan business in Germany",
-    "website for Afghan business in USA",
-    "website for Afghan business in Europe",
-    "Afghan owned digital agency international clients",
-
-    // Long-tail
-    "best digital marketing agency in Afghanistan",
-    "affordable SEO services Afghanistan",
-    "Google Ads management Afghanistan",
-
-    // Location-based
-    "digital agency Kabul",
-    "web design Herat",
-    "SEO company Afghanistan",
-    "digital marketing agency Kabul",
-
-    // Service-specific
-    "social media marketing Afghanistan",
-    "business automation Afghanistan",
-    "e-commerce development Kabul",
-    "API integration Afghanistan",
-    "3D web experiences Afghanistan",
-
-    // Local Language
-    "ساخت ویبسایت در افغانستان",
-    "طراحی سایت کابل",
-    "ساخت اپلیکیشن موبایل افغانستان",
-    "دیجیتال مارکتینگ افغانستان",
-    "سئو افغانستان",
-    "طراحی سایت برای افغان‌های خارج از کشور",
-    "د ویب پاڼې جوړول افغانستان",
-    "د موبایل اپلیکیشن جوړول",
-
-    // Brand
-    "Sheen Digital Agency",
-    "Sheen Afghanistan",
-    "شین",
-
-    // Technology
-    "Next.js development Afghanistan",
-    "React development Kabul",
-    "modern web design Afghanistan",
-  ],
-  authors: [{ name: "Sheen Digital Agency", url: "https://agency.sheen.af" }],
+  authors: [{ name: "Sheen Digital Agency", url: SITE_URL }],
   creator: "Sheen Digital Agency",
   publisher: "Sheen Digital Agency",
   formatDetection: {
@@ -151,7 +77,7 @@ export const metadata = {
     type: "website",
     locale: "en_US",
     alternateLocale: ["fa_AF", "ps_AF"],
-    url: "https://agency.sheen.af",
+    url: SITE_URL,
     title: "Sheen — Websites, Mobile Apps & SEO for Afghans Worldwide",
     description:
       "Websites, mobile apps, SEO and Google Ads built by a Kabul-based team — for businesses inside Afghanistan and for Afghans running businesses abroad.",
@@ -176,11 +102,11 @@ export const metadata = {
     images: ["/logo.png"],
   },
   alternates: {
-    canonical: "https://agency.sheen.af",
+    canonical: SITE_URL,
     languages: {
-      "en-US": "https://agency.sheen.af",
-      "fa-AF": "https://agency.sheen.af",
-      "ps-AF": "https://agency.sheen.af",
+      "en-US": SITE_URL,
+      "fa-AF": SITE_URL,
+      "ps-AF": SITE_URL,
     },
   },
   category: "technology",
@@ -192,17 +118,17 @@ export default function RootLayout({ children }) {
     "@graph": [
       {
         "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
-        "@id": "https://agency.sheen.af/#organization",
+        "@id": `${SITE_URL}/#organization`,
         name: "Sheen Digital Agency",
         legalName: "Sheen Digital Agency",
-        url: "https://agency.sheen.af",
+        url: SITE_URL,
         logo: {
           "@type": "ImageObject",
-          url: "https://agency.sheen.af/logo.png",
+          url: `${SITE_URL}/logo.png`,
           width: 512,
           height: 512,
         },
-        image: "https://agency.sheen.af/logo.png",
+        image: `${SITE_URL}/logo.png`,
         description:
           "Sheen is a digital agency based in Kabul, Afghanistan, building websites, mobile apps, e-commerce stores, SEO and Google Ads campaigns for businesses inside Afghanistan and for Afghans running businesses abroad.",
         slogan: "Transform Your Digital Presence",
@@ -332,32 +258,32 @@ export default function RootLayout({ children }) {
       },
       {
         "@type": "WebSite",
-        "@id": "https://agency.sheen.af/#website",
-        url: "https://agency.sheen.af",
+        "@id": `${SITE_URL}/#website`,
+        url: SITE_URL,
         name: "Sheen Digital Agency",
         description: "Premium Digital Agency in Afghanistan",
         publisher: {
-          "@id": "https://agency.sheen.af/#organization",
+          "@id": `${SITE_URL}/#organization`,
         },
         inLanguage: ["en", "fa", "ps"],
         potentialAction: {
           "@type": "SearchAction",
           target: {
             "@type": "EntryPoint",
-            urlTemplate: "https://agency.sheen.af/search?q={search_term_string}",
+            urlTemplate: `${SITE_URL}/search?q={search_term_string}`,
           },
           "query-input": "required name=search_term_string",
         },
       },
       {
         "@type": "BreadcrumbList",
-        "@id": "https://agency.sheen.af/#breadcrumb",
+        "@id": `${SITE_URL}/#breadcrumb`,
         itemListElement: [
           {
             "@type": "ListItem",
             position: 1,
             name: "Home",
-            item: "https://agency.sheen.af",
+            item: SITE_URL,
           },
         ],
       },

@@ -32,11 +32,17 @@ export default function HomePage() {
     { number: "2+", label: t("stats.yearsExperience") },
   ];
 
-  const testimonials = [
-    { name: "Unknown", position: t("testimonials.position1"), text: t("testimonials.testimonial1"), avatar: "/client-ahmad.png" },
-    { name: "Unknown", position: t("testimonials.position2"), text: t("testimonials.testimonial2"), avatar: "/client-sara.png" },
-    { name: "Unknown", position: t("testimonials.position3"), text: t("testimonials.testimonial3"), avatar: "/client-hamid.png" },
-  ];
+  // Real delivered work, straight from the portfolio data. This replaced three
+  // invented testimonials attributed to "Unknown" — placeholder quotes read as
+  // unfinished and give a search engine nothing it can verify.
+  const clientWork = projects.slice(0, 3).map((project) => ({
+    client: project.client,
+    project: localize(project.title),
+    desc: localize(project.description),
+    year: project.year,
+    link: project.link,
+    image: project.image,
+  }));
 
   const advantages = [
     t("whyChoose.feature1"), t("whyChoose.feature2"), t("whyChoose.feature3"),
@@ -231,35 +237,38 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* -------------------------------------------------------- Testimonials */}
+      {/* ----------------------------------------------------------- Client work */}
       <section className="section">
         <div className="shell">
-          <SectionHead title={t("testimonials.title")} />
+          <SectionHead title={t("clientWork.title")} subtitle={t("clientWork.subtitle")} />
 
           <div className="grid md:grid-cols-3 gap-4">
-            {testimonials.map((testimonial, index) => (
-              <motion.figure
-                key={index}
+            {clientWork.map((work, index) => (
+              <motion.article
+                key={work.client}
                 initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
                 transition={{ delay: index * 0.08, duration: 0.45, ease: EASE }}
                 className="card card-pad"
               >
-                <blockquote className="text-fluid-base">{testimonial.text}</blockquote>
+                <h3 className="text-fluid-base font-semibold">{work.client}</h3>
+                <p className="t-soft text-fluid-xs mt-1">
+                  {work.project} · {work.year}
+                </p>
+                <p className="text-fluid-sm mt-3">{work.desc}</p>
 
-                <figcaption className="mt-auto pt-6 flex items-center gap-3">
-                  <img
-                    src={testimonial.avatar}
-                    alt=""
-                    className="w-9 h-9 rounded-full object-cover"
-                  />
-                  <span className="text-fluid-sm">
-                    <span className="block font-semibold">{testimonial.name}</span>
-                    <span className="block t-soft text-fluid-xs">{testimonial.position}</span>
-                  </span>
-                </figcaption>
-              </motion.figure>
+                <a
+                  href={work.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-auto pt-6 inline-flex items-center gap-1.5 text-fluid-sm font-semibold"
+                >
+                  {domainOf(work.link)}
+                  <FiArrowUpRight aria-hidden="true" />
+                  <span className="sr-only">{t("clientWork.visit")}</span>
+                </a>
+              </motion.article>
             ))}
           </div>
         </div>

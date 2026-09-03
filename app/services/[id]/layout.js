@@ -1,5 +1,6 @@
 import servicesData from "../../../data/services";
 import { generateServiceSchema, generateBreadcrumbSchema } from "@/lib/seo-utils";
+import { SITE_URL } from '@/lib/site';
 
 export async function generateStaticParams() {
   return servicesData.map((service) => ({
@@ -44,11 +45,11 @@ export async function generateMetadata({ params }) {
       creator: "@sheen_af",
     },
     alternates: {
-      canonical: `https://agency.sheen.af/services/${service.slug}`,
+      canonical: `${SITE_URL}/services/${service.slug}`,
       languages: {
-        "en-US": `https://agency.sheen.af/services/${service.slug}`,
-        "fa-AF": `https://agency.sheen.af/services/${service.slug}`,
-        "ps-AF": `https://agency.sheen.af/services/${service.slug}`,
+        "en-US": `${SITE_URL}/services/${service.slug}`,
+        "fa-AF": `${SITE_URL}/services/${service.slug}`,
+        "ps-AF": `${SITE_URL}/services/${service.slug}`,
       },
     },
     robots: {

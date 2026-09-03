@@ -1,5 +1,6 @@
 import blogsData from "../../../data/blogs";
 import { generateArticleSchema, generateBreadcrumbSchema } from "@/lib/seo-utils";
+import { SITE_URL } from '@/lib/site';
 
 export async function generateStaticParams() {
   return blogsData.map((blog) => ({
@@ -51,11 +52,11 @@ export async function generateMetadata({ params }) {
       creator: "@sheen_af",
     },
     alternates: {
-      canonical: `https://agency.sheen.af/blog/${post.slug}`,
+      canonical: `${SITE_URL}/blog/${post.slug}`,
       languages: {
-        "en-US": `https://agency.sheen.af/blog/${post.slug}`,
-        "fa-AF": `https://agency.sheen.af/blog/${post.slug}`,
-        "ps-AF": `https://agency.sheen.af/blog/${post.slug}`,
+        "en-US": `${SITE_URL}/blog/${post.slug}`,
+        "fa-AF": `${SITE_URL}/blog/${post.slug}`,
+        "ps-AF": `${SITE_URL}/blog/${post.slug}`,
       },
     },
     robots: {

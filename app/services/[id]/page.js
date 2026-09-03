@@ -1,5 +1,6 @@
 import servicesData from "../../../data/services";
 import ClientServicePage from "./ClientServicePage";
+import { SITE_URL } from '@/lib/site';
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: title,
       description: description,
-      url: `https://agency.sheen.af/services/${service.slug}`,
+      url: `${SITE_URL}/services/${service.slug}`,
       // Add images if available in service data, or use default
       images: [
         {

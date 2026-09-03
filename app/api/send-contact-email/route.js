@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { SITE_URL } from '@/lib/site';
 
 export async function POST(request) {
   try {
@@ -204,7 +205,7 @@ export async function POST(request) {
               </ul>
 
               <center>
-                <a href="https://agency.sheen.af" class="cta-button">Visit Our Website</a>
+                <a href=SITE_URL class="cta-button">Visit Our Website</a>
               </center>
             </div>
             <div class="footer">

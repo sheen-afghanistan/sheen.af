@@ -1,5 +1,6 @@
 import projects from "../../../data/portfolio";
 import { generateCreativeWorkSchema, generateBreadcrumbSchema } from "@/lib/seo-utils";
+import { SITE_URL } from '@/lib/site';
 
 export async function generateStaticParams() {
   return projects.map((project) => ({
@@ -45,11 +46,11 @@ export async function generateMetadata({ params }) {
       creator: "@sheen_af",
     },
     alternates: {
-      canonical: `https://agency.sheen.af/portfolio/${project.slug}`,
+      canonical: `${SITE_URL}/portfolio/${project.slug}`,
       languages: {
-        "en-US": `https://agency.sheen.af/portfolio/${project.slug}`,
-        "fa-AF": `https://agency.sheen.af/portfolio/${project.slug}`,
-        "ps-AF": `https://agency.sheen.af/portfolio/${project.slug}`,
+        "en-US": `${SITE_URL}/portfolio/${project.slug}`,
+        "fa-AF": `${SITE_URL}/portfolio/${project.slug}`,
+        "ps-AF": `${SITE_URL}/portfolio/${project.slug}`,
       },
     },
     robots: {

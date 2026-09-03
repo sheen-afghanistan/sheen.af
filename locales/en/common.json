@@ -11,7 +11,7 @@
   },
   "hero": {
     "title": "Afghanistan's Leading Digital Agency for Web Design & SEO",
-    "subtitle": "As Afghanistan's premier digital agency, we specialize in web design, SEO services, and digital marketing to drive growth for businesses in nationwide",
+    "subtitle": "As Afghanistan's premier digital agency, we specialize in web design, SEO services, and digital marketing to drive growth for businesses across Afghanistan and for Afghans building businesses abroad",
     "cta": "Get Consultation",
     "viewWork": "View Our Work"
   },
@@ -110,15 +110,6 @@
     "feature6": "Competitive Pricing",
     "ctaTitle": "Ready to Start Your Project?",
     "ctaDesc": "Get a free consultation and quote for your next digital project."
-  },
-  "testimonials": {
-    "title": "What Our Clients Say",
-    "testimonial1": "Sheen transformed our online presence. Their expertise in web development and SEO is unmatched",
-    "testimonial2": "The Google Ads campaigns they managed increased our ROI by 300%. Highly recommended!",
-    "testimonial3": "Our e-commerce platform built by Sheen is fast, beautiful, and converts like crazy",
-    "position1": "CEO, Leader",
-    "position2": "Marketing Director",
-    "position3": "Founder, X"
   },
   "cta": {
     "title": "Let's Build Something Amazing Together",
@@ -646,5 +637,10 @@
         }
       }
     }
+  },
+  "clientWork": {
+    "title": "Clients We've Worked With",
+    "subtitle": "Real projects we have delivered. Every one of them is live — go and look.",
+    "visit": "Visit site"
   }
 }

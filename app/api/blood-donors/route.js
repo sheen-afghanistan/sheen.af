@@ -1,7 +1,13 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase';
+
+// Supabase is optional at build time, so every handler checks before using it.
+const notConfigured = () =>
+    NextResponse.json({ error: 'Database is not configured' }, { status: 503 });
 
 export async function GET() {
+    if (!isSupabaseConfigured) return notConfigured();
+
     try {
         const { data, error } = await supabase
             .from('blood_donors')
@@ -21,6 +27,8 @@ export async function GET() {
 }
 
 export async function POST(req) {
+    if (!isSupabaseConfigured) return notConfigured();
+
     try {
         const data = await req.json();
 

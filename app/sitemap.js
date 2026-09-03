@@ -1,9 +1,10 @@
 import blogsData from '@/data/blogs';
 import servicesData from '@/data/services';
 import projects from '@/data/portfolio';
+import { SITE_URL } from '@/lib/site';
 
 export default function sitemap() {
-    const baseUrl = 'https://agency.sheen.af';
+    const baseUrl = SITE_URL;
 
     // Static pages
     const staticPages = [

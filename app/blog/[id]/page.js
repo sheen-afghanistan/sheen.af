@@ -1,6 +1,7 @@
 import Link from "next/link";
 import blogsData from "../../../data/blogs";
 import ClientBlogPage from "./ClientBlogPage";
+import { SITE_URL } from '@/lib/site';
 
 export async function generateMetadata({ params }) {
   const { id } = await params;
@@ -25,7 +26,7 @@ export async function generateMetadata({ params }) {
       title: title,
       description: description,
       type: "article",
-      url: `https://agency.sheen.af/blog/${post.slug}`,
+      url: `${SITE_URL}/blog/${post.slug}`,
       images: [
         {
           url: post.image || "/logo.png",

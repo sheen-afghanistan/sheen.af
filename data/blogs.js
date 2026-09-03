@@ -1,4 +1,7 @@
+import { finnishCapBlogs } from "./blogsFi";
+
 export const blogsData = [
+    ...finnishCapBlogs,
     {
         id: "31",
         slug: "suliman-hakimi-founder-sheen-digital-agency",
@@ -252,7 +255,7 @@ If you are weighing up a website, an app or a marketing campaign, the useful fir
         readTime: "5 min read",
         image: "/logo.png",
         tags: ["Sheen", "Digital Agency Afghanistan", "Kabul", "Web Development", "About Us"]
-    },
+    },
     {
         id: "29",
         slug: "website-for-afghan-business-abroad",
@@ -367,7 +370,7 @@ If the answers are vague, keep looking. If you want ours, get in touch and we wi
         readTime: "5 min read",
         image: "/logo.png",
         tags: ["Afghans Abroad", "Afghan Diaspora", "Website for Afghan Business", "Remote Development", "Multilingual Website"]
-    },
+    },
     {
         id: "28",
         slug: "mobile-app-development-afghanistan-guide",
@@ -508,7 +511,7 @@ We build Android and iOS apps and the backends behind them, and we do it from Ka
         readTime: "6 min read",
         image: "/logo.png",
         tags: ["Mobile App Development Afghanistan", "Android App Kabul", "iOS App Afghanistan", "App Developer", "Cross Platform Apps"]
-    },
+    },
     {
         id: "27",
         slug: "etrat-elm-educational-center-website-case-study",
@@ -629,7 +632,7 @@ The pattern transfers. Courses that families can browse, admissions they can com
         readTime: "4 min read",
         image: "/logo.png",
         tags: ["Case Study", "Etrat Elm", "Education Website", "Next.js", "Multilingual Website", "Online Admission"]
-    },
+    },
     {
         id: "26",
         slug: "maple-mover-website-case-study",
@@ -752,7 +755,7 @@ If your business sells services rather than products, we can build you the same 
         readTime: "4 min read",
         image: "/logo.png",
         tags: ["Case Study", "Maple Mover", "Business Website", "Quote Request", "Lead Generation", "Next.js"]
-    },
+    },
     {
         id: "25",
         slug: "volvera-corporate-website-case-study",
@@ -867,7 +870,7 @@ We build corporate sites for companies inside and outside Afghanistan, in Englis
         readTime: "4 min read",
         image: "/logo.png",
         tags: ["Case Study", "Volvera", "Corporate Website", "International Clients", "Responsive Design", "Next.js"]
-    },
+    },
     {
         id: "24",
         slug: "power-force-paintball-booking-website-case-study",
@@ -988,7 +991,7 @@ If you are still taking bookings by phone and losing the ones that come in after
         readTime: "4 min read",
         image: "/logo.png",
         tags: ["Case Study", "Power Force Paintball", "Online Booking", "Sports Website", "Gallery", "Next.js"]
-    },
+    },
     {
         id: "23",
         slug: "sheen-web-design-development-service",
@@ -1133,7 +1136,7 @@ Tell us what your business does and who you want to reach. We will tell you what
         readTime: "5 min read",
         image: "/logo.png",
         tags: ["Web Design Afghanistan", "Website Development Kabul", "Next.js", "Sheen Services", "Responsive Design"]
-    },
+    },
     {
         id: "22",
         slug: "sheen-seo-google-ads-services",
@@ -1278,7 +1281,7 @@ SEO ورو، راټولیدونکی او په هر کلیک وړیا دی. می�
         readTime: "5 min read",
         image: "/logo.png",
         tags: ["SEO Afghanistan", "Google Ads Kabul", "Digital Marketing", "Sheen Services", "Local SEO"]
-    },
+    },
     {
         id: "21",
         slug: "sheen-ecommerce-automation-api-services",
@@ -1717,7 +1720,7 @@ SEO isn't a one-time task. Use tools like Google Search Console to see what peop
 
 **Ready to Boost Your Rankings?**
 Sheen is a premier **digital agency in Afghanistan** specializing in **SEO services** and **web design in Kabul**. 
-[Book a free consultation](https://agency.sheen.af/book) today to discuss your growth strategy!`,
+[Book a free consultation](https://www.sheen.af/book) today to discuss your growth strategy!`,
             da: "در چشم‌انداز دیجیتال به سرعت در حال تحول افغانستان، داشتن یک وب‌سایت دیگر کافی نیست. برای موفقیت واقعی، کسب‌وکار شما باید برای میلیون‌ها افغان که هر روز آنلاین جستجو می‌کنند قابل مشاهده باشد...",
             pa: "د افغانستان په ګړندۍ وده کونکي ډیجیټل چاپیریال کې ، یوازې د ویب پاڼې درلودل نور کافي ندي. د ریښتیني بریا لپاره ، ستاسو سوداګرۍ باید د ملیونونو افغانانو لپاره د لیدو وړ وي..."
         },
