@@ -32,17 +32,6 @@ export default function AboutClient() {
         github: "https://github.com/jawad-hakimee",
       },
     },
-    {
-      name: "Layla Wakily",
-      position: "Mobile App & Web Developer, UI/UX Designer",
-      image:
-        "https://thumbs.dreamstime.com/b/smiling-muslim-woman-wearing-blue-hijab-circle-profile-smiling-muslim-woman-wearing-blue-hijab-circle-profile-ai-generated-402854748.jpg",
-      social: {
-        linkedin: "https://www.linkedin.com/in/layla-wakily-4b453a31a/",
-        twitter: "https://x.com/la_wakily",
-        github: "https://github.com/Laylawakily",
-      },
-    },
   ];
 
   const values = [
