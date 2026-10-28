@@ -297,7 +297,7 @@ export async function POST(request) {
               </ul>
 
               <center>
-                <a href=SITE_URL class="cta-button">Visit Our Website</a>
+                <a href="${SITE_URL}" class="cta-button">Visit Our Website</a>
               </center>
             </div>
             <div class="footer">
