@@ -1,6 +1,8 @@
 import { finnishCapBlogs } from "./blogsFi";
+import { blogs2026 } from "./blogs2026";
 
-export const blogsData = [
+const posts = [
+    ...blogs2026,
     ...finnishCapBlogs,
     {
         id: "31",
@@ -2324,5 +2326,14 @@ Your mobile experience often determines whether visitors become customers. Prior
         tags: ["Mobile", "Responsive", "Design"]
     }
 ];
+
+// Newest first, so the blog index, related posts and feeds lead with fresh content.
+export const blogsData = [...posts].sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0));
+
+/** Card-sized view of a post (no body or FAQs) for client components, so a
+ *  listing never ships every article's full text in its JavaScript bundle. */
+export const toPostSummary = ({ id, slug, title, excerpt, category, author, date, updated, readTime, image }) => ({
+    id, slug, title, excerpt, category, author, date, updated: updated || date, readTime, image,
+});
 
 export default blogsData;

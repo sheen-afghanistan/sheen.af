@@ -1,6 +1,10 @@
 import servicesData from "../../../data/services";
 import { generateServiceSchema, generateBreadcrumbSchema } from "@/lib/seo-utils";
+import { notFound } from "next/navigation";
 import { SITE_URL } from '@/lib/site';
+
+// Unknown slugs 404 instead of rendering the first entry under a wrong URL.
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   return servicesData.map((service) => ({
@@ -46,11 +50,6 @@ export async function generateMetadata({ params }) {
     },
     alternates: {
       canonical: `${SITE_URL}/services/${service.slug}`,
-      languages: {
-        "en-US": `${SITE_URL}/services/${service.slug}`,
-        "fa-AF": `${SITE_URL}/services/${service.slug}`,
-        "ps-AF": `${SITE_URL}/services/${service.slug}`,
-      },
     },
     robots: {
       index: true,
@@ -63,7 +62,8 @@ export async function generateMetadata({ params }) {
 
 export default async function ServiceLayout({ children, params }) {
   const { id } = await params;
-  const service = servicesData.find((s) => s.slug === id) || servicesData[0];
+  const service = servicesData.find((s) => s.slug === id);
+  if (!service) notFound();
 
   // Generate structured data
   const serviceSchema = generateServiceSchema({

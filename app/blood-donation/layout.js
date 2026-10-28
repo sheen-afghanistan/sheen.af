@@ -1,3 +1,5 @@
+import { SITE_URL } from '@/lib/site';
+
 export const metadata = {
     title: {
         absolute: "اهدای خون🩸کابل - لوگر",
@@ -13,7 +15,7 @@ export const metadata = {
         title: "اهدای خون🩸کابل - لوگر",
         description: "بنیاد بخاطر خون دهندگان ولایت لوگر. با اهدای خون خود، زندگی دوباره ببخشید.",
     },
-    alternates: {}
+    alternates: { canonical: `${SITE_URL}/blood-donation` },
 };
 
 export default function BloodDonationLayout({ children }) {

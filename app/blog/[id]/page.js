@@ -1,51 +1,9 @@
-import Link from "next/link";
-import blogsData from "../../../data/blogs";
+import { notFound } from "next/navigation";
+import blogsData, { toPostSummary } from "../../../data/blogs";
+import { getAuthor } from "@/lib/authors";
 import ClientBlogPage from "./ClientBlogPage";
-import { SITE_URL } from '@/lib/site';
 
-export async function generateMetadata({ params }) {
-  const { id } = await params;
-  const post = blogsData.find((p) => p.slug === id || p.id === id);
-
-  if (!post) {
-    return {
-      title: "Blog Post Not Found | Sheen",
-      description: "The requested blog post could not be found.",
-    };
-  }
-
-  const title = post.title.en || post.title.da || "Blog Post";
-  const description = post.excerpt.en || post.excerpt.da || "";
-  const keywords = post.tags ? post.tags.join(", ") : "";
-
-  return {
-    title: `${title} | Sheen Digital Agency`,
-    description: description,
-    keywords: keywords,
-    openGraph: {
-      title: title,
-      description: description,
-      type: "article",
-      url: `${SITE_URL}/blog/${post.slug}`,
-      images: [
-        {
-          url: post.image || "/logo.png",
-          width: 1200,
-          height: 630,
-          alt: title,
-        },
-      ],
-      publishedTime: post.date,
-      authors: [post.author],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: title,
-      description: description,
-      images: [post.image || "/logo.png"],
-    },
-  };
-}
+// Metadata and structured data live in ./layout.js.
 
 export async function generateStaticParams() {
   return blogsData.map((post) => ({
@@ -53,6 +11,17 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function BlogPostPage({ params }) {
-  return <ClientBlogPage params={params} />;
+export default async function BlogPostPage({ params }) {
+  const { id } = await params;
+  const post = blogsData.find((p) => p.slug === id);
+  if (!post) notFound();
+
+  // Same-category posts first, topped up with the newest posts, so every
+  // article links onward to three others (internal links help crawl depth).
+  const sameCategory = blogsData.filter((p) => p.category === post.category && p.id !== post.id);
+  const others = blogsData.filter((p) => p.category !== post.category && p.id !== post.id);
+  const related = [...sameCategory, ...others].slice(0, 3).map(toPostSummary);
+
+  // Only this post and three summaries reach the client bundle.
+  return <ClientBlogPage post={post} relatedPosts={related} author={getAuthor(post.author)} />;
 }

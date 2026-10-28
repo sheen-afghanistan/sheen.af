@@ -101,13 +101,13 @@ export const metadata = {
       "Websites, mobile apps, SEO and Google Ads for businesses in Afghanistan and Afghans abroad. ساخت ویبسایت و اپلیکیشن در افغانستان",
     images: ["/logo.png"],
   },
+  // Canonical for the homepage only. Every other route sets its own — a route
+  // that doesn't would inherit this and declare itself a duplicate of "/".
+  // No hreflang map: all languages share one URL (switched client-side), and
+  // hreflang pointing every locale at the same URL is ignored or penalised.
   alternates: {
     canonical: SITE_URL,
-    languages: {
-      "en-US": SITE_URL,
-      "fa-AF": SITE_URL,
-      "ps-AF": SITE_URL,
-    },
+    types: { "application/rss+xml": `${SITE_URL}/feed.xml` },
   },
   category: "technology",
 };
@@ -134,6 +134,30 @@ export default function RootLayout({ children }) {
         slogan: "Transform Your Digital Presence",
         knowsLanguage: ["en", "fa", "ps"],
         foundingDate: "2020",
+        email: "info@sheen.af",
+        telephone: "+93-784-966-018",
+        founder: {
+          "@type": "Person",
+          "@id": `${SITE_URL}/#suliman-hakimi`,
+          name: "Suliman Hakimi",
+          jobTitle: "Founder & CEO",
+          sameAs: [
+            "https://www.linkedin.com/in/suliman-hakimi",
+            "https://github.com/SulimanHakimi",
+            "https://x.com/SulimanHakimi12",
+          ],
+        },
+        employee: [
+          { "@id": `${SITE_URL}/#suliman-hakimi` },
+          { "@type": "Person", name: "Jawad Hakimi", jobTitle: "Full-Stack Developer & Designer" },
+          { "@type": "Person", name: "Layla Wakily", jobTitle: "Mobile & Web Developer, UI/UX Designer" },
+        ],
+        knowsAbout: [
+          "Web design", "Next.js development", "Mobile app development", "SEO",
+          "Generative engine optimization", "Google Ads", "Social media advertising",
+          "E-commerce", "API integration", "Business automation", "AI chatbots",
+          "Right-to-left (Dari and Pashto) web design",
+        ],
         sameAs: [
           "https://www.facebook.com/profile.php?id=100066759369557",
           "https://www.instagram.com/sheen.af",
@@ -147,7 +171,6 @@ export default function RootLayout({ children }) {
             contactType: "customer service",
             areaServed: "AF",
             availableLanguage: ["English", "Dari", "Pashto"],
-            contactOption: "TollFree",
           },
           {
             "@type": "ContactPoint",
@@ -266,14 +289,6 @@ export default function RootLayout({ children }) {
           "@id": `${SITE_URL}/#organization`,
         },
         inLanguage: ["en", "fa", "ps"],
-        potentialAction: {
-          "@type": "SearchAction",
-          target: {
-            "@type": "EntryPoint",
-            urlTemplate: `${SITE_URL}/search?q={search_term_string}`,
-          },
-          "query-input": "required name=search_term_string",
-        },
       },
       {
         "@type": "BreadcrumbList",

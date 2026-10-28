@@ -1,6 +1,10 @@
 import projects from "../../../data/portfolio";
 import { generateCreativeWorkSchema, generateBreadcrumbSchema } from "@/lib/seo-utils";
+import { notFound } from "next/navigation";
 import { SITE_URL } from '@/lib/site';
+
+// Unknown slugs 404 instead of rendering the first entry under a wrong URL.
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   return projects.map((project) => ({
@@ -47,11 +51,6 @@ export async function generateMetadata({ params }) {
     },
     alternates: {
       canonical: `${SITE_URL}/portfolio/${project.slug}`,
-      languages: {
-        "en-US": `${SITE_URL}/portfolio/${project.slug}`,
-        "fa-AF": `${SITE_URL}/portfolio/${project.slug}`,
-        "ps-AF": `${SITE_URL}/portfolio/${project.slug}`,
-      },
     },
     robots: {
       index: true,
@@ -64,7 +63,8 @@ export async function generateMetadata({ params }) {
 
 export default async function PortfolioDetailLayout({ children, params }) {
   const { id } = await params;
-  const project = projects.find((p) => p.slug === id || p.id === id) || projects[0];
+  const project = projects.find((p) => p.slug === id || p.id === id);
+  if (!project) notFound();
 
   // Generate structured data
   const creativeWorkSchema = generateCreativeWorkSchema({

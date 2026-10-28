@@ -17,7 +17,7 @@ export async function generateMetadata({ params }) {
   const description = service.shortDesc.en || "";
 
   return {
-    title: `${title} | Sheen Digital Agency`,
+    title, // root layout's template appends "| Sheen Digital Agency"
     description: description,
     openGraph: {
       title: title,
