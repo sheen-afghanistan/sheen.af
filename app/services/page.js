@@ -22,8 +22,20 @@ export default function ServicesPage() {
   const categories = serviceCategories.filter((cat) =>
     servicesData.some((s) => s.category === cat.key)
   );
-  const filteredServices =
-    filter === "all" ? servicesData : servicesData.filter((s) => s.category === filter);
+  const [query, setQuery] = useState("");
+
+  // Search matches the title, short description and features in any language.
+  const needle = query.trim().toLowerCase();
+  const filteredServices = servicesData.filter((s) => {
+    if (filter !== "all" && s.category !== filter) return false;
+    if (!needle) return true;
+    const haystack = [
+      ...Object.values(s.title),
+      ...Object.values(s.shortDesc),
+      ...s.features,
+    ].join(" ").toLowerCase();
+    return haystack.includes(needle);
+  });
 
   return (
     <div className="page">
@@ -37,6 +49,14 @@ export default function ServicesPage() {
       {/* -------------------------------------------------------- Filter bar */}
       <section className="pb-10">
         <div className="shell">
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder={{ da: "جستجوی خدمات…", pa: "خدمتونه ولټوئ…" }[currentLang] || "Search services…"}
+            aria-label="Search services"
+            className="block w-full max-w-xl mx-auto mb-6 px-5 py-3 rounded-full border border-[var(--rule)] bg-transparent text-fluid-sm focus:outline-none focus:border-[var(--jade-deep)]"
+          />
           <div
             role="tablist"
             aria-label="Service categories"
@@ -60,6 +80,11 @@ export default function ServicesPage() {
 
       <section className="section-tight pb-24 relative">
         <div className="shell">
+          {filteredServices.length === 0 && (
+            <p className="text-center t-muted text-fluid-sm py-12">
+              No services match your search. Try another word or contact us — we likely still do it.
+            </p>
+          )}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {filteredServices.map((service, index) => (
               <motion.div

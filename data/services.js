@@ -1,7 +1,4 @@
-import batch1 from "./services-extra/batch1";
-import batch2 from "./services-extra/batch2";
-import batch3 from "./services-extra/batch3";
-import batch4 from "./services-extra/batch4";
+import extraServices from "./services-extra";
 
 // Filter groups for the /services listing, in display order.
 export const serviceCategories = [
@@ -14,7 +11,14 @@ export const serviceCategories = [
     { key: "security", label: { en: "Security", da: "امنیت", pa: "امنیت" } },
     { key: "ai-data", label: { en: "AI & Data", da: "هوش مصنوعی و داده", pa: "مصنوعي ځیرکتیا او ډېټا" } },
     { key: "content", label: { en: "Content & Language", da: "محتوا و زبان", pa: "منځپانګه او ژبه" } },
-    { key: "consulting", label: { en: "Consulting & Training", da: "مشاوره و آموزش", pa: "مشوره او روزنه" } }
+    { key: "consulting", label: { en: "Consulting & Training", da: "مشاوره و آموزش", pa: "مشوره او روزنه" } },
+    { key: "finance", label: { en: "Finance & Trade", da: "مالی و تجارت", pa: "مالي او سوداګري" } },
+    { key: "health", label: { en: "Health", da: "صحت", pa: "روغتیا" } },
+    { key: "education", label: { en: "Education", da: "آموزش و پرورش", pa: "زده کړه" } },
+    { key: "travel", label: { en: "Transport & Travel", da: "ترانسپورت و سفر", pa: "ترانسپورت او سفر" } },
+    { key: "agri-energy", label: { en: "Agriculture & Energy", da: "زراعت و انرژی", pa: "کرنه او انرژي" } },
+    { key: "platforms", label: { en: "Platforms & Marketplaces", da: "پلتفرم‌ها و بازارها", pa: "پلیټفارمونه او بازارونه" } },
+    { key: "workplace", label: { en: "Workplace Tools", da: "ابزارهای اداری", pa: "اداري وسایل" } }
 ];
 
 // The flagship services shown on the home page.
@@ -605,6 +609,6 @@ export const coreServices = [
     }
 ];
 
-export const servicesData = [...coreServices, ...batch1, ...batch2, ...batch3, ...batch4];
+export const servicesData = [...coreServices, ...extraServices];
 
 export default servicesData;
