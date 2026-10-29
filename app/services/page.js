@@ -1,10 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { FiArrowUpRight } from "react-icons/fi";
-import servicesData from "../../data/services";
+import servicesData, { serviceCategories } from "../../data/services";
 import PageHero from "../../components/PageHero";
 
 const EASE = [0.16, 1, 0.3, 1];
@@ -15,6 +16,14 @@ const isFigure = (price) => /\d/.test(price || "");
 export default function ServicesPage() {
   const { t, i18n } = useTranslation();
   const currentLang = i18n.language || "en";
+  const [filter, setFilter] = useState("all");
+
+  // Only offer tabs for categories that actually have services.
+  const categories = serviceCategories.filter((cat) =>
+    servicesData.some((s) => s.category === cat.key)
+  );
+  const filteredServices =
+    filter === "all" ? servicesData : servicesData.filter((s) => s.category === filter);
 
   return (
     <div className="page">
@@ -25,10 +34,34 @@ export default function ServicesPage() {
         subtitle="Comprehensive digital solutions to grow your business"
       />
 
+      {/* -------------------------------------------------------- Filter bar */}
+      <section className="pb-10">
+        <div className="shell">
+          <div
+            role="tablist"
+            aria-label="Service categories"
+            className="flex flex-wrap justify-center gap-2"
+          >
+            {[{ key: "all", label: { en: "All Services", da: "همه خدمات", pa: "ټول خدمتونه" } }, ...categories].map((cat) => (
+              <button
+                key={cat.key}
+                type="button"
+                role="tab"
+                aria-selected={filter === cat.key}
+                onClick={() => setFilter(cat.key)}
+                className={`chip ${filter === cat.key ? "chip-active" : ""}`}
+              >
+                {cat.label[currentLang] || cat.label.en}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section-tight pb-24 relative">
         <div className="shell">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {servicesData.map((service, index) => (
+            {filteredServices.map((service, index) => (
               <motion.div
                 key={service.id}
                 initial={{ opacity: 0, y: 24 }}

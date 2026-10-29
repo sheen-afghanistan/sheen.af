@@ -1,7 +1,28 @@
-export const servicesData = [
+import batch1 from "./services-extra/batch1";
+import batch2 from "./services-extra/batch2";
+import batch3 from "./services-extra/batch3";
+import batch4 from "./services-extra/batch4";
+
+// Filter groups for the /services listing, in display order.
+export const serviceCategories = [
+    { key: "development", label: { en: "Development", da: "توسعه", pa: "پراختیا" } },
+    { key: "solutions", label: { en: "Industry Solutions", da: "راه‌حل‌های صنعتی", pa: "صنعتي حلونه" } },
+    { key: "marketing", label: { en: "Marketing", da: "بازاریابی", pa: "بازار موندنه" } },
+    { key: "design", label: { en: "Design & Media", da: "دیزاین و رسانه", pa: "ډیزاین او رسنۍ" } },
+    { key: "ecommerce", label: { en: "E-commerce", da: "تجارت الکترونیکی", pa: "برېښنايي سوداګري" } },
+    { key: "cloud", label: { en: "Cloud & IT", da: "کلاود و IT", pa: "کلاوډ او IT" } },
+    { key: "security", label: { en: "Security", da: "امنیت", pa: "امنیت" } },
+    { key: "ai-data", label: { en: "AI & Data", da: "هوش مصنوعی و داده", pa: "مصنوعي ځیرکتیا او ډېټا" } },
+    { key: "content", label: { en: "Content & Language", da: "محتوا و زبان", pa: "منځپانګه او ژبه" } },
+    { key: "consulting", label: { en: "Consulting & Training", da: "مشاوره و آموزش", pa: "مشوره او روزنه" } }
+];
+
+// The flagship services shown on the home page.
+export const coreServices = [
     {
         id: "web-design",
         slug: "web-design",
+        category: "development",
         title: {
             en: "Web Design & Development",
             da: "طراحی و توسعه وب",
@@ -68,6 +89,7 @@ export const servicesData = [
     {
         id: "mobile-apps",
         slug: "mobile-apps",
+        category: "development",
         title: {
             en: "Mobile App Development",
             da: "ساخت اپلیکیشن موبایل",
@@ -135,6 +157,7 @@ export const servicesData = [
     {
         id: "seo",
         slug: "seo",
+        category: "marketing",
         title: {
             en: "SEO & Digital Marketing",
             da: "سئو و بازاریابی دیجیتال",
@@ -198,6 +221,7 @@ export const servicesData = [
     {
         id: "google-ads",
         slug: "google-ads",
+        category: "marketing",
         title: {
             en: "Google Ads Management",
             da: "مدیریت تبلیغات گوگل",
@@ -261,6 +285,7 @@ export const servicesData = [
     {
         id: "social-ads",
         slug: "social-ads",
+        category: "marketing",
         title: {
             en: "Social Media Advertising",
             da: "تبلیغات رسانه های اجتماعی",
@@ -324,6 +349,7 @@ export const servicesData = [
     {
         id: "api-integration",
         slug: "api-integration",
+        category: "development",
         title: {
             en: "API Integration",
             da: "یکپارچه سازی API",
@@ -387,6 +413,7 @@ export const servicesData = [
     {
         id: "ecommerce",
         slug: "ecommerce",
+        category: "ecommerce",
         title: {
             en: "E-commerce Solutions",
             da: "راه حل های تجارت الکترونیک",
@@ -451,6 +478,7 @@ export const servicesData = [
     {
         id: "3d-web",
         slug: "3d-web",
+        category: "design",
         title: {
             en: "3D Web Experiences",
             da: "تجربیات وب سه بعدی",
@@ -514,6 +542,7 @@ export const servicesData = [
     {
         id: "automation",
         slug: "automation",
+        category: "ai-data",
         title: {
             en: "Business Automation",
             da: "اتوماسیون کسب و کار",
@@ -575,5 +604,7 @@ export const servicesData = [
         }
     }
 ];
+
+export const servicesData = [...coreServices, ...batch1, ...batch2, ...batch3, ...batch4];
 
 export default servicesData;

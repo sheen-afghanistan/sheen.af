@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { FiArrowRight, FiArrowUpRight, FiCheck } from "react-icons/fi";
 import Link from "next/link";
 import "../lib/i18n";
-import servicesData from "../data/services";
+import { coreServices } from "../data/services";
 import projects from "../data/portfolio";
 import SectionHead from "../components/SectionHead";
 
@@ -18,7 +18,7 @@ export default function HomePage() {
 
   const localize = (v) => (typeof v === "string" ? v : v?.[i18n.language] || v?.en || "");
 
-  const services = servicesData.map((service) => ({
+  const services = coreServices.map((service) => ({
     id: service.id,
     title: service.title[i18n.language] || service.title.en,
     desc: service.shortDesc[i18n.language] || service.shortDesc.en,
